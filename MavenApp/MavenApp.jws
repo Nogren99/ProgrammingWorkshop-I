@@ -22,7 +22,5 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationBuildToolContentSet"/>
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
-   <list n="listOfChildren">
-      <hash><url n="URL" path="ProgrammingWorkshop-I/ProgrammingWorkshop-I.jpr"/></hash>
-   </list>
+   <list n="listOfChildren"/>
 </jws:workspace>
