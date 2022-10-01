@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7065be8e-ec6b-424f-a033-9dde3b204a78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/Mesa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/Mozo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/Operario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/Producto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/ProductoOferta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/Promocion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/modelo/TemporalOferta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/negocio/BeerHouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenApp/ProgrammingWorkshop-I/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +20,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/MavenApp/ProgrammingWorkshop-I" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/Programas/Github/ProgrammingWorkshop-I",
+    "last_opened_file_path": "E:/Programas/Github/InformationTheory",
     "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
