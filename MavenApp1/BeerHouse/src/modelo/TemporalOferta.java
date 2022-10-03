@@ -1,5 +1,5 @@
 package modelo;
 
-public class TemporalOferta extends Promocion{
+public class TemporalOferta extends Promocion {
     private Producto producto;
 }

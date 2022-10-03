@@ -82,7 +82,7 @@ public class BeerHouse {
         if (i < mozos.size())
             return this.mozos.get(i); //devuelvo mozo que luego modificaré con alguna ventana MVC
         else
-            return this.mozos.get(i);
+            return null;
     }
 
 }
