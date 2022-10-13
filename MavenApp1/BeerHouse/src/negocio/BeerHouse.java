@@ -21,6 +21,7 @@ public class BeerHouse {
     private ArrayList<Mesa> mesa = new ArrayList<Mesa>();
     private ArrayList<Operario> operario = new ArrayList<Operario>();
     private ArrayList<Producto> producto = new ArrayList<Producto>();
+    private double sueldo;
 
     private BeerHouse() {
 
@@ -41,7 +42,9 @@ public class BeerHouse {
                                                                   UsuarioInexistenteException {
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
-            return new Admin(username, nuevaPassword);
+            String nombreAdmin = JOptionPane.showInputDialog(null,"¿Quien sos?");
+            estaActivo(nombreAdmin);
+            return new Admin(username, nuevaPassword,nombreAdmin,true);
         } else {
             int i = 0;
             while (i < operario.size() && !operario.get(i)
@@ -65,7 +68,15 @@ public class BeerHouse {
         }
     }
 
-    public void agregarMozo(Mozo mozo) {
+    private void estaActivo(String nombreAdmin) {
+		// Buscar en el array de operarios , el nombre del admin para marcarlo como activo
+    	if(operario.contains(nombreAdmin)) {
+    		operario.get(operario.indexOf(nombreAdmin)).setActivo(true);
+    	}
+		
+	}
+
+	public void agregarMozo(Mozo mozo) {
         this.mozos.add(mozo);
     }
 
@@ -85,4 +96,12 @@ public class BeerHouse {
             return null;
     }
 
+    
+    public double sueldo(int hijos) {
+		if(hijos==0)
+			return sueldo;
+		else
+			return sueldo+sueldo*hijos*0.05;
+    }
+    
 }
