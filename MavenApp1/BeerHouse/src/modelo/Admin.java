@@ -7,4 +7,8 @@ public class Admin extends Operario {
 		// TODO Auto-generated constructor stub
 	}
     
+	
+	public void darDeAlta() {
+		
+	}
 }

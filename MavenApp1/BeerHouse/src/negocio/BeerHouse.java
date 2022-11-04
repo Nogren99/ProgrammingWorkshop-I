@@ -38,6 +38,7 @@ public class BeerHouse {
     }
 
 
+    
     public Usuario login(String username, String password) throws UsuarioInactivoException,
                                                                   UsuarioInexistenteException {
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
@@ -103,5 +104,6 @@ public class BeerHouse {
 		else
 			return sueldo+sueldo*hijos*0.05;
     }
+    
     
 }

@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Mozo {
@@ -8,6 +9,7 @@ public class Mozo {
     private GregorianCalendar date;
     private int hijos;
     private byte estado;
+    private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
     
     
     

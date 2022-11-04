@@ -28,4 +28,12 @@ public class Operario extends Usuario {
         return activo;
     }
 
+	
+	
+	public void asignaMozo(Mozo mozo,Mesa mesa) {
+		
+	}
+	
+	
+	
 }

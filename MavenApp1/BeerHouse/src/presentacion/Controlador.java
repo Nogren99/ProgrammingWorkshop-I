@@ -3,8 +3,8 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vistas.IVista;
-import vistas.VistaLogin;
+import vista.IVista;
+import vista.VistaLogin;
 
 public class Controlador implements ActionListener {
 
@@ -25,7 +25,10 @@ public class Controlador implements ActionListener {
         if (comando.equalsIgnoreCase("Ingresar")) {
             System.out.println("Ingresando...");
             this.vista.cerrar();
-        }
+        }else 
+        	if (comando.equalsIgnoreCase("NuevaComanda")) { //para 6.1
+        		
+        	}
 
     }
 
