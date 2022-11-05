@@ -1,5 +1,8 @@
 package modelo;
 
+import excepciones.UsuarioInactivoException;
+import excepciones.UsuarioInexistenteException;
+
 public class Operario extends Usuario {
 	
 	private String NyA;
@@ -23,16 +26,14 @@ public class Operario extends Usuario {
 	}
 
 
-
 	public boolean isActivo() {
-        return activo;
+
+		return activo;
+		
+        
     }
 
-	
-	
-	public void asignaMozo(Mozo mozo,Mesa mesa) {
-		
-	}
+
 	
 	
 	

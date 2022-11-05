@@ -97,7 +97,11 @@ public class BeerHouse {
             return null;
     }
 
-    
+    /**
+     * F 1.1.1 && 1.1.2
+     * @param hijos
+     * @return
+     */
     public double sueldo(int hijos) {
 		if(hijos==0)
 			return sueldo;
@@ -105,5 +109,5 @@ public class BeerHouse {
 			return sueldo+sueldo*hijos*0.05;
     }
     
-    
+
 }

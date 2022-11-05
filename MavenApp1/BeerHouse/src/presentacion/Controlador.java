@@ -27,7 +27,7 @@ public class Controlador implements ActionListener {
             this.vista.cerrar();
         }else 
         	if (comando.equalsIgnoreCase("NuevaComanda")) { //para 6.1
-        		
+        		 
         	}
 
     }

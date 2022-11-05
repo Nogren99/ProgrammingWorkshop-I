@@ -22,6 +22,7 @@ public class Main {
 
         try {
             user = (Operario) sistema.login(username, password);
+
             sistema.agregaOperario(user);
             System.out.println("Username:" + user.getUsername() + " Password: " + user.getPassword());
         } catch (Exception e) {
