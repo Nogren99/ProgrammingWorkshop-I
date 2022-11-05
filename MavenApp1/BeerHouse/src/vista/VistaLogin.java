@@ -18,6 +18,8 @@ import javax.swing.JPasswordField;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.Dimension;
 
 import javax.swing.border.TitledBorder;
@@ -30,30 +32,30 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 
-public class VistaLogin extends JFrame implements IVista {
+public class VistaLogin extends JFrame implements IVista, KeyListener {
 
     private JPanel contentPane;
     private JPanel panel;
     private JPanel panel_1;
     private JPanel panel_2;
     private JPanel panel_3;
-    private JButton btnNewButton;
-    private JLabel lblNewLabel_2;
-    private JLabel lblNewLabel_3;
-    private JPanel panel_8;
-    private JLabel lblNewLabel;
-    private JPanel panel_9;
-    private JLabel lblNewLabel_1;
-    private ActionListener actionListener;
-    private JPanel panel_10;
-    private JPanel panel_7;
-    private JPasswordField passwordField;
     private JPanel panel_4;
-    private JTextField textField;
     private JPanel panel_5;
     private JPanel panel_6;
-
+    private JPanel panel_7;
+    private JPanel panel_8;
+    private JPanel panel_9;
+    private JPanel panel_10;
+    private JButton btnNewButton;
+    private JLabel lblNewLabel;
+    private JLabel lblNewLabel_2;
+    private JLabel lblNewLabel_3;
+    private JLabel lblNewLabel_1;
+    private ActionListener actionListener;
+    private JPasswordField passwordField;
+    private JTextField textField;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -69,6 +71,7 @@ public class VistaLogin extends JFrame implements IVista {
     }
 
     public VistaLogin() {
+    	setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         this.contentPane = new JPanel();
@@ -103,6 +106,7 @@ public class VistaLogin extends JFrame implements IVista {
         this.textField = new JTextField();
         this.panel_5.add(this.textField);
         this.textField.setColumns(10);
+        this.textField.addKeyListener(this);
 
         this.panel_3 = new JPanel();
         this.panel_3.setBorder(new LineBorder(SystemColor.inactiveCaption));
@@ -112,7 +116,7 @@ public class VistaLogin extends JFrame implements IVista {
         this.panel_6 = new JPanel();
         this.panel_3.add(this.panel_6);
 
-        this.lblNewLabel_3 = new JLabel("Password");
+        this.lblNewLabel_3 = new JLabel("Contrase\u00F1a");
         this.panel_6.add(this.lblNewLabel_3);
 
         this.panel_4 = new JPanel();
@@ -120,8 +124,9 @@ public class VistaLogin extends JFrame implements IVista {
         this.panel_3.add(this.panel_4);
 
         this.passwordField = new JPasswordField();
-        this.passwordField.setMargin(new Insets(2, 50, 2, 50));
+        this.passwordField.setColumns(10);
         this.panel_4.add(this.passwordField);
+        this.passwordField.addKeyListener(this);
 
         this.panel_1 = new JPanel();
         this.panel_1.setBorder(new LineBorder(SystemColor.inactiveCaption));
@@ -142,6 +147,11 @@ public class VistaLogin extends JFrame implements IVista {
         this.panel_9.add(this.lblNewLabel_1);
 
         this.btnNewButton = new JButton("Ingresar");
+        this.btnNewButton.setEnabled(false);
+        this.btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         this.contentPane.add(this.btnNewButton, BorderLayout.SOUTH);
     }
 
@@ -159,6 +169,37 @@ public class VistaLogin extends JFrame implements IVista {
     public void mostrar() {
         this.setVisible(true);
     }
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		this.btnNewButton.setEnabled(!(this.textField.getText().isBlank() || this.passwordField.getText().isBlank()));
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public JPasswordField getPasswordField()
+	{
+		return this.passwordField;
+	}
+
+	public JTextField getTextField()
+	{
+		return this.textField;
+	}
 
 
 }
