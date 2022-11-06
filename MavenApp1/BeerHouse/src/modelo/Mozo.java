@@ -8,9 +8,7 @@ public class Mozo {
 	private String NyA;
     private GregorianCalendar date;
     private int hijos;
-    private byte estado;
-    private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
-    
+    private byte estado;    
     
     
     public Mozo() {
@@ -21,7 +19,7 @@ public class Mozo {
     /**
      * contrato
      * @param nyA
-     * @param date - el mozo debe ser mayor de 18 años
+     * @param date - el mozo debe ser mayor de 18 aï¿½os
      * @param hijos - la cant de hijos debe ser >= 0
      */
 	public Mozo(String nyA, GregorianCalendar date, int hijos) {

@@ -43,7 +43,7 @@ public class BeerHouse {
                                                                   UsuarioInexistenteException {
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
-            String nombreAdmin = JOptionPane.showInputDialog(null,"¿Quien sos?");
+            String nombreAdmin = JOptionPane.showInputDialog(null,"ï¿½Quien sos?");
             estaActivo(nombreAdmin);
             return new Admin(username, nuevaPassword,nombreAdmin,true);
         } else {
@@ -59,7 +59,7 @@ public class BeerHouse {
 
             System.out.println("Elemento:" + i);
 
-            if (i < operario.size()) { //se encontró usuario. verificar activo
+            if (i < operario.size()) { //se encontrï¿½ usuario. verificar activo
                 if (operario.get(i).isActivo())
                     return operario.get(i);
                 else
@@ -76,7 +76,11 @@ public class BeerHouse {
     	}
 		
 	}
-
+    
+    public void mesasVacias() {
+    	return this.mesa.isEmpty();
+    }
+    
 	public void agregarMozo(Mozo mozo) {
         this.mozos.add(mozo);
     }
@@ -92,7 +96,7 @@ public class BeerHouse {
             i++;
 
         if (i < mozos.size())
-            return this.mozos.get(i); //devuelvo mozo que luego modificaré con alguna ventana MVC
+            return this.mozos.get(i); //devuelvo mozo que luego modificarï¿½ con alguna ventana MVC
         else
             return null;
     }

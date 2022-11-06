@@ -5,6 +5,8 @@ public class Mesa {
     private int comensales;
     private Mozo mozo;
     private String estado;
+    private Comanda comanda;
+    
     
 	public Mesa(int numero, int comensales, Mozo mozo, String estado) {
 		super();
@@ -14,5 +16,6 @@ public class Mesa {
 		this.estado = estado;
 	}
     
+	
     
 }
