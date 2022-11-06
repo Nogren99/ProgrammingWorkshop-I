@@ -79,10 +79,6 @@ public class BeerHouse {
 		
 	}
     
-<<<<<<< Updated upstream
-    public boolean mesasVacias() {
-    	return this.mesa.isEmpty();
-=======
     public boolean mesasVacias() throws NoMesasHabilitadasException{
     	if(this.mesa.isEmpty())
     		throw new NoMesasHabilitadasException("No hay mesas habilitadas");
@@ -95,7 +91,6 @@ public class BeerHouse {
     		throw new NoMososActivosException("No hay mosos activos");
     	else
     		return false;
->>>>>>> Stashed changes
     }
     
 	public void agregarMozo(Mozo mozo) {
