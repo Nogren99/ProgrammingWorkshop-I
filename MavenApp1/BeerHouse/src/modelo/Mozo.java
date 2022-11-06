@@ -11,11 +11,6 @@ public class Mozo {
     private byte estado;    
     
     
-    public Mozo() {
-        super();
-    }
-
-
     /**
      * contrato
      * @param nyA
@@ -24,7 +19,6 @@ public class Mozo {
      */
 	public Mozo(String nyA, GregorianCalendar date, int hijos) {
 		super();
-		NyA = nyA;
 		this.date = date;
 		this.hijos = hijos;
 	}

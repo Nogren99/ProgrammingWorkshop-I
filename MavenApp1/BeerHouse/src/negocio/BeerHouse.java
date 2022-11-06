@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import excepciones.NoMesasHabilitadasException;
+import excepciones.NoMososActivosException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 
@@ -77,8 +79,23 @@ public class BeerHouse {
 		
 	}
     
+<<<<<<< Updated upstream
     public boolean mesasVacias() {
     	return this.mesa.isEmpty();
+=======
+    public boolean mesasVacias() throws NoMesasHabilitadasException{
+    	if(this.mesa.isEmpty())
+    		throw new NoMesasHabilitadasException("No hay mesas habilitadas");
+    	else
+    		return false;
+    }
+    
+    public boolean mososVacios() throws NoMososActivosException{
+    	if(this.mozos.isEmpty())
+    		throw new NoMososActivosException("No hay mosos activos");
+    	else
+    		return false;
+>>>>>>> Stashed changes
     }
     
 	public void agregarMozo(Mozo mozo) {
