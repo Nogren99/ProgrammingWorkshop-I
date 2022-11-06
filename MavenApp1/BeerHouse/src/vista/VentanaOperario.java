@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaOperario extends JFrame implements IVistaOperario
+public class VentanaOperario extends JFrame implements IVista
 {
 
 	private JPanel contentPane;
@@ -22,30 +22,7 @@ public class VentanaOperario extends JFrame implements IVistaOperario
 	private JButton asignarComandaButton;
 	private JButton cierreMesaButton;
 	private ActionListener actionListener;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					VentanaOperario frame = new VentanaOperario();
-					frame.setVisible(true);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaOperario()
 	{
 		setTitle("Operario");
@@ -62,10 +39,7 @@ public class VentanaOperario extends JFrame implements IVistaOperario
 		this.contentPane.add(this.panel);
 		
 		this.asignarMMButton = new JButton("Asignar mesa - mozo");
-		this.asignarMMButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		this.asignarMMButton.setToolTipText("Asignar mesa - mozo");
 		this.panel.add(this.asignarMMButton);
 		
@@ -75,10 +49,7 @@ public class VentanaOperario extends JFrame implements IVistaOperario
 		
 		this.asignarComandaButton = new JButton("Asignar comanda a mesa");
 		this.asignarComandaButton.setToolTipText("Asignar comanda a mesa");
-		this.asignarComandaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		this.panel_1.add(this.asignarComandaButton);
 		
 		this.panel_2 = new JPanel();
@@ -87,10 +58,7 @@ public class VentanaOperario extends JFrame implements IVistaOperario
 		
 		this.cierreMesaButton = new JButton("Cerrar mesa");
 		this.cierreMesaButton.setToolTipText("Cerrar mesa");
-		this.cierreMesaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		this.panel_2.add(this.cierreMesaButton);
 	}
 	
@@ -109,6 +77,9 @@ public class VentanaOperario extends JFrame implements IVistaOperario
 	@Override
 	public void setActionListener(ActionListener actionListener)
 	{
+		this.asignarComandaButton.addActionListener(actionListener);
+		this.asignarMMButton.addActionListener(actionListener);
+		this.cierreMesaButton.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 }

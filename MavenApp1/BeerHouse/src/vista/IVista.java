@@ -11,6 +11,5 @@ public interface IVista {
     void mostrar();
 
     void setActionListener(ActionListener actionListener);
-    JPasswordField getPasswordField();
-    JTextField getTextField();
+
 }

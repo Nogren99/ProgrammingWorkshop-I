@@ -146,10 +146,6 @@ public class VentanaRegistro extends JFrame implements IVista, KeyListener
         this.siguienteButton = new JButton("Siguiente");
         this.siguienteButton.setToolTipText("Siguiente");
         this.siguienteButton.setEnabled(false);
-        this.siguienteButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
         this.contentPane.add(this.siguienteButton, BorderLayout.SOUTH);
     }
 
@@ -192,16 +188,5 @@ public class VentanaRegistro extends JFrame implements IVista, KeyListener
 		
 	}
 
-	@Override
-	public JPasswordField getPasswordField()
-	{
-		return this.passwordField;
-	}
-
-	@Override
-	public JTextField getTextField()
-	{
-		return this.textField;
-	}
 
 }

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class VentanaAdmin extends JFrame implements IVistaAdmin
+public class VentanaAdmin extends JFrame implements IVista
 {
 
 	private JPanel contentPane;
@@ -28,30 +28,8 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 	private JButton estadisticasButton;
 	private JButton promocionesButton;
 	private ActionListener actionListener;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args)
-	{
-		EventQueue.invokeLater(new Runnable()
-		{
-			public void run()
-			{
-				try
-				{
-					VentanaAdmin frame = new VentanaAdmin();
-					frame.setVisible(true);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public VentanaAdmin()
 	{
 		setBackground(new Color(0, 114, 114));
@@ -69,10 +47,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		this.contentPane.add(this.panel);
 		
 		this.operariosButton = new JButton("Operarios");
-		operariosButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.operariosButton.setToolTipText("Operarios");
 		panel.add(this.operariosButton);
 		
@@ -82,10 +56,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		
 		this.mozosButton = new JButton("Mozos");
 		this.mozosButton.setToolTipText("Mozos");
-		this.mozosButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.panel_1.add(this.mozosButton);
 		
 		this.panel_2 = new JPanel();
@@ -94,10 +64,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		
 		this.mesasButton = new JButton("Mesas");
 		this.mesasButton.setToolTipText("Mesas");
-		this.mesasButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.panel_2.add(this.mesasButton);
 		
 		this.panel_3 = new JPanel();
@@ -106,10 +72,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		
 		this.productosEnVentaButton = new JButton("Productos en venta");
 		this.productosEnVentaButton.setToolTipText("Productos en venta");
-		this.productosEnVentaButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.panel_3.add(this.productosEnVentaButton);
 		
 		this.panel_4 = new JPanel();
@@ -118,10 +80,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		
 		this.estadisticasButton = new JButton("Estad\u00edsticas");
 		this.estadisticasButton.setToolTipText("Estad\u00EDsticas");
-		this.estadisticasButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.panel_4.add(this.estadisticasButton);
 		
 		this.panel_5 = new JPanel();
@@ -130,10 +88,6 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 		
 		this.promocionesButton = new JButton("Promociones");
 		this.promocionesButton.setToolTipText("Promociones");
-		this.promocionesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		this.panel_5.add(this.promocionesButton);
 	}
 
@@ -152,6 +106,12 @@ public class VentanaAdmin extends JFrame implements IVistaAdmin
 	@Override
 	public void setActionListener(ActionListener actionListener)
 	{
+		this.estadisticasButton.addActionListener(actionListener);
+		this.mesasButton.addActionListener(actionListener);
+		this.mozosButton.addActionListener(actionListener);
+		this.operariosButton.addActionListener(actionListener);
+		this.productosEnVentaButton.addActionListener(actionListener);
+		this.promocionesButton.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 
