@@ -38,11 +38,8 @@ public class BeerHouse {
     public void agregaOperario(Operario operario) {
         this.operario.add(operario);
     }
-
-
     
-    public Usuario login(String username, String password) throws UsuarioInactivoException,
-                                                                  UsuarioInexistenteException {
+    public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
             String nombreAdmin = JOptionPane.showInputDialog(null,"\u00bfQuien sos?");
@@ -50,17 +47,11 @@ public class BeerHouse {
             return new Admin(username, nuevaPassword,nombreAdmin,true);
         } else {
             int i = 0;
-            while (i < operario.size() && !operario.get(i)
-                                                   .getUsername()
-                                                   .equals(username) && !operario.get(i)
-                                                                                 .getPassword()
-                                                                                 .equals(password)) {
+            while (i < operario.size() && !operario.get(i).getUsername().equals(username) && !operario.get(i).getPassword().equals(password)) {
                 //System.out.println("Analizando username "+ operario.get(i).getUsername() + "password "+ operario.get(i).getPassword());
                 i++;
             }
-
             System.out.println("Elemento:" + i);
-
             if (i < operario.size()) { //se encontr\u00f3 usuario. verificar activo
                 if (operario.get(i).isActivo())
                     return operario.get(i);
