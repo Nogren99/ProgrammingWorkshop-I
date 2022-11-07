@@ -1,6 +1,5 @@
 package negocio;
 
-//zayrux 
 import modelo.Admin;
 import modelo.Mesa;
 import modelo.Mozo;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import excepciones.MesaRepetidaException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMososActivosException;
 import excepciones.UsuarioInactivoException;
@@ -21,9 +21,9 @@ public class BeerHouse {
 
     private static BeerHouse instancia;
     private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
-    private ArrayList<Mesa> mesa = new ArrayList<Mesa>();
-    private ArrayList<Operario> operario = new ArrayList<Operario>();
-    private ArrayList<Producto> producto = new ArrayList<Producto>();
+    private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
+    private ArrayList<Operario> operarios = new ArrayList<Operario>();
+    private ArrayList<Producto> productos = new ArrayList<Producto>();
     private double sueldo;
 
     private BeerHouse() {
@@ -37,25 +37,25 @@ public class BeerHouse {
     }
 
     public void agregaOperario(Operario operario) {
-        this.operario.add(operario);
+        this.operarios.add(operario);
     }
     
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
-        if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
+        if (operarios.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
             String nombreAdmin = JOptionPane.showInputDialog(null,"\u00bfQuien sos?");
             estaActivo(nombreAdmin);
             return new Admin(username, nuevaPassword,nombreAdmin,true);
         } else {
             int i = 0;
-            while (i < operario.size() && !operario.get(i).getUsername().equals(username) && !operario.get(i).getPassword().equals(password)) {
+            while (i < operarios.size() && !operarios.get(i).getUsername().equals(username) && !operarios.get(i).getPassword().equals(password)) {
                 //System.out.println("Analizando username "+ operario.get(i).getUsername() + "password "+ operario.get(i).getPassword());
                 i++;
             }
             System.out.println("Elemento:" + i);
-            if (i < operario.size()) { //se encontr\u00f3 usuario. verificar activo
-                if (operario.get(i).isActivo())
-                    return operario.get(i);
+            if (i < operarios.size()) { //se encontr\u00f3 usuario. verificar activo
+                if (operarios.get(i).isActivo())
+                    return operarios.get(i);
                 else
                     throw new UsuarioInactivoException("Usuario iNativo");
             } else //no se encontr\u00f3 el usuario. lanzar excepci\u00f3n (despues crearla)
@@ -65,14 +65,14 @@ public class BeerHouse {
 
     private void estaActivo(String nombreAdmin) {
 		// Buscar en el array de operarios , el nombre del admin para marcarlo como activo
-    	if(operario.contains(nombreAdmin)) {
-    		operario.get(operario.indexOf(nombreAdmin)).setActivo(true);
+    	if(operarios.contains(nombreAdmin)) {
+    		operarios.get(operarios.indexOf(nombreAdmin)).setActivo(true);
     	}
 		
 	}
     
     public boolean mesasVacias() throws NoMesasHabilitadasException{
-    	if(this.mesa.isEmpty())
+    	if(this.mesas.isEmpty())
     		throw new NoMesasHabilitadasException("No hay mesas habilitadas");
     	else
     		return false;
@@ -105,6 +105,20 @@ public class BeerHouse {
             return null;
     }
 
+    public void agregarMesa(Mesa mesa) throws MesaRepetidaException{
+    //Chequeamos que no sea vacia?
+	//Chequeamos que sea positiva?
+		if(this.mesas.contains(mesa))
+	        	throw new MesaRepetidaException("El nro de mesa NO puede repetirse");
+		else
+			this.mesas.add(mesa);
+    }
+
+    public void eliminaMesa(Mesa mesa) {
+        this.mesas.remove(mesa);
+    }
+
+    
     /**
      * F 1.1.1 && 1.1.2
      * @param hijos
