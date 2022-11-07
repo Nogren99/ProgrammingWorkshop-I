@@ -1,6 +1,7 @@
 package modelo;
 
 import excepciones.CantComensalesException;
+import excepciones.MesaSinMozoException;
 
 public class Mesa {
 	private int numero;
