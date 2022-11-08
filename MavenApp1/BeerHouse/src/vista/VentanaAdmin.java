@@ -10,8 +10,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.SystemColor;
 
-public class VentanaAdmin extends JFrame implements IVista
+public class VentanaAdmin extends JFrame implements IVista, ActionListener
 {
 
 	private JPanel contentPane;
@@ -28,6 +29,7 @@ public class VentanaAdmin extends JFrame implements IVista
 	private JButton estadisticasButton;
 	private JButton promocionesButton;
 	private ActionListener actionListener;
+	private JButton btnDesloguearse;
 
 	
 	public VentanaAdmin()
@@ -37,13 +39,13 @@ public class VentanaAdmin extends JFrame implements IVista
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 114, 114));
+		contentPane.setBackground(SystemColor.activeCaption);
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new GridLayout(6, 0, 0, 0));
 		
 		this.panel = new JPanel();
-		this.panel.setBackground(new Color(0, 114, 114));
+		this.panel.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel);
 		
 		this.operariosButton = new JButton("Operarios");
@@ -51,7 +53,7 @@ public class VentanaAdmin extends JFrame implements IVista
 		panel.add(this.operariosButton);
 		
 		this.panel_1 = new JPanel();
-		this.panel_1.setBackground(new Color(0, 114, 114));
+		this.panel_1.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel_1);
 		
 		this.mozosButton = new JButton("Mozos");
@@ -59,7 +61,7 @@ public class VentanaAdmin extends JFrame implements IVista
 		this.panel_1.add(this.mozosButton);
 		
 		this.panel_2 = new JPanel();
-		this.panel_2.setBackground(new Color(0, 114, 114));
+		this.panel_2.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel_2);
 		
 		this.mesasButton = new JButton("Mesas");
@@ -67,7 +69,7 @@ public class VentanaAdmin extends JFrame implements IVista
 		this.panel_2.add(this.mesasButton);
 		
 		this.panel_3 = new JPanel();
-		this.panel_3.setBackground(new Color(0, 114, 114));
+		this.panel_3.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel_3);
 		
 		this.productosEnVentaButton = new JButton("Productos en venta");
@@ -75,7 +77,7 @@ public class VentanaAdmin extends JFrame implements IVista
 		this.panel_3.add(this.productosEnVentaButton);
 		
 		this.panel_4 = new JPanel();
-		this.panel_4.setBackground(new Color(0, 114, 114));
+		this.panel_4.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel_4);
 		
 		this.estadisticasButton = new JButton("Estad\u00edsticas");
@@ -83,12 +85,16 @@ public class VentanaAdmin extends JFrame implements IVista
 		this.panel_4.add(this.estadisticasButton);
 		
 		this.panel_5 = new JPanel();
-		this.panel_5.setBackground(new Color(0, 114, 114));
+		this.panel_5.setBackground(SystemColor.inactiveCaption);
 		this.contentPane.add(this.panel_5);
 		
 		this.promocionesButton = new JButton("Promociones");
 		this.promocionesButton.setToolTipText("Promociones");
 		this.panel_5.add(this.promocionesButton);
+		
+		this.btnDesloguearse = new JButton("Desloguearse");
+		this.btnDesloguearse.addActionListener(this);
+		this.panel_5.add(this.btnDesloguearse);
 	}
 
 	@Override
@@ -112,7 +118,10 @@ public class VentanaAdmin extends JFrame implements IVista
 		this.operariosButton.addActionListener(actionListener);
 		this.productosEnVentaButton.addActionListener(actionListener);
 		this.promocionesButton.addActionListener(actionListener);
+		this.btnDesloguearse.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+	}
 }

@@ -12,9 +12,9 @@ import negocio.BeerHouse;
 public class Main {
 
     public static void main(String[] args) {
-        //Controlador controlador = new Controlador();
+        Controlador controlador = new Controlador();
 
-        BeerHouse sistema = negocio.BeerHouse.getInstancia();
+       /* BeerHouse sistema = negocio.BeerHouse.getInstancia();
 
         String username = JOptionPane.showInputDialog(null, "Ingresa nombre de usuario");
         String password = JOptionPane.showInputDialog(null, "Ingrese password");
@@ -22,7 +22,6 @@ public class Main {
 
         try {
             user = (Operario) sistema.login(username, password);
-
             sistema.agregaOperario(user);
             System.out.println("Username:" + user.getUsername() + " Password: " + user.getPassword());
         } catch (Exception e) {
@@ -38,8 +37,8 @@ public class Main {
             System.out.println("Username:" + user.getUsername() + " Password: " + user.getPassword());
         } catch (Exception e) {
             System.out.println("ERROR");
-        }
+        }*/
         
-    }
+    } 
 
 }

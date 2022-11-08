@@ -228,11 +228,6 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
 
         this.btnNewButton = new JButton("Ingresar");
         this.btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
-        this.btnNewButton.setEnabled(false);
-        this.btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
         this.contentPane.add(this.btnNewButton, BorderLayout.SOUTH);
     }
 
@@ -271,6 +266,8 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 	public JPasswordField getPasswordField()
 	{

@@ -199,7 +199,7 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 	public void setActionListener(ActionListener actionListener) {
 		this.btnEmpleado.addActionListener(actionListener);
 		this.btnMesa.addActionListener(actionListener);
-		this.setActionListener(actionListener);	
+		this.actionListener=actionListener;
 	}
 
 	public DefaultListModel getModeloListaEmpleados() {

@@ -22,6 +22,7 @@ public class VentanaOperario extends JFrame implements IVista
 	private JButton asignarComandaButton;
 	private JButton cierreMesaButton;
 	private ActionListener actionListener;
+	private JButton btnDEsloguearse;
 
 	public VentanaOperario()
 	{
@@ -60,6 +61,9 @@ public class VentanaOperario extends JFrame implements IVista
 		this.cierreMesaButton.setToolTipText("Cerrar mesa");
 
 		this.panel_2.add(this.cierreMesaButton);
+		
+		this.btnDEsloguearse = new JButton("Desloguearse");
+		this.panel_2.add(this.btnDEsloguearse);
 	}
 	
 	@Override
@@ -80,6 +84,7 @@ public class VentanaOperario extends JFrame implements IVista
 		this.asignarComandaButton.addActionListener(actionListener);
 		this.asignarMMButton.addActionListener(actionListener);
 		this.cierreMesaButton.addActionListener(actionListener);
+		this.btnDEsloguearse.addActionListener(actionListener); 
 		this.actionListener = actionListener;
 	}
 }

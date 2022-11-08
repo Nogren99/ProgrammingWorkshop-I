@@ -7,6 +7,7 @@ public class Operario extends Usuario {
 	
 	private String NyA;
     private boolean activo;
+    protected byte categoria;
 
     
     
@@ -14,9 +15,15 @@ public class Operario extends Usuario {
 		super(username, password);
 		NyA = nyA;
 		this.activo = activo;
+		this.categoria=10;
 	}
 
+    
+    
 
+	public byte getCategoria() {
+		return categoria;
+	}
 
 	public void setActivo(boolean activo) {
 		if (activo)
