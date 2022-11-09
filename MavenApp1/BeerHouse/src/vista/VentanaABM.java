@@ -126,6 +126,12 @@ public class VentanaABM extends JFrame implements IVista {
 		this.setVisible(true);
 	}
 
+	
+	
+	public DefaultListModel<Object> getModeloLista() {
+		return modeloLista;
+	}
+
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnAlta.addActionListener(actionListener);

@@ -119,6 +119,12 @@ public class BeerHouse {
 		else
 			return sueldo+sueldo*hijos*0.05;
     }
+
+	public ArrayList<Operario> getOperario() {
+		return operario;
+	}
     
 
+    
+    
 }

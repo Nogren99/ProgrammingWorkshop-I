@@ -18,5 +18,7 @@ public abstract class Usuario {
         return password;
     }
 
+    
+    
 
 }

@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -63,6 +64,16 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("Operarios")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaABM());
+        		VentanaABM ventABM = (VentanaABM) this.vista;
+        		Iterator<Operario> iterador = sistema.getOperario().iterator();
+        		
+        		while (iterador.hasNext())
+    			{
+        			Operario ope = iterador.next();
+        			if (ope.getCategoria()!=20)     //para que no salga el operario admin en la lista
+        				ventABM.getModeloLista().addElement(iterador.next());
+    			}
+        		ventABM.repaint();
         } else if (comando.equalsIgnoreCase("Mozos")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaABM());
@@ -72,6 +83,19 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("Productos en venta")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaABM());
+        } else if (comando.equalsIgnoreCase("Alta")) {
+        		this.vista.cerrar();
+        		String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo operario");   
+        		String username=JOptionPane.showInputDialog(null,"Ingresa username del nuevo operario");
+        		String pass=JOptionPane.showInputDialog(null,"Ingresa contraseña del nuevo operario");
+        		int dialogResult = JOptionPane.showConfirmDialog(null, "¿Es activo?", "Escoger", JOptionPane.YES_NO_OPTION);
+        		boolean activo=false;
+        		if (dialogResult == JOptionPane.YES_OPTION)
+        			activo=true;
+        		
+        		sistema.agregaOperario(new Operario(username,pass,name,activo));
+        		this.setVista(new VistaLogin());
+        		
         }
 
     }

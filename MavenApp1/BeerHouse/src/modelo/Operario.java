@@ -41,6 +41,14 @@ public class Operario extends Usuario {
     }
 
 
+
+
+	@Override
+	public String toString() {
+		return "Operario [NyA=" + NyA + ", activo=" + activo + ", categoria=" + categoria + "]";
+	}
+
+
 	
 	
 	
