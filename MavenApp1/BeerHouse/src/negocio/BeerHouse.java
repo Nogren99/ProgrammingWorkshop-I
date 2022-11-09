@@ -1,13 +1,5 @@
 package negocio;
 
-//zayrux 
-import modelo.Admin;
-import modelo.Mesa;
-import modelo.Mozo;
-import modelo.Operario;
-import modelo.Producto;
-import modelo.Usuario;
-
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -16,6 +8,14 @@ import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMososActivosException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
+//zayrux 
+import modelo.Admin;
+import modelo.Comanda;
+import modelo.Mesa;
+import modelo.Mozo;
+import modelo.Operario;
+import modelo.Producto;
+import modelo.Usuario;
 
 public class BeerHouse {
 
@@ -124,7 +124,29 @@ public class BeerHouse {
 		return operario;
 	}
     
-
+	public void asociarComanda(Mesa mesa, Comanda comanda) {
+        int i = 0;
+        while (i < this.mesa.size() && !this.mesa.get(i).equals(mesa))
+            i++;
+        if (i < this.mesa.size()) {
+            this.mesa.get(i).setComanda(comanda);
+            this.mesa.get(i).setEstado("Ocupada");
+        }
+    }
     
-    
+	public double mayorVolumenDeVenta() {
+		double max = 0.0;
+		for (Mozo mozo : mozos)
+			if (mozo.getVolumenDeVenta()>max)
+				max=mozo.getVolumenDeVenta();
+		return max;
+    }
+	
+	public double menorVolumenDeVenta() {
+		double min = 999999.0;
+		for (Mozo mozo : mozos)
+			if (mozo.getVolumenDeVenta()<min)
+				min=mozo.getVolumenDeVenta();
+		return min;
+    }
 }

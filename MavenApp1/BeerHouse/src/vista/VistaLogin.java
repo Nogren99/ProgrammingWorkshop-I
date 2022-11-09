@@ -73,7 +73,7 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
     private JPanel panel_22;
     private JPanel panel_23;
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -84,7 +84,7 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
                 }
             }
         });
-    }
+    }*/
 
     public VistaLogin() {
     	setTitle("Login");
@@ -146,6 +146,7 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         this.textField = new JTextField();
         this.panel_14.add(this.textField, BorderLayout.CENTER);
         this.textField.setColumns(10);
+        this.textField.addKeyListener(this);
         
         this.panel_16 = new JPanel();
         this.panel_16.setBackground(SystemColor.inactiveCaption);
@@ -182,26 +183,27 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         this.panel_4.setBackground(SystemColor.inactiveCaption);
         this.panel_4.setBorder(null);
         this.panel_3.add(this.panel_4);
-                this.panel_4.setLayout(new GridLayout(3, 1, 0, 0));
-                
-                this.panel_19 = new JPanel();
-                this.panel_19.setBackground(SystemColor.inactiveCaption);
-                this.panel_4.add(this.panel_19);
-                
-                this.panel_20 = new JPanel();
-                this.panel_4.add(this.panel_20);
-                this.panel_20.setLayout(new BorderLayout(0, 0));
-                
-                this.passwordField = new JPasswordField();
-                this.panel_20.add(this.passwordField, BorderLayout.CENTER);
-                
-                this.panel_21 = new JPanel();
-                this.panel_21.setBackground(SystemColor.inactiveCaption);
-                this.panel_20.add(this.panel_21, BorderLayout.EAST);
-                
-                this.panel_22 = new JPanel();
-                this.panel_22.setBackground(SystemColor.inactiveCaption);
-                this.panel_20.add(this.panel_22, BorderLayout.WEST);
+        this.panel_4.setLayout(new GridLayout(3, 1, 0, 0));
+        
+        this.panel_19 = new JPanel();
+        this.panel_19.setBackground(SystemColor.inactiveCaption);
+        this.panel_4.add(this.panel_19);
+        
+        this.panel_20 = new JPanel();
+        this.panel_4.add(this.panel_20);
+        this.panel_20.setLayout(new BorderLayout(0, 0));
+        
+        this.passwordField = new JPasswordField();
+        this.panel_20.add(this.passwordField, BorderLayout.CENTER);
+        this.passwordField.addKeyListener(this);
+        
+        this.panel_21 = new JPanel();
+        this.panel_21.setBackground(SystemColor.inactiveCaption);
+        this.panel_20.add(this.panel_21, BorderLayout.EAST);
+        
+        this.panel_22 = new JPanel();
+        this.panel_22.setBackground(SystemColor.inactiveCaption);
+        this.panel_20.add(this.panel_22, BorderLayout.WEST);
 
         this.panel_1 = new JPanel();
         this.panel_1.setBorder(new LineBorder(SystemColor.inactiveCaption));
@@ -227,6 +229,11 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         this.panel_9.add(this.lblNewLabel_1);
 
         this.btnNewButton = new JButton("Ingresar");
+        this.btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton.setEnabled(false);
         this.btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
         this.contentPane.add(this.btnNewButton, BorderLayout.SOUTH);
     }
