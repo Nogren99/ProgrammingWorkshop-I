@@ -45,6 +45,8 @@ public class VentanaABM extends JFrame implements IVista {
 	private JPanel panelOeste;
 	private JPanel panelEste;
 	private ActionListener actionListener;
+	private JPanel panel_1;
+	private JButton btnAtras;
 
 
 	public VentanaABM() {
@@ -115,6 +117,16 @@ public class VentanaABM extends JFrame implements IVista {
 		this.BtnModif.setBackground(SystemColor.textHighlight);
 		this.BtnModif.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		this.panelModif.add(this.BtnModif);
+		
+		this.panel_1 = new JPanel();
+		this.panel_1.setBackground(SystemColor.inactiveCaption);
+		this.panelBotones.add(this.panel_1);
+		
+		this.btnAtras = new JButton("Atras");
+		this.btnAtras.setBackground(SystemColor.textHighlight);
+		this.btnAtras.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		this.btnAtras.setRequestFocusEnabled(false);
+		this.panel_1.add(this.btnAtras);
 	}
 
 	@Override
@@ -142,6 +154,7 @@ public class VentanaABM extends JFrame implements IVista {
 		this.btnAlta.addActionListener(actionListener);
 		this.Btnbaja.addActionListener(actionListener);
 		this.BtnModif.addActionListener(actionListener);
+		this.btnAtras.addActionListener(actionListener);
 		this.actionListener=actionListener;
 	}
 

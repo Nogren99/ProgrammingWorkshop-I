@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import excepciones.MesaOcupadaException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMososActivosException;
 import excepciones.UsuarioInactivoException;
@@ -35,7 +36,24 @@ public class BeerHouse {
             instancia = new BeerHouse();
         return instancia;
     }
+    
+    public void actualizaStock(Producto producto, int cant) { //throws no hay suficiente stock
+    	producto.setStock(producto.getStock()-cant);
+    }
+    
+    public void asignaCM(Comanda comanda, Mesa mesa) {
+    	mesa.setComanda(comanda); //despues validar y eso
+    }
 
+    public void asignaMM(Mesa mesa, Mozo mozo) throws MesaOcupadaException {
+    	if (mesa.getEstado().equals("Libre")) {	
+    		mesa.setMozo(mozo);
+    		mesa.setEstado("Ocupada");
+    	}
+    	else
+    		throw new MesaOcupadaException("Esta mesa no está libre!");
+    }
+    
     public void modificaIDProducto(Producto producto, int ID) {
     	producto.setId(ID);
     }

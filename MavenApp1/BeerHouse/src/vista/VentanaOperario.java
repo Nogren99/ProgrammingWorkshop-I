@@ -39,7 +39,8 @@ public class VentanaOperario extends JFrame implements IVista
 		this.panel.setBackground(new Color(90, 173, 221));
 		this.contentPane.add(this.panel);
 		
-		this.asignarMMButton = new JButton("Asignar mesa - mozo");
+		this.asignarMMButton = new JButton("AsignaMM");
+		this.asignarMMButton.setActionCommand("AsignacionMM");
 
 		this.asignarMMButton.setToolTipText("Asignar mesa - mozo");
 		this.panel.add(this.asignarMMButton);
@@ -49,6 +50,7 @@ public class VentanaOperario extends JFrame implements IVista
 		this.contentPane.add(this.panel_1);
 		
 		this.asignarComandaButton = new JButton("Asignar comanda a mesa");
+		this.asignarComandaButton.setActionCommand("AsignacionCM");
 		this.asignarComandaButton.setToolTipText("Asignar comanda a mesa");
 
 		this.panel_1.add(this.asignarComandaButton);
@@ -87,4 +89,6 @@ public class VentanaOperario extends JFrame implements IVista
 		this.btnDEsloguearse.addActionListener(actionListener); 
 		this.actionListener = actionListener;
 	}
+	
+	
 }

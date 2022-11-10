@@ -1,23 +1,31 @@
 package presentacion;
 
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import excepciones.MesaOcupadaException;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
+import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Operario;
+import modelo.Pedido;
 import modelo.Producto;
 import negocio.BeerHouse;
 import vista.IVista;
 import vista.VentanaABM;
 import vista.VentanaAdmin;
+import vista.VentanaAsignacion;
+import vista.VentanaAsignacionComanda;
 import vista.VentanaEstadisticas;
 import vista.VentanaOperario;
 import vista.VistaLogin;
@@ -414,6 +422,60 @@ public class Controlador implements ActionListener {
 		ventABM.getBtnModif().setActionCommand("ModifProd");
 		ventABM.repaint();
     	
+    } else if (comando.equalsIgnoreCase("AsignacionMM")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaAsignacion());
+    	VentanaAsignacion ventAsignacion = (VentanaAsignacion) this.vista;
+    	Iterator<Mozo> iterador = sistema.getMozos().iterator();
+    	
+    	while (iterador.hasNext()) {
+    		ventAsignacion.getModeloLista().addElement(iterador.next());
+    	}
+    	
+    	
+    	ventAsignacion.repaint();
+    } else if (comando.equalsIgnoreCase("AsignarMM")) {
+    	VentanaAsignacion ventAsignacion = (VentanaAsignacion) this.vista;	
+    	Integer number = (Integer) ventAsignacion.getSpinner().getValue();
+    	int numero = number.intValue();
+    	try {
+			sistema.asignaMM(sistema.getMesa().get(numero), (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
+			JOptionPane.showInputDialog(null,"¡Mesa asignada con éxito!");
+		} catch (MesaOcupadaException e1) {
+			JOptionPane.showInputDialog(null,e1.getMessage());
+		}
+    	
+    	
+    } else if (comando.equalsIgnoreCase("Atras")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaAdmin());
+    } else if (comando.equalsIgnoreCase("Salir")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaOperario());
+    } else if (comando.equalsIgnoreCase("AsignacionCM")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaAsignacionComanda());
+    	
+    	VentanaAsignacionComanda ventAsignacionComanda = (VentanaAsignacionComanda) this.vista;
+    	Iterator<Producto> iterador = sistema.getProducto().iterator();
+    	
+    	while (iterador.hasNext()) {
+    		ventAsignacionComanda.getModeloLista().addElement(iterador.next());
+    	}
+    	
+    	ventAsignacionComanda.repaint();
+    } else if (comando.equalsIgnoreCase("AgregarAComanda")) {
+    	VentanaAsignacionComanda ventAsignacionComanda = (VentanaAsignacionComanda) this.vista;
+    	Comanda comanda = new Comanda();
+    	Pedido pedido = new Pedido((Producto) ventAsignacionComanda.getList().getSelectedValue(),(int) ventAsignacionComanda.getSpinner_1().getValue());
+    	
+    	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
+    	ventAsignacionComanda.repaint();
+    	
+    	comanda.addPedido(pedido);
+    	
+    	
+    	ventAsignacionComanda.getTextPane().setText(ventAsignacionComanda.getTextPane().getText()+"\n"+pedido.toString());
     }
     }
 }

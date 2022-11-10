@@ -9,6 +9,12 @@ public class Comanda {
     private Mesa mesa;
     private ArrayList<Pedido> orden = new ArrayList<Pedido>();
     private String estado;
+    
+    
+
+	public Comanda() {
+		super();
+	}
 
 	public Comanda(GregorianCalendar date, Mesa mesa, String estado) {
 		super();
@@ -23,6 +29,10 @@ public class Comanda {
 		
 	}
 
+	public void addPedido(Pedido pedido) {
+		orden.add(pedido);
+	}
+	
 	public ArrayList<Pedido> getOrden() {
 		return orden;
 	}
