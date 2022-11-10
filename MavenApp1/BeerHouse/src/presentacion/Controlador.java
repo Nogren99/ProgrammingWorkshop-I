@@ -65,7 +65,7 @@ public class Controlador implements ActionListener {
         }else if (comando.equalsIgnoreCase("Desloguearse")) { //para 6.1
         		 this.vista.cerrar();
         		 this.setVista(new VistaLogin());
-        } else if (comando.equalsIgnoreCase("Estad�sticas")) {
+        } else if (comando.equalsIgnoreCase("Estad\u00edsticas")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaEstadisticas());
         } else if (comando.equalsIgnoreCase("Operarios")) {
@@ -143,8 +143,8 @@ public class Controlador implements ActionListener {
         		this.vista.cerrar();
         		String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo operario");   
         		String username=JOptionPane.showInputDialog(null,"Ingresa username del nuevo operario");
-        		String pass=JOptionPane.showInputDialog(null,"Ingresa contrasena del nuevo operario");
-        		int dialogResult = JOptionPane.showConfirmDialog(null, "Es activo?", "Escoger", JOptionPane.YES_NO_OPTION);
+        		String pass=JOptionPane.showInputDialog(null,"Ingresa contrase\u00f1a del nuevo operario");
+        		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
         		boolean activo=false;
         		if (dialogResult == JOptionPane.YES_OPTION)
         			activo=true;
@@ -169,11 +169,12 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("ModifOpe")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
         	Operario ope = (Operario) ventABM.getList().getSelectedValue();
-        	System.out.println(ope.toString());
+        	if (ope!=null) {
+        		System.out.println(ope.toString());
         	this.vista.cerrar();
         	
         	String[] opcionesModificar = {"Username", "Password", "Estado","Nombre y Apellido"};
-        	int i = JOptionPane.showOptionDialog(null, "¿Qué elemento deseas modificar?", "Clickea una opcion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
+        	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
         	switch(i) {
         	case 1: 
         		String username=JOptionPane.showInputDialog(null,"Ingresa nuevo username del operario");
@@ -184,7 +185,7 @@ public class Controlador implements ActionListener {
         		sistema.modificaPasswordOpe(ope, pass);
         	break;
         	case 3:
-        		int dialogResult = JOptionPane.showConfirmDialog(null, "Es activo?", "Escoger", JOptionPane.YES_NO_OPTION);
+        		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
         		boolean activo=false;
         		if (dialogResult == JOptionPane.YES_OPTION)
         			activo=true;
@@ -209,6 +210,9 @@ public class Controlador implements ActionListener {
     		ventABM.getBtnbaja().setActionCommand("BajaOpe");
     		ventABM.getBtnModif().setActionCommand("ModifOpe");
     		ventABM.repaint();
+    		}
+        	else
+        		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un operario de la lista");
         } else if (comando.equalsIgnoreCase("AltaMozo")) {
         	String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo mozo");  
         	int hijos = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de bendiciones del nuevo mozo"));
@@ -231,14 +235,15 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("ModifMozo")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
         	Mozo mozo = (Mozo) ventABM.getList().getSelectedValue();
+        	if (mozo!=null) {
         	System.out.println(mozo.toString());
         	this.vista.cerrar();
         	
         	String[] opcionesModificar = {"Nombre", "Cantidad de hijos", "Estado"};
-        	int i = JOptionPane.showOptionDialog(null, "¿Qué elemento deseas modificar?", "Clickea una opcion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
+        	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
         	switch(i) {
         	case 1: 
-        		String name=JOptionPane.showInputDialog(null,"Ingresa nuevo nombre del moso");
+        		String name=JOptionPane.showInputDialog(null,"Ingresa nuevo nombre del mozo");
         		sistema.modificaNombreMozo(mozo, name);
         	break;
         	case 2:
@@ -264,6 +269,9 @@ public class Controlador implements ActionListener {
     		ventABM.getBtnbaja().setActionCommand("BajaMozo");
     		ventABM.getBtnModif().setActionCommand("ModifMozo");
     		ventABM.repaint();
+    		}
+        	else
+        		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un mozo de la lista");
     } else if (comando.equalsIgnoreCase("AltaMesa")) {
     	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
     	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de sillas"));
@@ -282,11 +290,12 @@ public class Controlador implements ActionListener {
     } else if (comando.equalsIgnoreCase("ModifMesa")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	Mesa mesa = (Mesa) ventABM.getList().getSelectedValue();
+    	if (mesa!=null) {
     	System.out.println(mesa.toString());
     	this.vista.cerrar();
     	
-    	String[] opcionesModificar = {"Numero", "Cantidad de sillas", "Estado"}; //aca no puse asignar mozo porque eso lo hacen los operarios desde su ventana
-    	int i = JOptionPane.showOptionDialog(null, "¿Qué elemento deseas modificar?", "Clickea una opcion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
+    	String[] opcionesModificar = {"N\u00famero", "Cantidad de sillas", "Estado"}; //aca no puse asignar mozo porque eso lo hacen los operarios desde su ventana
+    	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
     	switch(i) {
     	case 1: 
     		int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa"));
@@ -298,7 +307,7 @@ public class Controlador implements ActionListener {
     	break;
     	case 3:
     		String[] opciones = {"Libre", "Ocupada", "Inhabilitada"};
-    		i = JOptionPane.showOptionDialog(null, "Nuevo estado:", "Clickea una opcion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0])+1;
+    		i = JOptionPane.showOptionDialog(null, "Nuevo estado:", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0])+1;
     		String eleccion=null;
     		switch (i) {
     		case 1: eleccion="Libre";
@@ -325,6 +334,9 @@ public class Controlador implements ActionListener {
 		ventABM.getBtnbaja().setActionCommand("BajaMesa");
 		ventABM.getBtnModif().setActionCommand("ModifMesa");
 		ventABM.repaint();
+		}
+    	else
+    		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar una mesa de la lista");
     } else if (comando.equalsIgnoreCase("AltaProd")) {
     	
     	int id = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa ID de producto")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
@@ -364,7 +376,7 @@ public class Controlador implements ActionListener {
     	this.vista.cerrar();
     	
     	String[] opcionesModificar = {"ID", "Nombre", "Precio costo","Precio venta","Stock inicial"};
-    	int i = JOptionPane.showOptionDialog(null, "¿Qué elemento deseas modificar?", "Clickea una opcion", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
+    	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
     	switch(i) {
     	case 1: 
     		int id=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa nuevo ID del producto"));
