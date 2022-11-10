@@ -19,59 +19,58 @@ public class Mozo {
      */
 	public Mozo(String nyA, GregorianCalendar date, int hijos) {
 		super();
+		this.NyA=nyA;
 		this.date = date;
 		this.hijos = hijos;
 		this.volumenDeVenta = 0.0;
 	}
-	
-	@Override
-    public String toString() {
-        return "Mozo [NyA=" + NyA + ", date=" + date + ", hijos=" + hijos + ", estado=" + estado + "]";
-    }
 
-
-    public void setNyA(String nyA) {
-        NyA = nyA;
-    }
-
-
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
-    }
-
-
-    public void setHijos(int hijos) {
-        this.hijos = hijos;
-    }
-
-
-    public void setEstado(byte estado) {
-        this.estado = estado;
-    }
-
-	public String getNyA()
-	{
+	public String getNyA() {
 		return NyA;
 	}
 
-	public GregorianCalendar getDate()
-	{
+	public void setNyA(String nyA) {
+		NyA = nyA;
+	}
+
+	public GregorianCalendar getDate() {
 		return date;
 	}
 
-	public int getHijos()
-	{
+	public void setDate(GregorianCalendar date) {
+		this.date = date;
+	}
+
+	public int getHijos() {
 		return hijos;
 	}
 
-	public byte getEstado()
-	{
+	public void setHijos(int hijos) {
+		this.hijos = hijos;
+	}
+
+	public byte getEstado() {
 		return estado;
 	}
 
-	public double getVolumenDeVenta()
-	{
+	public void setEstado(byte estado) {
+		this.estado = estado;
+	}
+
+	public double getVolumenDeVenta() {
 		return volumenDeVenta;
 	}
+
+	public void setVolumenDeVenta(double volumenDeVenta) {
+		this.volumenDeVenta = volumenDeVenta;
+	}
+
+	@Override
+	public String toString() {
+		return "Mozo [NyA=" + NyA + ", date=" + date + ", hijos=" + hijos + ", estado=" + estado + ", volumenDeVenta="
+				+ volumenDeVenta + "]";
+	}
+
+	
 	
 }

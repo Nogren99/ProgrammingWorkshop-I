@@ -8,66 +8,73 @@ public class Mesa {
     private Comanda comanda;
     
     
-	public Mesa(int numero, int comensales, Mozo mozo, String estado) {
+	public Mesa(int numero, int comensales, String estado) {
 		super();
 		this.numero = numero;
 		this.comensales = comensales;
-		this.mozo = mozo;
+		this.mozo=null;
 		this.estado = estado;
 	}
 
 
-	public int getComensales()
-	{
+	public int getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+
+	public int getComensales() {
 		return comensales;
 	}
 
 
-	public void setComensales(int comensales)
-	{
+	public void setComensales(int comensales) {
 		this.comensales = comensales;
 	}
 
 
-	public Mozo getMozo()
-	{
+	public Mozo getMozo() {
 		return mozo;
 	}
 
 
-	public void setMozo(Mozo mozo)
-	{
+	public void setMozo(Mozo mozo) {
 		this.mozo = mozo;
 	}
 
 
-	public String getEstado()
-	{
+	public String getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado)
-	{
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
 
-	public Comanda getComanda()
-	{
+	public Comanda getComanda() {
 		return comanda;
 	}
 
 
-	public void setComanda(Comanda comanda)
-	{
+	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
 	}
 
 
-	public int getNumero()
-	{
-		return numero;
+	@Override
+	public String toString() {
+		return "Mesa [numero=" + numero + ", comensales=" + comensales + ", mozo=" + mozo + ", estado=" + estado
+				+ ", comanda=" + comanda + "]";
 	}
+
+
+	
+    
     
 }
