@@ -17,7 +17,39 @@ public class Producto {
         super();
     }
 
-    /**
+    
+    
+    public void setId(int id) {
+		Id = id;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+
+
+
+	public void setVenta(double venta) {
+		this.venta = venta;
+	}
+
+
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+
+
+	/**
      * F 4.1.1
      * @param id
      * @param nombre
@@ -27,7 +59,7 @@ public class Producto {
      * @throws precioVentaMenorAlCostoException
      */
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws precioVentaMenorAlCostoException , precioVentaInvalidoException, costoInvalidoException{
-		super();
+		super(); //esto no va en la clase producto. deberia ir al agregar en beerhouse yo opino, o bien en la ventana
 		if(venta>costo && venta>0 && costo>0) {
 			Id = id;
 			this.nombre = nombre;
@@ -46,6 +78,16 @@ public class Producto {
 		}
 		
 	}
+
+
+
+	@Override
+	public String toString() {
+		return  nombre + "     ["+"Id=" + Id +  ", costo=" + costo + ", venta=" + venta + ", stock="
+				+ stock + "]";
+	}
+	
+	
     
 
     

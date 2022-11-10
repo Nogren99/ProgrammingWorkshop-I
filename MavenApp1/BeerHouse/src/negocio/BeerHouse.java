@@ -36,8 +36,62 @@ public class BeerHouse {
         return instancia;
     }
 
+    public void modificaIDProducto(Producto producto, int ID) {
+    	producto.setId(ID);
+    }
+    
+    public void modificaPrecioCosto(Producto producto, float precioCosto) {// hay inflacion ahre
+    	producto.setCosto(precioCosto);
+    }
+    
+    public void modificaPrecioVenta(Producto producto, float precioVenta) {
+    	producto.setVenta(precioVenta);
+    }
+    
+    public void modificaNombreProducto(Producto producto, String nombre) {
+    	producto.setNombre(nombre);
+    }
+    
+    public void modificaStockProducto(Producto producto, int stock) {
+    	producto.setStock(stock);
+    }
+    
+    public void agregaProducto(Producto producto) {
+    	this.producto.add(producto);
+    }
+    
+    public void eliminaProducto(Producto producto) {
+    	this.producto.remove(producto);
+    }
+    
     public void agregaOperario(Operario operario) {
         this.operario.add(operario);
+    }
+    
+    public void inicializaMesas() { //despues ver como manejamos esto
+    	for (int i=1; i<50;i++) {
+    		this.agregaMesa(new Mesa(i,3,"libre"));
+    	}
+    }
+    
+    public void modificaNumeroMesa(Mesa mesa,int numero) { //verificar que no exista ya. ver si lo validamos en el controlador o mandamos excepcion desde aca
+    	mesa.setNumero(numero);
+    }
+    
+    public void modificaSillasMesa(Mesa mesa, int sillas) {
+    	mesa.setComensales(sillas);
+    }
+    
+    public void modificaEstadoMesa(Mesa mesa, String estado) {
+    	mesa.setEstado(estado);
+    }
+    
+    public void eliminaMesa(Mesa mesa) {
+    	this.mesa.remove(mesa);
+    }
+    
+    public void agregaMesa(Mesa mesa) {
+    	this.mesa.add(mesa);
     }
     
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
@@ -97,15 +151,32 @@ public class BeerHouse {
         this.mozos.remove(mozo);
     }
 
-    public Mozo modificaMozo(Mozo mozo) {
-        int i = 0;
-        while (i < mozos.size() && !mozos.get(i).equals(mozo))
-            i++;
-
-        if (i < mozos.size())
-            return this.mozos.get(i); //devuelvo mozo que luego modificar\u00e1 con alguna ventana MVC
-        else
-            return null;
+    public void modificaNombreMozo(Mozo mozo, String name) {
+    	mozo.setNyA(name);
+    }
+    
+    public void modificaHijosMozo(Mozo mozo,int hijos) {
+    	mozo.setHijos(hijos);
+    }
+    
+    public void modificaEstadoMozo(Mozo mozo, int estado) {
+    	mozo.setEstado((byte) estado);
+    }
+    
+    public void modificaUsernameOpe(Operario ope,String username) {
+    	ope.setUsername(username);
+    }
+    
+    public void modificaPasswordOpe(Operario ope,String password) {
+    	ope.setPassword(password);
+    }
+    
+    public void modificaEstadoOpe(Operario ope,boolean activo) {
+    	ope.setActivo(activo);
+    }
+    
+    public void modificaNombre(Operario ope, String name) {
+    	ope.setNyA(name); 	
     }
 
     /**
@@ -122,6 +193,24 @@ public class BeerHouse {
 
 	public ArrayList<Operario> getOperario() {
 		return operario;
+	}
+
+	
+	
+	public ArrayList<Mozo> getMozos() {
+		return mozos;
+	}
+
+	public ArrayList<Mesa> getMesa() {
+		return mesa;
+	}
+
+	public void eliminaOperario(Operario ope) {
+		operario.remove(ope);
+	}
+
+	public ArrayList<Producto> getProducto() {
+		return producto;
 	}
     
 	public void asociarComanda(Mesa mesa, Comanda comanda) {

@@ -73,6 +73,7 @@ public class VentanaAdmin extends JFrame implements IVista, ActionListener
 		this.contentPane.add(this.panel_3);
 		
 		this.productosEnVentaButton = new JButton("Productos en venta");
+		productosEnVentaButton.setActionCommand("Productos");
 		this.productosEnVentaButton.setToolTipText("Productos en venta");
 		this.panel_3.add(this.productosEnVentaButton);
 		

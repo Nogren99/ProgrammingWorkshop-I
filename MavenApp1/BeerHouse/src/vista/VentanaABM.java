@@ -24,6 +24,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
 
 public class VentanaABM extends JFrame implements IVista { 
 
@@ -128,6 +129,10 @@ public class VentanaABM extends JFrame implements IVista {
 
 	
 	
+	public JList<Object> getList() {
+		return list;
+	}
+
 	public DefaultListModel<Object> getModeloLista() {
 		return modeloLista;
 	}
@@ -139,5 +144,19 @@ public class VentanaABM extends JFrame implements IVista {
 		this.BtnModif.addActionListener(actionListener);
 		this.actionListener=actionListener;
 	}
+
+	public JButton getBtnAlta() {
+		return btnAlta;
+	}
+
+	public JButton getBtnbaja() {
+		return Btnbaja;
+	}
+
+	public JButton getBtnModif() {
+		return BtnModif;
+	}
+	
+	
 
 }

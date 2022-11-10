@@ -12,6 +12,8 @@ import negocio.BeerHouse;
 public class Main {
 
     public static void main(String[] args) {
+    	BeerHouse sistema = BeerHouse.getInstancia();
+    	sistema.inicializaMesas();
         Controlador controlador = new Controlador();
 
        /* BeerHouse sistema = negocio.BeerHouse.getInstancia();

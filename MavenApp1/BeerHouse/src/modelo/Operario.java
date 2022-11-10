@@ -21,6 +21,20 @@ public class Operario extends Usuario {
     
     
 
+	public String getNyA() {
+		return NyA;
+	}
+
+
+
+
+	public void setNyA(String nyA) {
+		NyA = nyA;
+	}
+
+
+
+
 	public byte getCategoria() {
 		return categoria;
 	}
@@ -45,10 +59,26 @@ public class Operario extends Usuario {
 
 	@Override
 	public String toString() {
-		return "Operario [NyA=" + NyA + ", activo=" + activo + ", categoria=" + categoria + "]";
+		return "Operario "+ super.toString() +" [NyA=" + NyA + ", activo=" + activo + ", categoria=" + categoria + "]";
 	}
 
 
+
+
+	
+
+	
+
+
+
+
+
+/* 	@Override
+	public String toString() {
+		return "Operario [NyA=" + NyA + ", activo=" + activo + ", categoria=" + categoria + "]";
+	} */
+
+	
 	
 	
 	
