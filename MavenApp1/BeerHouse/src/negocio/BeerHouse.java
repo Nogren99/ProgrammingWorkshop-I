@@ -1,6 +1,9 @@
 package negocio;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -17,8 +20,11 @@ import modelo.Mozo;
 import modelo.Operario;
 import modelo.Producto;
 import modelo.Usuario;
+import persistencia.IPersistencia;
 
-public class BeerHouse {
+import persistencia.PersistenciaBIN;
+
+public class BeerHouse implements Serializable{
 
     private static BeerHouse instancia;
     private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
@@ -256,4 +262,32 @@ public class BeerHouse {
 				min=mozo.getVolumenDeVenta();
 		return min;
     }
+	
+	public void escribirPersistencia() throws IOException
+	{ // catchear excepcion en el main
+		IPersistencia persistencia = new PersistenciaBIN();
+		persistencia.abrirOutput("Datos.bin");
+		System.out.println("Creando archivo de escritura");
+		persistencia.escribir(this);
+		System.out.println("Datos grabados exitosamente");
+		persistencia.cerrarOutput();
+		System.out.println("Archivo cerrado");
+	}
+	
+	public void leerPersistencia() throws ClassNotFoundException, IOException, Exception
+	{
+		IPersistencia persistencia = new PersistenciaBIN();
+		persistencia.abrirInput("Datos.bin");
+		System.out.println("Archivo abierto");
+		BeerHouse auxiliar = (BeerHouse) persistencia.leer();
+		System.out.println("Datos recuperados");
+		persistencia.cerrarInput();
+		System.out.println("Archivo cerrado");
+		
+		this.mesa=auxiliar.getMesa();
+		this.mozos=auxiliar.getMozos();
+		this.operario=auxiliar.getOperario();
+		this.producto=auxiliar.getProducto();
+	}
+	
 }

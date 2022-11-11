@@ -15,6 +15,7 @@ public class Main {
     	BeerHouse sistema = BeerHouse.getInstancia();
     	sistema.inicializaMesas();
         Controlador controlador = new Controlador();
+        ControladorPersistencia controladorPersistencia = new ControladorPersistencia();
 
        /* BeerHouse sistema = negocio.BeerHouse.getInstancia();
 

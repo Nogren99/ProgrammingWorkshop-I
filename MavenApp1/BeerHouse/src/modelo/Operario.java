@@ -1,9 +1,11 @@
 package modelo;
 
+import java.io.Serializable;
+
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 
-public class Operario extends Usuario {
+public class Operario extends Usuario{
 	
 	private String NyA;
     private boolean activo;

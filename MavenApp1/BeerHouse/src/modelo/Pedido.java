@@ -1,11 +1,12 @@
 package modelo;
 
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import java.util.GregorianCalendar;
 
-public class Pedido {
+public class Pedido implements Serializable{
 
     private Producto producto;
     private int cantidad;

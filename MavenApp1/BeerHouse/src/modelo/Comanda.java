@@ -1,9 +1,10 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Comanda {
+public class Comanda implements Serializable{
 
     private GregorianCalendar date;
     private Mesa mesa;

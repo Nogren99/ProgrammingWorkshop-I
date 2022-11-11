@@ -1,12 +1,14 @@
 package modelo;
 
+import java.io.Serializable;
+
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
 
-public class Producto {
+public class Producto implements Serializable{
 	private int Id;
     private String nombre;
     private double costo;
