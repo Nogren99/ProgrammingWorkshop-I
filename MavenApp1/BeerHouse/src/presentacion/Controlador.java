@@ -209,7 +209,13 @@ public class Controlador implements ActionListener {
         	break;
         	case 2:
         		String pass=JOptionPane.showInputDialog(null,"Ingresa nueva password del operario");
-        		sistema.modificaPasswordOpe(ope, pass);
+        		if(pass.length()>6 && pass.length()<12
+        				&& pass.matches(".*\\d+.*") // contiene al menos un digito
+        				&& pass.chars().anyMatch(Character::isUpperCase) //contiene al menos una mayuscula
+        				) 
+        			sistema.modificaPasswordOpe(ope, pass);
+        		else
+        			JOptionPane.showMessageDialog(null, "La contrase\\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
         	break;
         	case 3:
         		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
@@ -243,16 +249,20 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("AltaMozo")) {
         	String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo mozo");  
         	int hijos = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de bendiciones del nuevo mozo"));
-        	int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
         	
-        	Mozo mozo = new Mozo(name,new GregorianCalendar(),hijos);
-        	sistema.agregarMozo(mozo);
-        	
-        	VentanaABM ventABM = (VentanaABM) this.vista;
-    		
-    		ventABM.getModeloLista().addElement(mozo);
-        	
-    		ventABM.repaint();
+        	if(hijos>=0) {
+        		int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
+            	Mozo mozo = new Mozo(name,new GregorianCalendar(),hijos);
+            	sistema.agregarMozo(mozo);
+            	VentanaABM ventABM = (VentanaABM) this.vista;       		
+        		ventABM.getModeloLista().addElement(mozo);
+        		ventABM.repaint();
+        	}else {
+        		JOptionPane.showMessageDialog(null, "MOZO PUTO");
+        		VentanaABM ventABM = (VentanaABM) this.vista;
+        		ventABM.repaint();
+        	}
+        		
         } else if (comando.equalsIgnoreCase("BajaMozo")){
         	VentanaABM ventABM = (VentanaABM) this.vista;
         	sistema.eliminaMozo((Mozo) ventABM.getList().getSelectedValue());
@@ -275,7 +285,11 @@ public class Controlador implements ActionListener {
         	break;
         	case 2:
         		int hijos= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de hijos"));
-        		sistema.modificaHijosMozo(mozo, hijos);
+        		if(hijos>=0) {
+        			sistema.modificaHijosMozo(mozo, hijos);
+            	}else {
+            		JOptionPane.showMessageDialog(null, "La cantidad de hijos debe ser >= 0");
+            	}	
         	break;
         	case 3:
         		int estado= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado"));
