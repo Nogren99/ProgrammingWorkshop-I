@@ -59,7 +59,9 @@ public class Producto implements Serializable{
      * @param venta
      * @param stock
      * @throws precioVentaMenorAlCostoException
+     * 
      */
+     
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws precioVentaMenorAlCostoException , precioVentaInvalidoException, costoInvalidoException{
 		super(); //esto no va en la clase producto. deberia ir al agregar en beerhouse yo opino, o bien en la ventana
 		if(venta>costo && venta>0 && costo>0) {
@@ -69,11 +71,11 @@ public class Producto implements Serializable{
 			this.venta = venta;
 			this.stock = stock;
 		}else {
-			if(venta<0)
-				throw new precioVentaInvalidoException("Precio de venta INVALIDO");
+			if(venta<=0)
+				throw new precioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 			else
-				if(costo<0)
-					throw new costoInvalidoException("costo INVALIDO");
+				if(costo<=0)
+					throw new costoInvalidoException("costo INVALIDO , debe ser mayor a 0");
 				else 
 					if (venta<costo)
 						throw new precioVentaMenorAlCostoException("Precio de venta menor al costo");

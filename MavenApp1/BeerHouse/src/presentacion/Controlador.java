@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
@@ -395,8 +396,7 @@ public class Controlador implements ActionListener {
     	else
     		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar una mesa de la lista");
     } else if (comando.equalsIgnoreCase("AltaProd")) {
-    	
-    	int id = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa ID de producto")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
+    	 
     	String name= (JOptionPane.showInputDialog(null,"Ingresa nombre de producto"));
     	float precioCosto = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de costo"));
     	float precioVenta = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de venta"));
@@ -404,16 +404,13 @@ public class Controlador implements ActionListener {
     	
     	Producto producto=null;
 		try {
-			producto = new Producto(id,name,precioCosto,precioVenta,stock);
+			producto = new Producto(sistema.getProducto().size()+1,name,precioCosto,precioVenta,stock);
 		} catch (precioVentaMenorAlCostoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		} catch (precioVentaInvalidoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		} catch (costoInvalidoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
     	sistema.agregaProducto(producto);
     	
@@ -423,6 +420,25 @@ public class Controlador implements ActionListener {
     	
     } else if (comando.equalsIgnoreCase("BajaProd")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
+    	ArrayList<Mesa> mesas= sistema.getMesa();
+    	Iterator<Mesa> Iterador = mesas.iterator();
+    	//si en el arraylist mesa,hay una mesa que contiene una comanda, en la cual su arraylist contiene un pedido que tenga un producto igual al selccionado
+		//se elimina
+    	while(Iterador.hasNext()) { //me fijo en cada mesa
+    		Mesa m = Iterador.next();
+    		System.out.println(m.toString());
+    		
+    		Comanda comanda= m.getComanda();
+    		if(comanda!=null) { //comanda de cada mesa
+    			ArrayList<Pedido> pedidos= comanda.getOrden(); //pedidos de cada comanda
+        		if(pedidos!=null && pedidos.contains( (Producto) ventABM.getList().getSelectedValue() )) { //producto del pedido
+        			JOptionPane.showMessageDialog(null, "No se puede eliminar el producto, pertenece a una comanda");
+                	}
+        		}
+    	}
+    		
+    	
+    	
     	sistema.eliminaProducto((Producto) ventABM.getList().getSelectedValue());
     	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
     	ventABM.repaint();
@@ -436,8 +452,9 @@ public class Controlador implements ActionListener {
     	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
     	switch(i) {
     	case 1: 
-    		int id=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa nuevo ID del producto"));
-    		sistema.modificaIDProducto(producto, id);
+    		sistema.modificaIDProducto(producto, sistema.getProducto().size()+1);
+    		JOptionPane.showMessageDialog(ventABM, "El ID ha sido actualizado satisfactoriamente");
+    		
     	break;
     	case 2:
     		String name=JOptionPane.showInputDialog(null,"Ingresa nuevo nombre del producto");
