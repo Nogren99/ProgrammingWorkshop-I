@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import excepciones.CantComensalesException;
 import excepciones.MesaOcupadaException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMososActivosException;
@@ -91,10 +92,10 @@ public class BeerHouse implements Serializable{
     public void agregaOperario(Operario operario) {
         this.operario.add(operario);
     }
-    
+
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=1; i<50;i++) {
-    		this.agregaMesa(new Mesa(i,3,"libre"));
+    		//this.agregaMesa(new Mesa(i,3,"libre"));
     	}
     }
     

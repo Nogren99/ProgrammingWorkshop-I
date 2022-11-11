@@ -11,6 +11,7 @@ import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import excepciones.CantComensalesException;
 import excepciones.MesaOcupadaException;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
@@ -332,14 +333,21 @@ public class Controlador implements ActionListener {
         		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un mozo de la lista");
     } else if (comando.equalsIgnoreCase("AltaMesa")) {
     	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
-    	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de sillas"));
+    	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de comensales"));
     	
-    	Mesa mesa = new Mesa(numero,sillas,"Libre");
-    	sistema.agregaMesa(mesa);
+    	Mesa mesa=null;
+		try {
+			mesa = new Mesa(numero,sillas,"Libre");
+		} catch (CantComensalesException e1) {
+			JOptionPane.showMessageDialog(null,e1.getMessage());
+		}
+		sistema.agregaMesa(mesa);
     	
     	VentanaABM ventABM = (VentanaABM) this.vista;
 		ventABM.getModeloLista().addElement(mesa);
-		ventABM.repaint();	
+		ventABM.repaint();
+		
+		
     } else if (comando.equalsIgnoreCase("BajaMesa")) {   	
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	sistema.eliminaMesa((Mesa) ventABM.getList().getSelectedValue());

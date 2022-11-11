@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
     	BeerHouse sistema = BeerHouse.getInstancia();
-    	sistema.inicializaMesas();
+    	//sistema.inicializaMesas();
         Controlador controlador = new Controlador();
         ControladorPersistencia controladorPersistencia = new ControladorPersistencia();
 

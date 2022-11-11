@@ -2,6 +2,8 @@ package modelo;
 
 import java.io.Serializable;
 
+import excepciones.CantComensalesException;
+
 public class Mesa implements Serializable{
 	private int numero;
     private int comensales;
@@ -10,12 +12,18 @@ public class Mesa implements Serializable{
     private Comanda comanda;
     
     
-	public Mesa(int numero, int comensales, String estado) {
+	public Mesa(int numero, int comensales, String estado) throws CantComensalesException{
 		super();
-		this.numero = numero;
-		this.comensales = comensales;
-		this.mozo=null;
-		this.estado = estado;
+		if( ! (comensales>=2 && numero>1)) //la cantidad de comensales debe ser > =2 cuando el nro de mesa es > 1
+            throw new CantComensalesException("La cantidad de comensales no es la indicada dado el nro. de mesa");
+		else {
+			this.numero = numero;
+			this.comensales = comensales;
+			this.mozo=null;
+			this.estado = estado;
+		}
+		
+		
 	}
 
 
