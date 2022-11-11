@@ -90,7 +90,7 @@ public class Producto implements Serializable{
 	
 
 	public int getStock() {
-		return stock;
+		return Id; //TEMPORAL PORQ NO PODEMOS CREAR GETID
 	}
 
 

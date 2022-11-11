@@ -335,18 +335,29 @@ public class Controlador implements ActionListener {
     	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
     	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de comensales"));
     	
-    	Mesa mesa=null;
-		try {
-			mesa = new Mesa(numero,sillas,"Libre");
-		} catch (CantComensalesException e1) {
-			JOptionPane.showMessageDialog(null,e1.getMessage());
-		}
-		sistema.agregaMesa(mesa);
-    	
-    	VentanaABM ventABM = (VentanaABM) this.vista;
-		ventABM.getModeloLista().addElement(mesa);
-		ventABM.repaint();
-		
+    	ArrayList<Mesa> mesas= sistema.getMesa();
+        Iterator<Mesa> Iterador = mesas.iterator();
+        boolean existe=false;
+        while(Iterador.hasNext()) { 
+            Mesa m = Iterador.next();
+            if(m.getNumero()==numero) {
+            	existe=true;
+            	JOptionPane.showMessageDialog(null,"Esa mesa ya existe!!!!!!!!");
+            }
+        }
+        if(!existe) {
+        	Mesa mesa=null;
+    		try {
+    			mesa = new Mesa(numero,sillas,"Libre");
+    			sistema.agregaMesa(mesa);
+    			VentanaABM ventABM = (VentanaABM) this.vista;
+    			ventABM.getModeloLista().addElement(mesa);
+    			ventABM.repaint();
+    		} catch (CantComensalesException e1) {
+    			JOptionPane.showMessageDialog(null,e1.getMessage());
+    		}
+        	
+        }
 		
     } else if (comando.equalsIgnoreCase("BajaMesa")) {   	
     	VentanaABM ventABM = (VentanaABM) this.vista;
@@ -365,7 +376,18 @@ public class Controlador implements ActionListener {
     	switch(i) {
     	case 1: 
     		int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa"));
-    		sistema.modificaNumeroMesa(mesa, numero);
+    		ArrayList<Mesa> mesas= sistema.getMesa();
+            Iterator<Mesa> Iterador = mesas.iterator();
+            boolean existe=false;
+            while(Iterador.hasNext()) { 
+                Mesa m = Iterador.next();
+                if(m.getNumero()==numero) {
+                	existe=true;
+                	JOptionPane.showMessageDialog(null,"¡Esa mesa ya existe!");
+                }
+            }
+            if(!existe) 
+            	sistema.modificaNumeroMesa(mesa, numero);
     	break;
     	case 2:
     		int sillas= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de sillas"));
@@ -404,27 +426,44 @@ public class Controlador implements ActionListener {
     	else
     		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar una mesa de la lista");
     } else if (comando.equalsIgnoreCase("AltaProd")) {
-    	 
-    	String name= (JOptionPane.showInputDialog(null,"Ingresa nombre de producto"));
-    	float precioCosto = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de costo"));
-    	float precioVenta = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de venta"));
-    	int stock = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa stock inicial"));
+    	int ID = Integer.parseInt(JOptionPane.showInputDialog(null,"Numero de Id"));
     	
-    	Producto producto=null;
-		try {
-			producto = new Producto(sistema.getProducto().size()+1,name,precioCosto,precioVenta,stock);
-		} catch (precioVentaMenorAlCostoException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		} catch (precioVentaInvalidoException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		} catch (costoInvalidoException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
-    	sistema.agregaProducto(producto);
     	
-    	VentanaABM ventABM = (VentanaABM) this.vista;
-		ventABM.getModeloLista().addElement(producto);
-		ventABM.repaint();	
+    	
+    	boolean existe=false;
+		ArrayList<Producto> productos= sistema.getProducto();
+        Iterator<Producto> Iterador = productos.iterator();
+        while(Iterador.hasNext()) { 
+            Producto p = Iterador.next();
+            if(p.getStock()==ID) {
+            	existe=true;
+            	JOptionPane.showMessageDialog(null, "YA EXISTE ESE ID");
+            }
+        }
+        if(!existe) {
+        	String name= (JOptionPane.showInputDialog(null,"Ingresa nombre de producto"));
+        	float precioCosto = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de costo"));
+        	float precioVenta = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa precio de venta"));
+        	int stock = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa stock inicial"));
+        	Producto producto=null;
+    		try {
+    			producto = new Producto(sistema.getProducto().size()+1,name,precioCosto,precioVenta,stock);
+    		} catch (precioVentaMenorAlCostoException e1) {
+    			JOptionPane.showMessageDialog(null, e1.getMessage());
+    		} catch (precioVentaInvalidoException e1) {
+    			JOptionPane.showMessageDialog(null, e1.getMessage());
+    		} catch (costoInvalidoException e1) {
+    			JOptionPane.showMessageDialog(null, e1.getMessage());
+    		}
+        	sistema.agregaProducto(producto);
+        	
+        	VentanaABM ventABM = (VentanaABM) this.vista;
+    		ventABM.getModeloLista().addElement(producto);
+    		ventABM.repaint();	
+        }
+    	
+    	
+    	
     	
     } else if (comando.equalsIgnoreCase("BajaProd")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
@@ -460,9 +499,21 @@ public class Controlador implements ActionListener {
     	int i = JOptionPane.showOptionDialog(null, "\u00bfQu\u00e9 elemento deseas modificar?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesModificar, opcionesModificar[0])+1;
     	switch(i) {
     	case 1: 
-    		sistema.modificaIDProducto(producto, sistema.getProducto().size()+1);
-    		JOptionPane.showMessageDialog(ventABM, "El ID ha sido actualizado satisfactoriamente");
-    		
+    		int ID = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de ID"));
+    		boolean existe=false;
+    		ArrayList<Producto> productos= sistema.getProducto();
+            Iterator<Producto> Iterador = productos.iterator();
+            while(Iterador.hasNext()) { 
+                Producto p = Iterador.next();
+                if(p.getStock()==ID) {
+                	existe=true;
+                	JOptionPane.showMessageDialog(null, "YA EXISTE ESE ID");
+                }
+            }
+            if(!existe) {
+            	sistema.modificaIDProducto(producto, ID);
+            	JOptionPane.showMessageDialog(ventABM, "El ID ha sido actualizado satisfactoriamente");
+            }
     	break;
     	case 2:
     		String name=JOptionPane.showInputDialog(null,"Ingresa nuevo nombre del producto");
