@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Mozo implements Serializable{
@@ -68,7 +69,21 @@ public class Mozo implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Mozo [NyA=" + NyA + ", date=" + date + ", hijos=" + hijos + ", estado=" + estado + ", volumenDeVenta="
+		String est = null;
+		switch(estado) {
+		case 0:
+			est="Activo";
+			break;
+		
+		case 1:
+			est="De franco";
+			break;
+		
+		case 2:
+			est="Ausente";
+			break;
+		}
+		return "Mozo [NyA=" + NyA + ", Nacimiento=" + date.get(Calendar.DATE)+ " / " + date.get(Calendar.MONTH)+ " / " + date.get(Calendar.YEAR)+", hijos=" + hijos + ", estado=" + est + ", volumenDeVenta="
 				+ volumenDeVenta + "]";
 	}
 
