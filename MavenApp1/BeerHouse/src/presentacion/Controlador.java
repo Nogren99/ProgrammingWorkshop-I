@@ -251,14 +251,21 @@ public class Controlador implements ActionListener {
         	int hijos = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de bendiciones del nuevo mozo"));
         	
         	if(hijos>=0) {
-        		int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
-            	Mozo mozo = new Mozo(name,new GregorianCalendar(),hijos);
-            	sistema.agregarMozo(mozo);
-            	VentanaABM ventABM = (VentanaABM) this.vista;       		
-        		ventABM.getModeloLista().addElement(mozo);
-        		ventABM.repaint();
+        		int edad = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa la edad del nuevo mozo"));
+        		if(edad>18) {
+        			int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
+                	Mozo mozo = new Mozo(name,new GregorianCalendar(),hijos);
+                	sistema.agregarMozo(mozo);
+                	VentanaABM ventABM = (VentanaABM) this.vista;       		
+            		ventABM.getModeloLista().addElement(mozo);
+            		ventABM.repaint();
+        		}else {
+        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 años");
+            		VentanaABM ventABM = (VentanaABM) this.vista;
+            		ventABM.repaint();
+        		}
         	}else {
-        		JOptionPane.showMessageDialog(null, "MOZO PUTO");
+        		JOptionPane.showMessageDialog(null, "La cantidad de bendis debe ser mayor o igual a ");
         		VentanaABM ventABM = (VentanaABM) this.vista;
         		ventABM.repaint();
         	}
@@ -294,7 +301,7 @@ public class Controlador implements ActionListener {
         	case 3:
         		int estado= Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado"));
         		sistema.modificaEstadoMozo(mozo, estado);
-        		break;      	    	
+        		break; 
         }
         	this.setVista(new VentanaABM());
         	Iterator<Mozo> iterador = sistema.getMozos().iterator();
