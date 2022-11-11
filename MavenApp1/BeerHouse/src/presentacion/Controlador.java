@@ -152,21 +152,40 @@ public class Controlador implements ActionListener {
         		String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo operario");   
         		String username=JOptionPane.showInputDialog(null,"Ingresa username del nuevo operario");
         		String pass=JOptionPane.showInputDialog(null,"Ingresa contrase\u00f1a del nuevo operario");
-        		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
-        		boolean activo=false;
-        		if (dialogResult == JOptionPane.YES_OPTION)
-        			activo=true;
-        		Operario ope = new Operario(username,pass,name,activo);
-        		sistema.agregaOperario(ope);
-        		this.setVista(new VentanaABM());
-        		VentanaABM ventABM = (VentanaABM) this.vista;
-        		ventABM.getModeloLista().addElement(ope);
+        		if(pass.length()>6 && pass.length()<12
+        				&& pass.matches(".*\\d+.*") // contiene al menos un digito
+        				&& pass.chars().anyMatch(Character::isUpperCase) //contiene al menos una mayuscula
+        				) {
+        			
+        			int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
+            		boolean activo=false;
+            		if (dialogResult == JOptionPane.YES_OPTION)
+            			activo=true;
+            		
+            		Operario ope = new Operario(username,pass,name,activo);
+            		sistema.agregaOperario(ope);
+            		this.setVista(new VentanaABM());
+            		VentanaABM ventABM = (VentanaABM) this.vista;
+            		ventABM.getModeloLista().addElement(ope);
+            		
+            		ventABM.getBtnAlta().setActionCommand("AltaOpe");
+            		ventABM.getBtnbaja().setActionCommand("BajaOpe");
+            		ventABM.getBtnModif().setActionCommand("ModifOpe");
+            		ventABM.repaint();
+            		
+        			
+        		}else {
+        			JOptionPane.showMessageDialog(null, "La contrase\\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
+        			this.setVista(new VentanaABM());
+            		VentanaABM ventABM = (VentanaABM) this.vista;
+            		ventABM.getBtnAlta().setActionCommand("AltaOpe");
+            		ventABM.getBtnbaja().setActionCommand("BajaOpe");
+            		ventABM.getBtnModif().setActionCommand("ModifOpe");
+            		ventABM.repaint();
+        			
+        		}
         		
-        		ventABM.getBtnAlta().setActionCommand("AltaOpe");
-        		ventABM.getBtnbaja().setActionCommand("BajaOpe");
-        		ventABM.getBtnModif().setActionCommand("ModifOpe");
         		
-        		ventABM.repaint();
         		
         		//this.setVista(new VistaLogin());    		
         } else if (comando.equalsIgnoreCase("BajaOpe")) {

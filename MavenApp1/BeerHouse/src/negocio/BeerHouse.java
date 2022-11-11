@@ -151,6 +151,8 @@ public class BeerHouse implements Serializable{
     	}
 		
 	}
+
+    
     
     public boolean mesasVacias() throws NoMesasHabilitadasException{
     	if(this.mesa.isEmpty())
@@ -274,6 +276,8 @@ public class BeerHouse implements Serializable{
 		System.out.println("Archivo cerrado");
 	}
 	
+	
+	
 	public void leerPersistencia() throws ClassNotFoundException, IOException, Exception
 	{
 		IPersistencia persistencia = new PersistenciaBIN();
@@ -289,5 +293,7 @@ public class BeerHouse implements Serializable{
 		this.operario=auxiliar.getOperario();
 		this.producto=auxiliar.getProducto();
 	}
+	
+
 	
 }
