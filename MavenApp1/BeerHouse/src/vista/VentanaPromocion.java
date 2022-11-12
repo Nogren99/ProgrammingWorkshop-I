@@ -33,7 +33,7 @@ public class VentanaPromocion extends JFrame implements IVista{
 	private JPanel panel_1;
 	private JLabel lblNewLabel;
 	private JPanel panel_3;
-	private JButton btnSalir;
+	private JButton btnAtras;
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JScrollPane scrollPane;
@@ -85,6 +85,42 @@ public class VentanaPromocion extends JFrame implements IVista{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	private JPanel panel_23;
+	private JPanel panel_24;
+	private JButton btnNuevaPromocion_1;
+	private JPanel panel_25;
+	private JPanel panel_26;
+	private JLabel lblNewLabel_9;
+	private JPanel panel_27;
+	private JPanel panel_28;
+	private JLabel lblNewLabel_10;
+	private JPanel panel_29;
+	private JTextField textField_1;
+	private JPanel panel_30;
+	private JLabel lblNewLabel_11;
+	private JPanel panel_31;
+	private JCheckBox chckbxNewCheckBox_7;
+	private JCheckBox chckbxNewCheckBox_8;
+	private JCheckBox chckbxNewCheckBox_9;
+	private JCheckBox chckbxNewCheckBox_10;
+	private JCheckBox chckbxNewCheckBox_11;
+	private JCheckBox chckbxNewCheckBox_12;
+	private JCheckBox chckbxNewCheckBox_13;
+	private JPanel panel_32;
+	private JLabel lblNewLabel_12;
+	private JPanel panel_33;
+	private JRadioButton rdbtnNewRadioButton_6;
+	private JRadioButton rdbtnNewRadioButton_7;
+	private JPanel panel_36;
+	private JLabel lblNewLabel_14;
+	private JPanel panel_37;
+	private JSpinner spinner_4;
+	private JPanel panel_40;
+	private JLabel lblNewLabel_16;
+	private JPanel panel_41;
+	private JRadioButton rdbtnNewRadioButton_10;
+	private JRadioButton rdbtnNewRadioButton_11;
+	private JTextField textField_2;
 
 	public VentanaPromocion() {
 		setTitle("Promociones");
@@ -127,10 +163,10 @@ public class VentanaPromocion extends JFrame implements IVista{
 		panel_3.setBackground(SystemColor.inactiveCaption);
 		panel_4.add(panel_3, BorderLayout.SOUTH);
 		
-		btnSalir = new JButton("Salir");
-		btnSalir.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
-		btnSalir.setBackground(SystemColor.textHighlight);
-		panel_3.add(btnSalir);
+		btnAtras = new JButton("Atras");
+		btnAtras.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		btnAtras.setBackground(SystemColor.textHighlight);
+		panel_3.add(btnAtras);
 		
 		panel_5 = new JPanel();
 		tabbedPane.addTab("Nueva promoci\u00F3n", null, panel_5, null);
@@ -283,6 +319,124 @@ public class VentanaPromocion extends JFrame implements IVista{
 		rdbtnNewRadioButton_5 = new JRadioButton("No");
 		buttonGroup_2.add(rdbtnNewRadioButton_5);
 		panel_22.add(rdbtnNewRadioButton_5);
+		
+		this.panel_23 = new JPanel();
+		tabbedPane.addTab("Oferta Temporal", null, this.panel_23, null);
+		this.panel_23.setLayout(new BorderLayout(0, 0));
+		
+		this.panel_24 = new JPanel();
+		this.panel_24.setBackground(SystemColor.inactiveCaption);
+		this.panel_23.add(this.panel_24, BorderLayout.SOUTH);
+		
+		this.btnNuevaPromocion_1 = new JButton("Nueva Promoci\u00F3n");
+		this.btnNuevaPromocion_1.setForeground(Color.BLACK);
+		this.btnNuevaPromocion_1.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		this.btnNuevaPromocion_1.setBackground(SystemColor.textHighlight);
+		this.btnNuevaPromocion_1.setActionCommand("AsignarMM");
+		this.panel_24.add(this.btnNuevaPromocion_1);
+		
+		this.panel_25 = new JPanel();
+		this.panel_23.add(this.panel_25, BorderLayout.CENTER);
+		this.panel_25.setLayout(new GridLayout(6, 2, 0, 0));
+		
+		this.panel_26 = new JPanel();
+		this.panel_25.add(this.panel_26);
+		
+		this.lblNewLabel_9 = new JLabel("Nombre");
+		this.panel_26.add(this.lblNewLabel_9);
+		
+		this.panel_27 = new JPanel();
+		this.panel_25.add(this.panel_27);
+		
+		this.textField_2 = new JTextField();
+		this.textField_2.setColumns(10);
+		this.panel_27.add(this.textField_2);
+		
+		this.panel_28 = new JPanel();
+		this.panel_25.add(this.panel_28);
+		
+		this.lblNewLabel_10 = new JLabel("Forma de pago");
+		this.panel_28.add(this.lblNewLabel_10);
+		
+		this.panel_29 = new JPanel();
+		this.panel_25.add(this.panel_29);
+		
+		this.textField_1 = new JTextField();
+		this.textField_1.setColumns(10);
+		this.panel_29.add(this.textField_1);
+		
+		this.panel_30 = new JPanel();
+		this.panel_25.add(this.panel_30);
+		
+		this.lblNewLabel_11 = new JLabel("Dias de promo");
+		this.panel_30.add(this.lblNewLabel_11);
+		
+		this.panel_31 = new JPanel();
+		this.panel_25.add(this.panel_31);
+		
+		this.chckbxNewCheckBox_7 = new JCheckBox("Lunes");
+		this.panel_31.add(this.chckbxNewCheckBox_7);
+		
+		this.chckbxNewCheckBox_8 = new JCheckBox("Martes");
+		this.panel_31.add(this.chckbxNewCheckBox_8);
+		
+		this.chckbxNewCheckBox_9 = new JCheckBox("Mi\u00E9rcoles");
+		this.panel_31.add(this.chckbxNewCheckBox_9);
+		
+		this.chckbxNewCheckBox_10 = new JCheckBox("Jueves");
+		this.panel_31.add(this.chckbxNewCheckBox_10);
+		
+		this.chckbxNewCheckBox_11 = new JCheckBox("Viernes");
+		this.panel_31.add(this.chckbxNewCheckBox_11);
+		
+		this.chckbxNewCheckBox_12 = new JCheckBox("S\u00E1bado");
+		this.panel_31.add(this.chckbxNewCheckBox_12);
+		
+		this.chckbxNewCheckBox_13 = new JCheckBox("Domingo");
+		this.panel_31.add(this.chckbxNewCheckBox_13);
+		
+		this.panel_36 = new JPanel();
+		this.panel_25.add(this.panel_36);
+		
+		this.lblNewLabel_14 = new JLabel("Porcentaje Descuento");
+		this.panel_36.add(this.lblNewLabel_14);
+		
+		this.panel_37 = new JPanel();
+		this.panel_25.add(this.panel_37);
+		
+		this.spinner_4 = new JSpinner();
+		this.spinner_4.setModel(new SpinnerNumberModel(0, 0, 100, 1));
+		this.panel_37.add(this.spinner_4);
+		
+		this.panel_32 = new JPanel();
+		this.panel_25.add(this.panel_32);
+		
+		this.lblNewLabel_12 = new JLabel("Es acumulable");
+		this.panel_32.add(this.lblNewLabel_12);
+		
+		this.panel_33 = new JPanel();
+		this.panel_25.add(this.panel_33);
+		
+		this.rdbtnNewRadioButton_6 = new JRadioButton("S\u00ED");
+		this.panel_33.add(this.rdbtnNewRadioButton_6);
+		
+		this.rdbtnNewRadioButton_7 = new JRadioButton("No");
+		this.panel_33.add(this.rdbtnNewRadioButton_7);
+		
+		this.panel_40 = new JPanel();
+		this.panel_25.add(this.panel_40);
+		
+		this.lblNewLabel_16 = new JLabel("\u00BFActiva?");
+		this.panel_40.add(this.lblNewLabel_16);
+		
+		this.panel_41 = new JPanel();
+		this.panel_25.add(this.panel_41);
+		
+		this.rdbtnNewRadioButton_10 = new JRadioButton("S\u00ED");
+		this.panel_41.add(this.rdbtnNewRadioButton_10);
+		
+		this.rdbtnNewRadioButton_11 = new JRadioButton("No");
+		this.panel_41.add(this.rdbtnNewRadioButton_11);
 	}
 
 	@Override
@@ -298,7 +452,7 @@ public class VentanaPromocion extends JFrame implements IVista{
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnNuevaPromocion.addActionListener(actionListener);
-		this.btnSalir.addActionListener(actionListener);
+		this.btnAtras.addActionListener(actionListener);
 		this.actionListener=actionListener;	
 	}
 

@@ -30,6 +30,7 @@ import vista.VentanaAsignacion;
 import vista.VentanaAsignacionComanda;
 import vista.VentanaEstadisticas;
 import vista.VentanaOperario;
+import vista.VentanaPromocion;
 import vista.VistaLogin;
 
 public class Controlador implements ActionListener {
@@ -661,6 +662,9 @@ public class Controlador implements ActionListener {
     	
     	
     	
+    }else if (comando.equalsIgnoreCase("Promociones")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaPromocion());
     }
     
     }

@@ -20,6 +20,7 @@ import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Operario;
 import modelo.Producto;
+import modelo.Promocion;
 import modelo.Usuario;
 import persistencia.IPersistencia;
 
