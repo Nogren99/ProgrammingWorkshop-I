@@ -192,9 +192,14 @@ public class Controlador implements ActionListener {
         		//this.setVista(new VistaLogin());    		
         } else if (comando.equalsIgnoreCase("BajaOpe")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
-        	sistema.eliminaOperario((Operario) ventABM.getList().getSelectedValue());
-        	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
-        	ventABM.repaint();	
+        	Operario ope = (Operario) ventABM.getList().getSelectedValue();
+        	if (ope!=null) {
+        		System.out.println(ope.toString());
+	        	sistema.eliminaOperario((Operario) ventABM.getList().getSelectedValue());
+	        	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
+        	}else 
+        		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un operario de la lista");
+        	ventABM.repaint();
         } else if (comando.equalsIgnoreCase("ModifOpe")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
         	Operario ope = (Operario) ventABM.getList().getSelectedValue();
@@ -263,26 +268,34 @@ public class Controlador implements ActionListener {
                 		ventABM.getModeloLista().addElement(mozo);
                 		ventABM.repaint();
         			}else {
+        				VentanaABM ventABM = (VentanaABM) this.vista;
         				JOptionPane.showMessageDialog(null, "Estado Invalido (0=Activo ; 1=De franco ; 2 =Ausente)");
-                		VentanaABM ventABM = (VentanaABM) this.vista;
                 		ventABM.repaint();
         			}
         		}else {
+        			VentanaABM ventABM = (VentanaABM) this.vista;
         			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 años");
-            		VentanaABM ventABM = (VentanaABM) this.vista;
             		ventABM.repaint();
         		}
         	}else {
-        		JOptionPane.showMessageDialog(null, "La cantidad de bendis debe ser mayor o igual a ");
         		VentanaABM ventABM = (VentanaABM) this.vista;
+        		JOptionPane.showMessageDialog(null, "La cantidad de bendis debe ser mayor o igual a ");
+        		
         		ventABM.repaint();
         	}
         		
         } else if (comando.equalsIgnoreCase("BajaMozo")){
         	VentanaABM ventABM = (VentanaABM) this.vista;
-        	sistema.eliminaMozo((Mozo) ventABM.getList().getSelectedValue());
-        	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
-        	ventABM.repaint();	
+        	Mozo mozo = (Mozo) ventABM.getList().getSelectedValue();
+        	if(mozo!=null) {
+        		this.vista.cerrar();
+        		sistema.eliminaMozo((Mozo) ventABM.getList().getSelectedValue());
+            	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
+            	ventABM.repaint();
+        	}else {
+        		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un mozo de la lista");
+        	}
+        		
         	
         } else if (comando.equalsIgnoreCase("ModifMozo")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
@@ -332,7 +345,7 @@ public class Controlador implements ActionListener {
         	else
         		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un mozo de la lista");
     } else if (comando.equalsIgnoreCase("AltaMesa")) {
-    	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa")); //verificar que no se repita, esto se los dejo a ustedes muchachos 
+    	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa"));
     	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de comensales"));
     	
     	ArrayList<Mesa> mesas= sistema.getMesa();
@@ -361,9 +374,14 @@ public class Controlador implements ActionListener {
 		
     } else if (comando.equalsIgnoreCase("BajaMesa")) {   	
     	VentanaABM ventABM = (VentanaABM) this.vista;
-    	sistema.eliminaMesa((Mesa) ventABM.getList().getSelectedValue());
-    	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
-    	ventABM.repaint();
+    	Mesa mesa = (Mesa) ventABM.getList().getSelectedValue();
+    	if(mesa!=null) {
+    		sistema.eliminaMesa((Mesa) ventABM.getList().getSelectedValue());
+        	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
+        	ventABM.repaint();
+    	}else
+    		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar una mesa de la lista");
+    	
     } else if (comando.equalsIgnoreCase("ModifMesa")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	Mesa mesa = (Mesa) ventABM.getList().getSelectedValue();
@@ -467,6 +485,10 @@ public class Controlador implements ActionListener {
     	
     } else if (comando.equalsIgnoreCase("BajaProd")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
+    	Producto producto = (Producto) ventABM.getList().getSelectedValue();
+    	if (producto!=null) {
+    		
+    	
     	ArrayList<Mesa> mesas= sistema.getMesa();
     	Iterator<Mesa> Iterador = mesas.iterator();
     	//si en el arraylist mesa,hay una mesa que contiene una comanda, en la cual su arraylist contiene un pedido que tenga un producto igual al selccionado
@@ -489,9 +511,16 @@ public class Controlador implements ActionListener {
     	sistema.eliminaProducto((Producto) ventABM.getList().getSelectedValue());
     	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
     	ventABM.repaint();
+    	
+    	}else
+    		JOptionPane.showMessageDialog(ventABM, "Debes seleccionar un producto de la lista");
+    	
     } else if (comando.equalsIgnoreCase("ModifProd")) {
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	Producto producto = (Producto) ventABM.getList().getSelectedValue();
+    	if(producto!=null) {
+    		
+    	
     	System.out.println(producto.toString());
     	this.vista.cerrar();
     	
@@ -531,6 +560,7 @@ public class Controlador implements ActionListener {
     		int stock=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa nuevo stock del producto"));
     		sistema.modificaStockProducto(producto, stock);
     		break;
+    	
     }
     	this.setVista(new VentanaABM());
     	Iterator<Producto> iterador = sistema.getProducto().iterator();
@@ -546,6 +576,9 @@ public class Controlador implements ActionListener {
 		ventABM.getBtnbaja().setActionCommand("BajaProd");
 		ventABM.getBtnModif().setActionCommand("ModifProd");
 		ventABM.repaint();
+		
+    	}else
+    		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un producto de la lista");
     	
     } else if (comando.equalsIgnoreCase("AsignacionMM")) { //ASIGNAMM ------------------------------------
     	this.vista.cerrar();
@@ -617,8 +650,9 @@ public class Controlador implements ActionListener {
                 if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue()) {
                     if(m.getMozo().getEstado()==0 && m.getEstado()=="libre") { //la mesa asociada encuentra un mozo asociado y se fija q este activo
                     	m.setEstado("Ocupada");
-                    	//5. STOCK
+                    	//5. STOCK falta
                     	m.setComanda(comanda);
+                    	m.getMozo().setVolumenDeVenta(1);//falta . ¿que es volumen?
                     	System.out.println(m.toString());
                     }
                 }
@@ -627,7 +661,8 @@ public class Controlador implements ActionListener {
     	
     	
     	
-    } 
+    }
+    
     }
 }
 
