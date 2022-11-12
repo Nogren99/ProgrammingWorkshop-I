@@ -547,7 +547,7 @@ public class Controlador implements ActionListener {
 		ventABM.getBtnModif().setActionCommand("ModifProd");
 		ventABM.repaint();
     	
-    } else if (comando.equalsIgnoreCase("AsignacionMM")) {
+    } else if (comando.equalsIgnoreCase("AsignacionMM")) { //ASIGNAMM ------------------------------------
     	this.vista.cerrar();
     	this.setVista(new VentanaAsignacion());
     	VentanaAsignacion ventAsignacion = (VentanaAsignacion) this.vista;
@@ -577,7 +577,7 @@ public class Controlador implements ActionListener {
     } else if (comando.equalsIgnoreCase("Salir")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaOperario());
-    } else if (comando.equalsIgnoreCase("AsignacionCM")) {
+    } else if (comando.equalsIgnoreCase("AsignacionCM")) { //ASIGNAR COMANDA MESA
     	this.vista.cerrar();
     	this.setVista(new VentanaAsignacionComanda());
     	
@@ -589,7 +589,7 @@ public class Controlador implements ActionListener {
     	}
     	
     	ventAsignacionComanda.repaint();
-    } else if (comando.equalsIgnoreCase("AgregarAComanda")) {
+    } else if (comando.equalsIgnoreCase("AgregarAComanda")) { // PRIMER BOTONCITO
     	VentanaAsignacionComanda ventAsignacionComanda = (VentanaAsignacionComanda) this.vista;
     	Comanda comanda = new Comanda();
     	Pedido pedido = new Pedido((Producto) ventAsignacionComanda.getList().getSelectedValue(),(int) ventAsignacionComanda.getSpinner_1().getValue());
@@ -599,9 +599,35 @@ public class Controlador implements ActionListener {
     	
     	comanda.addPedido(pedido);
     	
-    	
     	ventAsignacionComanda.getTextPane().setText(ventAsignacionComanda.getTextPane().getText()+"\n"+pedido.toString());
-    }
+    	
+    	
+    	
+    	//LO Q SIGUE ACONTINUACION PODRIA IMPLEMENTARSE DESPUES DE TOCAR EL BOTON "ASIGNAR"
+        ArrayList<Mesa> mesas= sistema.getMesa();
+        
+    	if(mesas.size()==0) {
+    		JOptionPane.showMessageDialog(null, "No hay mesas habilitadas");
+    	}else if (false) { //                 (int) ventAsignacionComanda.getSpinner_1().getValue()  > STOCK 
+    		JOptionPane.showMessageDialog(null, "La cantidad solicitada no puedesuperar al stock del producto");
+    	}else {
+        	Iterator<Mesa> IteradorMesa = mesas.iterator();
+        	while(IteradorMesa.hasNext()) { 
+                Mesa m = IteradorMesa.next();
+                if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue()) {
+                    if(m.getMozo().getEstado()==0 && m.getEstado()=="libre") { //la mesa asociada encuentra un mozo asociado y se fija q este activo
+                    	m.setEstado("Ocupada");
+                    	//5. STOCK
+                    	m.setComanda(comanda);
+                    	System.out.println(m.toString());
+                    }
+                }
+        	}
+    	}
+    	
+    	
+    	
+    } 
     }
 }
 

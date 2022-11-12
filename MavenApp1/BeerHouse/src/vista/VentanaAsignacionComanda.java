@@ -255,6 +255,7 @@ public class VentanaAsignacionComanda extends JFrame implements IVista{
 		this.panel_3.add(this.btnAgregar);
 		
 		this.btnAsignar = new JButton("Asignar");
+		this.btnAsignar.setActionCommand("AgregarComandaAMesa");
 		this.btnAsignar.setBackground(SystemColor.textHighlight);
 		this.btnAsignar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		this.btnAsignar.setForeground(SystemColor.desktop);
