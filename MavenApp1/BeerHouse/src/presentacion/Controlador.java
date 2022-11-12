@@ -177,7 +177,7 @@ public class Controlador implements ActionListener {
             		
         			
         		}else {
-        			JOptionPane.showMessageDialog(null, "La contrase\\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
         			this.setVista(new VentanaABM());
             		VentanaABM ventABM = (VentanaABM) this.vista;
             		ventABM.getBtnAlta().setActionCommand("AltaOpe");
@@ -222,7 +222,7 @@ public class Controlador implements ActionListener {
         				) 
         			sistema.modificaPasswordOpe(ope, pass);
         		else
-        			JOptionPane.showMessageDialog(null, "La contrase\\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
         	break;
         	case 3:
         		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
@@ -598,9 +598,9 @@ public class Controlador implements ActionListener {
     	int numero = number.intValue();
     	try {
 			sistema.asignaMM(sistema.getMesa().get(numero), (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
-			JOptionPane.showInputDialog(null,"¡Mesa asignada con éxito!");
+			JOptionPane.showMessageDialog(null,"¡Mesa asignada con éxito!");
 		} catch (MesaOcupadaException e1) {
-			JOptionPane.showInputDialog(null,e1.getMessage());
+			JOptionPane.showMessageDialog(null,e1.getMessage());
 		}
     	
     	
