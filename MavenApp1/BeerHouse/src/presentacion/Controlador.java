@@ -717,6 +717,8 @@ public class Controlador implements ActionListener {
     	
     }else if (comando.equalsIgnoreCase("cerrarMesaSeleccionada")) {
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
+    	double total=0;
+    	
     	
     	Mesa mesa; // TEMPORAL hasta que se peuda seleccionar una mesa desde ventana
     	/*

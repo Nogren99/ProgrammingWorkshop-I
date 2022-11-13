@@ -88,4 +88,21 @@ public class ProductoOferta extends Promocion {
 	public void setActiva(boolean activa) {
 		this.activa = activa;
 	}
+
+	@Override
+	public double calculaPrecio(int cant,String promo) {
+		double aux=0;
+		
+		if(promo==this.diasDePromo && activa) {
+			if(this.aplicaDosPorUno && cant%2==0) 
+				aux=(this.producto.getVenta()*cant)/2;
+			if(this.aplicaDtoPorCantidad && cant>this.dtoPorCantidad_CantMinima) {
+				aux=this.dtoPorCantidad_PrecioUnitario*cant;
+			}
+		}else
+			aux=cant*this.producto.getVenta();
+
+		return aux;
+		
+	}
 }

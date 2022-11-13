@@ -2,7 +2,8 @@ package modelo;
 
 public class TemporalOferta extends Promocion {
 	private String nombre;
-    private String formaPago;
+	private Producto producto;
+	private String formaPago;
     private int porcentajeDescuento;
     private String diasDePromo;
     private boolean activo;
@@ -18,6 +19,14 @@ public class TemporalOferta extends Promocion {
 		this.diasDePromo = diasDePromo;
 		this.activo = activo;
 		this.esAcumulable = esAcumulable;
+	}
+
+    public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	public String getNombre() {
@@ -66,5 +75,13 @@ public class TemporalOferta extends Promocion {
 
 	public void setEsAcumulable(boolean esAcumulable) {
 		this.esAcumulable = esAcumulable;
+	}
+
+	@Override
+	public double calculaPrecio(int cant,String promo) {
+		if(activo && promo == this.diasDePromo) {
+			return cant * (  this.producto.getVenta() * this.porcentajeDescuento / 100  );
+		}else
+			return cant*this.producto.getVenta();
 	}
 }

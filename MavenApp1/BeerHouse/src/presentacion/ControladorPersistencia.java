@@ -23,7 +23,7 @@ public class ControladorPersistencia implements ActionListener{
 		 if(comando.equalsIgnoreCase("Persistir")) {
 			try {
 				sistema.escribirPersistencia();
-				this.vista.cerrar();
+				//this.vista.cerrar();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -31,7 +31,7 @@ public class ControladorPersistencia implements ActionListener{
 		} else if (comando.equalsIgnoreCase("LeerPersistencia")) {
 			try {
 				sistema.leerPersistencia();
-				this.vista.cerrar();
+				//this.vista.cerrar();
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

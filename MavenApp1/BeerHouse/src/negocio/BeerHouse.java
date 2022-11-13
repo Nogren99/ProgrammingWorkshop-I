@@ -107,7 +107,12 @@ public class BeerHouse implements Serializable{
 
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=1; i<50;i++) {
-    		//this.agregaMesa(new Mesa(i,3,"libre"));
+    		try {
+				this.agregaMesa(new Mesa(i,3,"libre"));
+			} catch (CantComensalesException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     }
     
@@ -252,6 +257,34 @@ public class BeerHouse implements Serializable{
 		return producto;
 	}
     
+	public double getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+
+	public static void setInstancia(BeerHouse instancia) {
+		BeerHouse.instancia = instancia;
+	}
+
+	public void setMozos(ArrayList<Mozo> mozos) {
+		this.mozos = mozos;
+	}
+
+	public void setMesa(ArrayList<Mesa> mesa) {
+		this.mesa = mesa;
+	}
+
+	public void setOperario(ArrayList<Operario> operario) {
+		this.operario = operario;
+	}
+
+	public void setProducto(ArrayList<Producto> producto) {
+		this.producto = producto;
+	}
+
 	public void asociarComanda(Mesa mesa, Comanda comanda) {
         int i = 0;
         while (i < this.mesa.size() && !this.mesa.get(i).equals(mesa))

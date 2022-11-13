@@ -21,7 +21,25 @@ public class Producto implements Serializable{
 
     
     
-    public void setId(int id) {
+    public int getId() {
+		return Id;
+	}
+
+
+
+	public double getCosto() {
+		return costo;
+	}
+
+
+
+	public double getVenta() {
+		return venta;
+	}
+
+
+
+	public void setId(int id) {
 		Id = id;
 	}
 
