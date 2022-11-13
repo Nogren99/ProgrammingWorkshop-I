@@ -24,6 +24,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 
@@ -45,7 +46,6 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JLabel lblNewLabel_1;
 	private JSpinner spinner;
 	private JLabel lblNewLabel_2;
-	private JTextField textField;
 	private JLabel lblNewLabel_3;
 	private JPanel panel_12;
 	private JCheckBox chckbxNewCheckBox;
@@ -122,10 +122,14 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JRadioButton rdbtnNewRadioButton_10;
 	private JRadioButton rdbtnNewRadioButton_11;
 	private JTextField textField_2;
+	private JList list_1;
+	private JScrollPane scrollPane_1;
+	private DefaultListModel modeloLista_1;
 
 	public VentanaPromocion() {
 		setTitle("Promociones");
 		this.modeloLista = new DefaultListModel();
+		this.modeloLista_1 = new DefaultListModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 524, 392);
 		this.contentPane = new JPanel();
@@ -148,6 +152,7 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
 		list = new JList();
+		this.list.setModel(modeloLista);
 		scrollPane.setViewportView(list);
 		
 		panel_1 = new JPanel();
@@ -178,11 +183,11 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_5.add(panel_2, BorderLayout.SOUTH);
 		
 		btnNuevaPromocion = new JButton("Nueva Promoci\u00F3n");
+		btnNuevaPromocion.setActionCommand("NuevaPromo");
 		this.btnNuevaPromocion.addActionListener(this);
 		btnNuevaPromocion.setForeground(Color.BLACK);
 		btnNuevaPromocion.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		btnNuevaPromocion.setBackground(SystemColor.textHighlight);
-		btnNuevaPromocion.setActionCommand("AsignarMM");
 		panel_2.add(btnNuevaPromocion);
 		
 		panel_6 = new JPanel();
@@ -211,9 +216,12 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_10 = new JPanel();
 		panel_6.add(panel_10);
 		
-		textField = new JTextField();
-		panel_10.add(textField);
-		textField.setColumns(10);
+		scrollPane_1 = new JScrollPane();
+		panel_10.add(scrollPane_1);
+		
+		list_1 = new JList();
+		this.list_1.setModel(modeloLista_1);
+		scrollPane_1.setViewportView(list_1);
 		
 		panel_11 = new JPanel();
 		panel_6.add(panel_11);
@@ -302,6 +310,7 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_6.add(panel_20);
 		
 		spinner_2 = new JSpinner();
+		spinner_2.setPreferredSize(new Dimension(80, 20));
 		spinner_2.setModel(new SpinnerNumberModel(Double.valueOf(0), Double.valueOf(0), null, Double.valueOf(1)));
 		panel_20.add(spinner_2);
 		
@@ -334,7 +343,7 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		this.btnNuevaOfertaTemp.setForeground(Color.BLACK);
 		this.btnNuevaOfertaTemp.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		this.btnNuevaOfertaTemp.setBackground(SystemColor.textHighlight);
-		this.btnNuevaOfertaTemp.setActionCommand("AsignarMM");
+		this.btnNuevaOfertaTemp.setActionCommand("PromoTemp");
 		this.panel_24.add(this.btnNuevaOfertaTemp);
 		
 		this.panel_25 = new JPanel();
@@ -441,6 +450,11 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		this.panel_41.add(this.rdbtnNewRadioButton_11);
 	}
 
+	public DefaultListModel getModeloLista_1()
+	{
+		return modeloLista_1;
+	}
+
 	public JPanel getContentPane() {
 		return contentPane;
 	}
@@ -495,10 +509,16 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 
 	public JLabel getLblNewLabel_2() {
 		return lblNewLabel_2;
+	}	
+
+	public JList getList_1()
+	{
+		return list_1;
 	}
 
-	public JTextField getTextField() {
-		return textField;
+	public JScrollPane getScrollPane_1()
+	{
+		return scrollPane_1;
 	}
 
 	public JLabel getLblNewLabel_3() {
