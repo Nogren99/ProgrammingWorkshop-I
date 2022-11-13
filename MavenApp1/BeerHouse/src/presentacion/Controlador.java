@@ -23,12 +23,14 @@ import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
 import modelo.ProductoOferta;
+import modelo.TemporalOferta;
 import negocio.BeerHouse;
 import vista.IVista;
 import vista.VentanaABM;
 import vista.VentanaAdmin;
 import vista.VentanaAsignacion;
 import vista.VentanaAsignacionComanda;
+import vista.VentanaCerrarMesa;
 import vista.VentanaEstadisticas;
 import vista.VentanaOperario;
 import vista.VentanaPromocion;
@@ -695,18 +697,40 @@ public class Controlador implements ActionListener {
     			boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
     			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_2().getValue(),(double)ventProm.getSpinner_1().getValue(), activa);
     			//aca se va a agregar al arraylist
+    			JOptionPane.showMessageDialog(null,"Oferta agregada satisfactoriamente");
     		}else
     			JOptionPane.showMessageDialog(null,"Debes seleccionar al menos un tipo de promocion");
     		
     	}else
     		JOptionPane.showMessageDialog(null,"Debes seleccionar un producto");
-    	
-    	
-    	
-    	
-    	JOptionPane.showMessageDialog(null, "funciona :o");
     }else if (comando.equalsIgnoreCase("PromoTemp")) {
-    	JOptionPane.showMessageDialog(null, "tmb funciona :o");
+    	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
+    	//aca se traeria el arraylist de promociones
+    	//¡¡¡el contrato no pide verificar nada!!!
+    	String diaspromo="";//pendiente
+    	TemporalOferta prod = new TemporalOferta(ventProm.getTextField_2().getText(), ventProm.getTextField_1().getText(), diaspromo,(int)ventProm.getSpinner_4().getValue() , ventProm.getRdbtnNewRadioButton_6().isSelected(), ventProm.getRdbtnNewRadioButton_10().isSelected());
+    	JOptionPane.showMessageDialog(null, "Oferta temporal agregada satisfactoriamente");
+    }else if (comando.equalsIgnoreCase("Cerrar Mesa")) {
+    	this.vista.cerrar();
+    	this.setVista(new VentanaCerrarMesa());
+    	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
+    	
+    	
+    	ventClose.getBtnCerrar().setActionCommand("cerrarMesaSeleccionada");
+    	
+    }else if (comando.equalsIgnoreCase("cerrarMesaSeleccionada")) {
+    	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
+    	
+    	Mesa mesa; // TEMPORAL hasta que se peuda seleccionar una mesa desde ventana
+    	/*
+    	if(!(mesa.getComanda().getEstado()=="Cerrada")) {
+    		mesa.setEstado("Libre");
+    		
+    		mesa.getMozo().setVolumenDeVenta((double)ventClose.getSpinner_2().getValue()); //falta aplicar promociones
+    		
+    	}else
+    		JOptionPane.showMessageDialog(null,"Esa comanda ya esta cerrada!!");
+    	*/
     }
     
     }

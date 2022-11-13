@@ -1,7 +1,3 @@
-/vista/
 /presentacion/
-/excepciones/
 /modelo/
-/negocio/
-/persistencia/
-/main/
+/vista/

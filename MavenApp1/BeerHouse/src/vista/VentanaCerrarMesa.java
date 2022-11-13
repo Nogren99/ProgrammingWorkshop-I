@@ -28,7 +28,7 @@ public class VentanaCerrarMesa extends JFrame implements IVista{
 	private JPanel panel;
 	private JPanel panel_1;
 	private DefaultListModel modeloLista;
-	private JButton btnSalir;
+	private JButton btnAtras;
 	private ActionListener actionListener;
 	private JButton btnCerrar;
 	private JLabel lblNewLabel;
@@ -164,10 +164,118 @@ public class VentanaCerrarMesa extends JFrame implements IVista{
 		this.btnCerrar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		this.panel_1.add(this.btnCerrar);
 		
-		this.btnSalir = new JButton("Salir");
-		this.btnSalir.setBackground(SystemColor.textHighlight);
-		this.btnSalir.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
-		this.panel_1.add(this.btnSalir);
+		this.btnAtras = new JButton("Atras");
+		this.btnAtras.setBackground(SystemColor.textHighlight);
+		this.btnAtras.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		this.panel_1.add(this.btnAtras);
+	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JPanel getPanel_1() {
+		return panel_1;
+	}
+
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+
+	public ActionListener getActionListener() {
+		return actionListener;
+	}
+
+	public JButton getBtnCerrar() {
+		return btnCerrar;
+	}
+
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+
+	public JLabel getLblNewLabel_1() {
+		return lblNewLabel_1;
+	}
+
+	public JLabel getLblNewLabel_2() {
+		return lblNewLabel_2;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public JLabel getLblNewLabel_3() {
+		return lblNewLabel_3;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JLabel getLblNewLabel_4() {
+		return lblNewLabel_4;
+	}
+
+	public JLabel getLblNewLabel_5() {
+		return lblNewLabel_5;
+	}
+
+	public JScrollPane getScrollPane_1() {
+		return scrollPane_1;
+	}
+
+	public JPanel getPanel_2() {
+		return panel_2;
+	}
+
+	public JPanel getPanel_3() {
+		return panel_3;
+	}
+
+	public JPanel getPanel_4() {
+		return panel_4;
+	}
+
+	public JPanel getPanel_5() {
+		return panel_5;
+	}
+
+	public JPanel getPanel_6() {
+		return panel_6;
+	}
+
+	public JPanel getPanel_7() {
+		return panel_7;
+	}
+
+	public JPanel getPanel_8() {
+		return panel_8;
+	}
+
+	public JPanel getPanel_9() {
+		return panel_9;
+	}
+
+	public JPanel getPanel_10() {
+		return panel_10;
+	}
+
+	public JPanel getPanel_11() {
+		return panel_11;
+	}
+
+	public JPanel getPanel_12() {
+		return panel_12;
+	}
+
+	public JPanel getPanel_13() {
+		return panel_13;
 	}
 
 	@Override
@@ -183,7 +291,7 @@ public class VentanaCerrarMesa extends JFrame implements IVista{
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnCerrar.addActionListener(actionListener);
-		this.btnSalir.addActionListener(actionListener);
+		this.btnAtras.addActionListener(actionListener);
 		this.actionListener=actionListener;	
 	}
 

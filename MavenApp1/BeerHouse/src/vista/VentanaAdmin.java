@@ -30,6 +30,7 @@ public class VentanaAdmin extends JFrame implements IVista, ActionListener
 	private JButton promocionesButton;
 	private ActionListener actionListener;
 	private JButton btnDesloguearse;
+	private JButton cerrarMesa;
 
 	
 	public VentanaAdmin()
@@ -67,6 +68,10 @@ public class VentanaAdmin extends JFrame implements IVista, ActionListener
 		this.mesasButton = new JButton("Mesas");
 		this.mesasButton.setToolTipText("Mesas");
 		this.panel_2.add(this.mesasButton);
+		
+		this.cerrarMesa = new JButton("Cerrar Mesa");
+		this.cerrarMesa.setToolTipText("Cerrar Mesa");
+		this.panel_2.add(this.cerrarMesa);
 		
 		this.panel_3 = new JPanel();
 		this.panel_3.setBackground(SystemColor.inactiveCaption);
@@ -120,6 +125,7 @@ public class VentanaAdmin extends JFrame implements IVista, ActionListener
 		this.productosEnVentaButton.addActionListener(actionListener);
 		this.promocionesButton.addActionListener(actionListener);
 		this.btnDesloguearse.addActionListener(actionListener);
+		this.cerrarMesa.addActionListener(actionListener);
 		this.actionListener = actionListener;
 	}
 

@@ -9,8 +9,8 @@ public class TemporalOferta extends Promocion {
     private boolean esAcumulable;
     
 
-	public TemporalOferta(String nombre, String formaPago, int porcentajeDescuento, String diasDePromo, boolean activo,
-			boolean esAcumulable) {
+	public TemporalOferta(String nombre, String formaPago,String diasDePromo, int porcentajeDescuento,boolean esAcumulable,  boolean activo
+			) {
 		super();
 		this.nombre = nombre;
 		this.formaPago = formaPago;
