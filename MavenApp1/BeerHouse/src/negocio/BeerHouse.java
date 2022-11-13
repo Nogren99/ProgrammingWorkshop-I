@@ -34,7 +34,17 @@ public class BeerHouse implements Serializable{
     private ArrayList<Mesa> mesa = new ArrayList<Mesa>();
     private ArrayList<Operario> operario = new ArrayList<Operario>();
     private ArrayList<Producto> producto = new ArrayList<Producto>();
-    private double sueldo;
+    private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
+    public ArrayList<Promocion> getPromociones() {
+		return promociones;
+	}
+
+	public void setPromociones(ArrayList<Promocion> promociones) {
+		this.promociones = promociones;
+	}
+
+
+	private double sueldo;
 
     private BeerHouse() {
 
@@ -275,6 +285,7 @@ public class BeerHouse implements Serializable{
         beerDTO.setMozos(this.mozos);
         beerDTO.setOperario(this.operario);
         beerDTO.setProducto(this.producto);
+        beerDTO.setPromociones(this.promociones);
         IPersistencia persistencia = new PersistenciaBIN();
         persistencia.abrirOutput("Datos.bin");
         System.out.println("Creando archivo de escritura");
@@ -294,6 +305,7 @@ public class BeerHouse implements Serializable{
         System.out.println("Datos recuperados");
         persistencia.cerrarInput();
         System.out.println("Archivo cerrado");
+        this.promociones=beerDTO.getPromociones();
         this.mesa=beerDTO.getMesa();
         this.mozos=beerDTO.getMozos();
         this.operario=beerDTO.getOperario();

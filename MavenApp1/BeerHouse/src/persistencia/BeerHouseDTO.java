@@ -7,6 +7,7 @@ import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Operario;
 import modelo.Producto;
+import modelo.Promocion;
 
 public class BeerHouseDTO implements Serializable {
 
@@ -14,8 +15,15 @@ public class BeerHouseDTO implements Serializable {
     private ArrayList<Mesa> mesa = new ArrayList<Mesa>();
     private ArrayList<Operario> operario = new ArrayList<Operario>();
     private ArrayList<Producto> producto = new ArrayList<Producto>();
+    private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
 
-    public ArrayList<Mozo> getMozos() {
+    public ArrayList<Promocion> getPromociones() {
+		return promociones;
+	}
+	public void setPromociones(ArrayList<Promocion> promociones) {
+		this.promociones = promociones;
+	}
+	public ArrayList<Mozo> getMozos() {
         return mozos;
     }
     public void setMozos(ArrayList<Mozo> mozos) {
