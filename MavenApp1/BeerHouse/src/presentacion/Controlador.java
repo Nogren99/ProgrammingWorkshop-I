@@ -22,6 +22,7 @@ import modelo.Mozo;
 import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
+import modelo.ProductoOferta;
 import negocio.BeerHouse;
 import vista.IVista;
 import vista.VentanaABM;
@@ -665,6 +666,47 @@ public class Controlador implements ActionListener {
     }else if (comando.equalsIgnoreCase("Promociones")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaPromocion());
+    
+		
+		VentanaPromocion ventProm = (VentanaPromocion) this.vista;
+		Iterator<Producto> iterador = sistema.getProducto().iterator();
+		
+		while (iterador.hasNext())
+		{
+			Producto producto = iterador.next();
+			ventProm.getModeloLista().addElement(producto);
+		}
+		ventProm.getBtnNuevaPromocion().setActionCommand("NuevaPromo");
+		ventProm.getbtnNuevaOfertaTemp().setActionCommand("PromoTemp");
+		
+		ventProm.repaint();
+    	
+    }else if (comando.equalsIgnoreCase("NuevaPromo")) {
+    	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
+    	//aca se traeria el arraylist de promociones
+    	
+    	if(ventProm.getTextField().getText()!=null ) { // esto es cuando no hay producto seleccionado, hay q actualizarlo
+    		boolean dosPorUno =ventProm.getRdbtnNewRadioButton().isSelected();
+    		boolean descuentoCantidad=ventProm.getRdbtnNewRadioButton_2().isSelected();
+    		
+    		if(dosPorUno || descuentoCantidad) {
+    			String diaspromo=""; //pendiente
+    			Producto temporal=null; //ahora selecciona textfield, va a seleccionar productos
+    			boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
+    			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_2().getValue(),(double)ventProm.getSpinner_1().getValue(), activa);
+    			//aca se va a agregar al arraylist
+    		}else
+    			JOptionPane.showMessageDialog(null,"Debes seleccionar al menos un tipo de promocion");
+    		
+    	}else
+    		JOptionPane.showMessageDialog(null,"Debes seleccionar un producto");
+    	
+    	
+    	
+    	
+    	JOptionPane.showMessageDialog(null, "funciona :o");
+    }else if (comando.equalsIgnoreCase("PromoTemp")) {
+    	JOptionPane.showMessageDialog(null, "tmb funciona :o");
     }
     
     }

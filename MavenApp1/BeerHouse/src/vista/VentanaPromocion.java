@@ -23,8 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import java.awt.event.ActionEvent;
 
-public class VentanaPromocion extends JFrame implements IVista{
+public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 
 	private JPanel contentPane;
 	private DefaultListModel modeloLista;
@@ -87,7 +88,7 @@ public class VentanaPromocion extends JFrame implements IVista{
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	private JPanel panel_23;
 	private JPanel panel_24;
-	private JButton btnNuevaPromocion_1;
+	private JButton btnNuevaOfertaTemp;
 	private JPanel panel_25;
 	private JPanel panel_26;
 	private JLabel lblNewLabel_9;
@@ -177,6 +178,7 @@ public class VentanaPromocion extends JFrame implements IVista{
 		panel_5.add(panel_2, BorderLayout.SOUTH);
 		
 		btnNuevaPromocion = new JButton("Nueva Promoci\u00F3n");
+		this.btnNuevaPromocion.addActionListener(this);
 		btnNuevaPromocion.setForeground(Color.BLACK);
 		btnNuevaPromocion.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		btnNuevaPromocion.setBackground(SystemColor.textHighlight);
@@ -328,12 +330,12 @@ public class VentanaPromocion extends JFrame implements IVista{
 		this.panel_24.setBackground(SystemColor.inactiveCaption);
 		this.panel_23.add(this.panel_24, BorderLayout.SOUTH);
 		
-		this.btnNuevaPromocion_1 = new JButton("Nueva Promoci\u00F3n");
-		this.btnNuevaPromocion_1.setForeground(Color.BLACK);
-		this.btnNuevaPromocion_1.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
-		this.btnNuevaPromocion_1.setBackground(SystemColor.textHighlight);
-		this.btnNuevaPromocion_1.setActionCommand("AsignarMM");
-		this.panel_24.add(this.btnNuevaPromocion_1);
+		this.btnNuevaOfertaTemp = new JButton("Nueva Oferta Temporal");
+		this.btnNuevaOfertaTemp.setForeground(Color.BLACK);
+		this.btnNuevaOfertaTemp.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		this.btnNuevaOfertaTemp.setBackground(SystemColor.textHighlight);
+		this.btnNuevaOfertaTemp.setActionCommand("AsignarMM");
+		this.panel_24.add(this.btnNuevaOfertaTemp);
 		
 		this.panel_25 = new JPanel();
 		this.panel_23.add(this.panel_25, BorderLayout.CENTER);
@@ -439,6 +441,370 @@ public class VentanaPromocion extends JFrame implements IVista{
 		this.panel_41.add(this.rdbtnNewRadioButton_11);
 	}
 
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public ActionListener getActionListener() {
+		return actionListener;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JPanel getPanel_1() {
+		return panel_1;
+	}
+
+	public JLabel getLblNewLabel() {
+		return lblNewLabel;
+	}
+
+	public JButton getBtnAtras() {
+		return btnAtras;
+	}
+
+	public JPanel getPanel_4() {
+		return panel_4;
+	}
+
+	public JPanel getPanel_5() {
+		return panel_5;
+	}
+
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	public JPanel getPanel_2() {
+		return panel_2;
+	}
+
+	public JPanel getPanel_6() {
+		return panel_6;
+	}
+
+	public JLabel getLblNewLabel_1() {
+		return lblNewLabel_1;
+	}
+
+	public JSpinner getSpinner() {
+		return spinner;
+	}
+
+	public JLabel getLblNewLabel_2() {
+		return lblNewLabel_2;
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JLabel getLblNewLabel_3() {
+		return lblNewLabel_3;
+	}
+
+	public JPanel getPanel_12() {
+		return panel_12;
+	}
+
+	public JCheckBox getChckbxNewCheckBox() {
+		return chckbxNewCheckBox;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_1() {
+		return chckbxNewCheckBox_1;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_2() {
+		return chckbxNewCheckBox_2;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_3() {
+		return chckbxNewCheckBox_3;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_4() {
+		return chckbxNewCheckBox_4;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_5() {
+		return chckbxNewCheckBox_5;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_6() {
+		return chckbxNewCheckBox_6;
+	}
+
+	public JPanel getPanel_7() {
+		return panel_7;
+	}
+
+	public JPanel getPanel_8() {
+		return panel_8;
+	}
+
+	public JPanel getPanel_9() {
+		return panel_9;
+	}
+
+	public JPanel getPanel_10() {
+		return panel_10;
+	}
+
+	public JPanel getPanel_11() {
+		return panel_11;
+	}
+
+	public JLabel getLblNewLabel_4() {
+		return lblNewLabel_4;
+	}
+
+	public JPanel getPanel_13() {
+		return panel_13;
+	}
+
+	public JPanel getPanel_14() {
+		return panel_14;
+	}
+
+	public JLabel getLblNewLabel_5() {
+		return lblNewLabel_5;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton() {
+		return rdbtnNewRadioButton;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_1() {
+		return rdbtnNewRadioButton_1;
+	}
+
+	public JPanel getPanel_15() {
+		return panel_15;
+	}
+
+	public JPanel getPanel_16() {
+		return panel_16;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_2() {
+		return rdbtnNewRadioButton_2;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_3() {
+		return rdbtnNewRadioButton_3;
+	}
+
+	public JLabel getLblNewLabel_6() {
+		return lblNewLabel_6;
+	}
+
+	public JLabel getLblNewLabel_7() {
+		return lblNewLabel_7;
+	}
+
+	public JLabel getLblNewLabel_8() {
+		return lblNewLabel_8;
+	}
+
+	public JSpinner getSpinner_1() {
+		return spinner_1;
+	}
+
+	public JSpinner getSpinner_2() {
+		return spinner_2;
+	}
+
+	public JPanel getPanel_17() {
+		return panel_17;
+	}
+
+	public JPanel getPanel_18() {
+		return panel_18;
+	}
+
+	public JPanel getPanel_19() {
+		return panel_19;
+	}
+
+	public JPanel getPanel_20() {
+		return panel_20;
+	}
+
+	public JPanel getPanel_21() {
+		return panel_21;
+	}
+
+	public JPanel getPanel_22() {
+		return panel_22;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_4() {
+		return rdbtnNewRadioButton_4;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_5() {
+		return rdbtnNewRadioButton_5;
+	}
+
+	public ButtonGroup getButtonGroup() {
+		return buttonGroup;
+	}
+
+	public ButtonGroup getButtonGroup_1() {
+		return buttonGroup_1;
+	}
+
+	public ButtonGroup getButtonGroup_2() {
+		return buttonGroup_2;
+	}
+
+	public JPanel getPanel_23() {
+		return panel_23;
+	}
+
+	public JPanel getPanel_24() {
+		return panel_24;
+	}
+
+	public JButton getBtnNuevaOfertaTemp() {
+		return btnNuevaOfertaTemp;
+	}
+
+	public JPanel getPanel_25() {
+		return panel_25;
+	}
+
+	public JPanel getPanel_26() {
+		return panel_26;
+	}
+
+	public JLabel getLblNewLabel_9() {
+		return lblNewLabel_9;
+	}
+
+	public JPanel getPanel_27() {
+		return panel_27;
+	}
+
+	public JPanel getPanel_28() {
+		return panel_28;
+	}
+
+	public JLabel getLblNewLabel_10() {
+		return lblNewLabel_10;
+	}
+
+	public JPanel getPanel_29() {
+		return panel_29;
+	}
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+	public JPanel getPanel_30() {
+		return panel_30;
+	}
+
+	public JLabel getLblNewLabel_11() {
+		return lblNewLabel_11;
+	}
+
+	public JPanel getPanel_31() {
+		return panel_31;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_7() {
+		return chckbxNewCheckBox_7;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_8() {
+		return chckbxNewCheckBox_8;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_9() {
+		return chckbxNewCheckBox_9;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_10() {
+		return chckbxNewCheckBox_10;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_11() {
+		return chckbxNewCheckBox_11;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_12() {
+		return chckbxNewCheckBox_12;
+	}
+
+	public JCheckBox getChckbxNewCheckBox_13() {
+		return chckbxNewCheckBox_13;
+	}
+
+	public JPanel getPanel_32() {
+		return panel_32;
+	}
+
+	public JLabel getLblNewLabel_12() {
+		return lblNewLabel_12;
+	}
+
+	public JPanel getPanel_33() {
+		return panel_33;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_6() {
+		return rdbtnNewRadioButton_6;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_7() {
+		return rdbtnNewRadioButton_7;
+	}
+
+	public JPanel getPanel_36() {
+		return panel_36;
+	}
+
+	public JLabel getLblNewLabel_14() {
+		return lblNewLabel_14;
+	}
+
+	public JPanel getPanel_37() {
+		return panel_37;
+	}
+
+	public JSpinner getSpinner_4() {
+		return spinner_4;
+	}
+
+	public JPanel getPanel_40() {
+		return panel_40;
+	}
+
+	public JLabel getLblNewLabel_16() {
+		return lblNewLabel_16;
+	}
+
+	public JPanel getPanel_41() {
+		return panel_41;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_10() {
+		return rdbtnNewRadioButton_10;
+	}
+
+	public JRadioButton getRdbtnNewRadioButton_11() {
+		return rdbtnNewRadioButton_11;
+	}
+
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+
 	@Override
 	public void cerrar() {
 		this.dispose();
@@ -452,6 +818,7 @@ public class VentanaPromocion extends JFrame implements IVista{
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnNuevaPromocion.addActionListener(actionListener);
+		this.btnNuevaOfertaTemp.addActionListener(actionListener);
 		this.btnAtras.addActionListener(actionListener);
 		this.actionListener=actionListener;	
 	}
@@ -467,9 +834,14 @@ public class VentanaPromocion extends JFrame implements IVista{
 	public JButton getBtnNuevaPromocion() {
 		return btnNuevaPromocion;
 	}
+	public JButton getbtnNuevaOfertaTemp() {
+		return btnNuevaOfertaTemp;
+	}
 
 	public JPanel getPanel_3() {
 		return panel_3;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+	}
 }
