@@ -1,14 +1,11 @@
 package presentacion;
 
-import java.awt.Font;
-import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
@@ -676,7 +673,7 @@ public class Controlador implements ActionListener {
 		while (iterador.hasNext())
 		{
 			Producto producto = iterador.next();
-			ventProm.getModeloLista().addElement(producto);
+			ventProm.getModeloLista_1().addElement(producto);
 		}
 		ventProm.getBtnNuevaPromocion().setActionCommand("NuevaPromo");
 		ventProm.getbtnNuevaOfertaTemp().setActionCommand("PromoTemp");
@@ -687,7 +684,7 @@ public class Controlador implements ActionListener {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
     	//aca se traeria el arraylist de promociones
     	
-    	if(ventProm.getTextField().getText()!=null ) { // esto es cuando no hay producto seleccionado, hay q actualizarlo
+    	if(ventProm.getList_1().getSelectedValue()!=null ) { // esto es cuando no hay producto seleccionado, hay q actualizarlo
     		boolean dosPorUno =ventProm.getRdbtnNewRadioButton().isSelected();
     		boolean descuentoCantidad=ventProm.getRdbtnNewRadioButton_2().isSelected();
     		
@@ -695,7 +692,7 @@ public class Controlador implements ActionListener {
     			String diaspromo=""; //pendiente
     			Producto temporal=null; //ahora selecciona textfield, va a seleccionar productos
     			boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
-    			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_2().getValue(),(double)ventProm.getSpinner_1().getValue(), activa);
+    			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_1().getValue(),(double)ventProm.getSpinner_2().getValue(), activa);
     			//aca se va a agregar al arraylist
     			JOptionPane.showMessageDialog(null,"Oferta agregada satisfactoriamente");
     		}else
