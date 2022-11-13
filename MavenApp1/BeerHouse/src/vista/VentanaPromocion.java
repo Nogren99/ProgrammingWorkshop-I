@@ -20,11 +20,11 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import javax.swing.SpinnerListModel;
 
 public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 
@@ -48,13 +48,6 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JPanel panel_12;
-	private JCheckBox chckbxNewCheckBox;
-	private JCheckBox chckbxNewCheckBox_1;
-	private JCheckBox chckbxNewCheckBox_2;
-	private JCheckBox chckbxNewCheckBox_3;
-	private JCheckBox chckbxNewCheckBox_4;
-	private JCheckBox chckbxNewCheckBox_5;
-	private JCheckBox chckbxNewCheckBox_6;
 	private JPanel panel_7;
 	private JPanel panel_8;
 	private JPanel panel_9;
@@ -100,13 +93,6 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JPanel panel_30;
 	private JLabel lblNewLabel_11;
 	private JPanel panel_31;
-	private JCheckBox chckbxNewCheckBox_7;
-	private JCheckBox chckbxNewCheckBox_8;
-	private JCheckBox chckbxNewCheckBox_9;
-	private JCheckBox chckbxNewCheckBox_10;
-	private JCheckBox chckbxNewCheckBox_11;
-	private JCheckBox chckbxNewCheckBox_12;
-	private JCheckBox chckbxNewCheckBox_13;
 	private JPanel panel_32;
 	private JLabel lblNewLabel_12;
 	private JPanel panel_33;
@@ -125,6 +111,8 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JList list_1;
 	private JScrollPane scrollPane_1;
 	private DefaultListModel modeloLista_1;
+	private JSpinner spinner_3;
+	private JSpinner spinner_5;
 
 	public VentanaPromocion() {
 		setTitle("Promociones");
@@ -204,6 +192,7 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_6.add(panel_8);
 		
 		spinner = new JSpinner();
+		spinner.setPreferredSize(new Dimension(80, 20));
 		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		panel_8.add(spinner);
 		
@@ -232,26 +221,10 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_12 = new JPanel();
 		panel_6.add(panel_12);
 		
-		chckbxNewCheckBox = new JCheckBox("Lunes");
-		panel_12.add(chckbxNewCheckBox);
-		
-		chckbxNewCheckBox_1 = new JCheckBox("Martes");
-		panel_12.add(chckbxNewCheckBox_1);
-		
-		chckbxNewCheckBox_2 = new JCheckBox("Mi\u00E9rcoles");
-		panel_12.add(chckbxNewCheckBox_2);
-		
-		chckbxNewCheckBox_3 = new JCheckBox("Jueves");
-		panel_12.add(chckbxNewCheckBox_3);
-		
-		chckbxNewCheckBox_4 = new JCheckBox("Viernes");
-		panel_12.add(chckbxNewCheckBox_4);
-		
-		chckbxNewCheckBox_5 = new JCheckBox("S\u00E1bado");
-		panel_12.add(chckbxNewCheckBox_5);
-		
-		chckbxNewCheckBox_6 = new JCheckBox("Domingo");
-		panel_12.add(chckbxNewCheckBox_6);
+		spinner_3 = new JSpinner();
+		spinner_3.setPreferredSize(new Dimension(80, 20));
+		spinner_3.setModel(new SpinnerListModel(new String[] {"Lunes", "Martes", "Mi\u00E9rcoles", "Jueves", "Viernes", "S\u00E1bado", "Domingo"}));
+		panel_12.add(spinner_3);
 		
 		panel_13 = new JPanel();
 		panel_6.add(panel_13);
@@ -297,6 +270,7 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		panel_6.add(panel_18);
 		
 		spinner_1 = new JSpinner();
+		spinner_1.setPreferredSize(new Dimension(80, 20));
 		spinner_1.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		panel_18.add(spinner_1);
 		
@@ -385,26 +359,10 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		this.panel_31 = new JPanel();
 		this.panel_25.add(this.panel_31);
 		
-		this.chckbxNewCheckBox_7 = new JCheckBox("Lunes");
-		this.panel_31.add(this.chckbxNewCheckBox_7);
-		
-		this.chckbxNewCheckBox_8 = new JCheckBox("Martes");
-		this.panel_31.add(this.chckbxNewCheckBox_8);
-		
-		this.chckbxNewCheckBox_9 = new JCheckBox("Mi\u00E9rcoles");
-		this.panel_31.add(this.chckbxNewCheckBox_9);
-		
-		this.chckbxNewCheckBox_10 = new JCheckBox("Jueves");
-		this.panel_31.add(this.chckbxNewCheckBox_10);
-		
-		this.chckbxNewCheckBox_11 = new JCheckBox("Viernes");
-		this.panel_31.add(this.chckbxNewCheckBox_11);
-		
-		this.chckbxNewCheckBox_12 = new JCheckBox("S\u00E1bado");
-		this.panel_31.add(this.chckbxNewCheckBox_12);
-		
-		this.chckbxNewCheckBox_13 = new JCheckBox("Domingo");
-		this.panel_31.add(this.chckbxNewCheckBox_13);
+		spinner_5 = new JSpinner();
+		spinner_5.setModel(new SpinnerListModel(new String[] {"Lunes", "Martes", "Mi\u00E9rcoles", "Jueves", "Viernes", "S\u00E1bado", "Domingo"}));
+		spinner_5.setPreferredSize(new Dimension(80, 20));
+		panel_31.add(spinner_5);
 		
 		this.panel_36 = new JPanel();
 		this.panel_25.add(this.panel_36);
@@ -527,34 +485,6 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 
 	public JPanel getPanel_12() {
 		return panel_12;
-	}
-
-	public JCheckBox getChckbxNewCheckBox() {
-		return chckbxNewCheckBox;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_1() {
-		return chckbxNewCheckBox_1;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_2() {
-		return chckbxNewCheckBox_2;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_3() {
-		return chckbxNewCheckBox_3;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_4() {
-		return chckbxNewCheckBox_4;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_5() {
-		return chckbxNewCheckBox_5;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_6() {
-		return chckbxNewCheckBox_6;
 	}
 
 	public JPanel getPanel_7() {
@@ -736,37 +666,19 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	public JPanel getPanel_31() {
 		return panel_31;
 	}
-
-	public JCheckBox getChckbxNewCheckBox_7() {
-		return chckbxNewCheckBox_7;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_8() {
-		return chckbxNewCheckBox_8;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_9() {
-		return chckbxNewCheckBox_9;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_10() {
-		return chckbxNewCheckBox_10;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_11() {
-		return chckbxNewCheckBox_11;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_12() {
-		return chckbxNewCheckBox_12;
-	}
-
-	public JCheckBox getChckbxNewCheckBox_13() {
-		return chckbxNewCheckBox_13;
-	}
-
+	
 	public JPanel getPanel_32() {
 		return panel_32;
+	}
+
+	public JSpinner getSpinner_3()
+	{
+		return spinner_3;
+	}
+
+	public JSpinner getSpinner_5()
+	{
+		return spinner_5;
 	}
 
 	public JLabel getLblNewLabel_12() {
