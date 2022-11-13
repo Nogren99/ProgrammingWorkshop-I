@@ -1,3 +1,5 @@
-/presentacion/
 /modelo/
+/negocio/
+/persistencia/
+/presentacion/
 /vista/

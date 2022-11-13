@@ -54,7 +54,7 @@ public class BeerHouse implements Serializable{
     }
 
     public void asignaMM(Mesa mesa, Mozo mozo) throws MesaOcupadaException {
-    	if (mesa.getEstado().equals("Libre")) {	
+    	if (mesa.getEstado().equalsIgnoreCase("Libre")) {	
     		mesa.setMozo(mozo);
     		mesa.setEstado("Ocupada");
     	}
