@@ -712,22 +712,24 @@ public class Controlador implements ActionListener {
     	this.setVista(new VentanaCerrarMesa());
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
     	
+    	Iterator<Mesa> iterador = sistema.getMesa().iterator();
+		
+		while (iterador.hasNext())
+		{
+			Mesa mesa = iterador.next();
+			if (mesa.getEstado().equalsIgnoreCase("Ocupada")) {
+				ventClose.getModeloLista().addElement(mesa);
+			}
+		}
+
     	
-    	ventClose.getBtnCerrar().setActionCommand("cerrarMesaSeleccionada");
-    	
-    }else if (comando.equalsIgnoreCase("cerrarMesaSeleccionada")) {
+    }else if (comando.equalsIgnoreCase("CerrarMesaSeleccionada")) {
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
+    	Mesa mesa = (Mesa) ventClose.getList().getSelectedValue();
     	
-    	Mesa mesa; // TEMPORAL hasta que se peuda seleccionar una mesa desde ventana
-    	/*
-    	if(!(mesa.getComanda().getEstado()=="Cerrada")) {
-    		mesa.setEstado("Libre");
-    		
-    		mesa.getMozo().setVolumenDeVenta((double)ventClose.getSpinner_2().getValue()); //falta aplicar promociones
-    		
-    	}else
-    		JOptionPane.showMessageDialog(null,"Esa comanda ya esta cerrada!!");
-    	*/
+    	mesa.setEstado("Libre");
+    	//mesa.getMozo().setVolumenDeVenta(//EL VALOR DE VENTA VA AKI //);
+    	
     }
     
     }

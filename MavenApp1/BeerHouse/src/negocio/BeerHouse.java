@@ -107,7 +107,12 @@ public class BeerHouse implements Serializable{
 
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=1; i<50;i++) {
-    		//this.agregaMesa(new Mesa(i,3,"libre"));
+    		try {
+				this.agregaMesa(new Mesa(i,3,"libre"));
+			} catch (CantComensalesException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     }
     
@@ -236,6 +241,23 @@ public class BeerHouse implements Serializable{
 
 	
 	
+	
+	public void setMozos(ArrayList<Mozo> mozos) {
+		this.mozos = mozos;
+	}
+
+	public void setMesa(ArrayList<Mesa> mesa) {
+		this.mesa = mesa;
+	}
+
+	public void setOperario(ArrayList<Operario> operario) {
+		this.operario = operario;
+	}
+
+	public void setProducto(ArrayList<Producto> producto) {
+		this.producto = producto;
+	}
+
 	public ArrayList<Mozo> getMozos() {
 		return mozos;
 	}
