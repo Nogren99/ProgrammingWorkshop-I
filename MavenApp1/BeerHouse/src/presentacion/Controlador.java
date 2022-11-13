@@ -178,7 +178,7 @@ public class Controlador implements ActionListener {
             		
         			
         		}else {
-        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dï¿½gito y 1 mayï¿½scula");
         			this.setVista(new VentanaABM());
             		VentanaABM ventABM = (VentanaABM) this.vista;
             		ventABM.getBtnAlta().setActionCommand("AltaOpe");
@@ -223,7 +223,7 @@ public class Controlador implements ActionListener {
         				) 
         			sistema.modificaPasswordOpe(ope, pass);
         		else
-        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dígito y 1 mayúscula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 dï¿½gito y 1 mayï¿½scula");
         	break;
         	case 3:
         		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
@@ -275,7 +275,7 @@ public class Controlador implements ActionListener {
         			}
         		}else {
         			VentanaABM ventABM = (VentanaABM) this.vista;
-        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 años");
+        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 aï¿½os");
             		ventABM.repaint();
         		}
         	}else {
@@ -402,7 +402,7 @@ public class Controlador implements ActionListener {
                 Mesa m = Iterador.next();
                 if(m.getNumero()==numero) {
                 	existe=true;
-                	JOptionPane.showMessageDialog(null,"¡Esa mesa ya existe!");
+                	JOptionPane.showMessageDialog(null,"ï¿½Esa mesa ya existe!");
                 }
             }
             if(!existe) 
@@ -599,7 +599,7 @@ public class Controlador implements ActionListener {
     	int numero = number.intValue();
     	try {
 			sistema.asignaMM(sistema.getMesa().get(numero), (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
-			JOptionPane.showMessageDialog(null,"¡Mesa asignada con éxito!");
+			JOptionPane.showMessageDialog(null,"ï¿½Mesa asignada con ï¿½xito!");
 		} catch (MesaOcupadaException e1) {
 			JOptionPane.showMessageDialog(null,e1.getMessage());
 		}
@@ -653,7 +653,7 @@ public class Controlador implements ActionListener {
                     	m.setEstado("Ocupada");
                     	//5. STOCK falta
                     	m.setComanda(comanda);
-                    	m.getMozo().setVolumenDeVenta(1);//falta . ¿que es volumen?
+                    	m.getMozo().setVolumenDeVenta(1);//falta . ï¿½que es volumen?
                     	System.out.println(m.toString());
                     }
                 }
@@ -703,7 +703,7 @@ public class Controlador implements ActionListener {
     }else if (comando.equalsIgnoreCase("PromoTemp")) {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
     	//aca se traeria el arraylist de promociones
-    	//¡¡¡el contrato no pide verificar nada!!!
+    	//ï¿½ï¿½ï¿½el contrato no pide verificar nada!!!
     	String diaspromo="";//pendiente
     	TemporalOferta prod = new TemporalOferta(ventProm.getTextField_2().getText(), ventProm.getTextField_1().getText(), diaspromo,(int)ventProm.getSpinner_4().getValue() , ventProm.getRdbtnNewRadioButton_6().isSelected(), ventProm.getRdbtnNewRadioButton_10().isSelected());
     	JOptionPane.showMessageDialog(null, "Oferta temporal agregada satisfactoriamente");
@@ -712,24 +712,24 @@ public class Controlador implements ActionListener {
     	this.setVista(new VentanaCerrarMesa());
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
     	
+    	Iterator<Mesa> iterador = sistema.getMesa().iterator();
+		
+		while (iterador.hasNext())
+		{
+			Mesa mesa = iterador.next();
+			if (mesa.getEstado().equalsIgnoreCase("Ocupada")) {
+				ventClose.getModeloLista().addElement(mesa);
+			}
+		}
+
     	
-    	ventClose.getBtnCerrar().setActionCommand("cerrarMesaSeleccionada");
-    	
-    }else if (comando.equalsIgnoreCase("cerrarMesaSeleccionada")) {
+    }else if (comando.equalsIgnoreCase("CerrarMesaSeleccionada")) {
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
-    	double total=0;
+    	Mesa mesa = (Mesa) ventClose.getList().getSelectedValue();
     	
+    	mesa.setEstado("Libre");
+    	//mesa.getMozo().setVolumenDeVenta(//EL VALOR DE VENTA VA AKI //);
     	
-    	Mesa mesa; // TEMPORAL hasta que se peuda seleccionar una mesa desde ventana
-    	/*
-    	if(!(mesa.getComanda().getEstado()=="Cerrada")) {
-    		mesa.setEstado("Libre");
-    		
-    		mesa.getMozo().setVolumenDeVenta((double)ventClose.getSpinner_2().getValue()); //falta aplicar promociones
-    		
-    	}else
-    		JOptionPane.showMessageDialog(null,"Esa comanda ya esta cerrada!!");
-    	*/
     }
     
     }

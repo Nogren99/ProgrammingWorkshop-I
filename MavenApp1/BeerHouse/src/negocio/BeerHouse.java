@@ -241,6 +241,23 @@ public class BeerHouse implements Serializable{
 
 	
 	
+	
+	public void setMozos(ArrayList<Mozo> mozos) {
+		this.mozos = mozos;
+	}
+
+	public void setMesa(ArrayList<Mesa> mesa) {
+		this.mesa = mesa;
+	}
+
+	public void setOperario(ArrayList<Operario> operario) {
+		this.operario = operario;
+	}
+
+	public void setProducto(ArrayList<Producto> producto) {
+		this.producto = producto;
+	}
+
 	public ArrayList<Mozo> getMozos() {
 		return mozos;
 	}
