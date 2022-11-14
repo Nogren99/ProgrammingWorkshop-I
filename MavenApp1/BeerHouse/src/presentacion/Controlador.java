@@ -647,48 +647,36 @@ public class Controlador implements ActionListener {
                         Mesa m = IteradorMesa.next();
                         
                         if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue()) {
+                        	/*
                         	System.out.println(m);
                         	System.out.println(m.getMozo());
                         	System.out.println((int) ventAsignacionComanda.getSpinner().getValue());
                         	System.out.println(m.getMozo().getEstado()==0);
                         	System.out.println(m.getEstado().equalsIgnoreCase("libre"));
+                        	*/
                             if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo
-                            	
-                            	System.out.println("657"+m.getComanda());
                             	if(m.getComanda()==null) {
-                            		System.out.println("659"+m.getComanda());
-	                            	Comanda	comanda = new Comanda(new GregorianCalendar(), m, "abierta");
-	                            	System.out.println("661"+m.getComanda());
-	                            	System.out.println(comanda);
+	                            	Comanda	comanda = new Comanda();
 	                            	m.setComanda(comanda);
-	                            	System.out.println("662"+comanda);
+	                            	//m.getComanda().setMesa(m);
+	                            	m.getComanda().setDate(new GregorianCalendar());
+	                            	m.getComanda().setEstado("abierta");
                             	}
-                            	System.out.println("663"+m.getComanda());
                             	m.getComanda().addPedido(pedido);
                             	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                            	m.setEstado("Ocupada");
-                            	System.out.println("667"+m.getComanda());
-                            	System.out.println("entro re piola "+m.toString());
+                            	System.out.println("comanda:"+m.getComanda());
+                            	System.out.println("mesa:"+m.toString());
                             	search=false;
                             }else
                             	JOptionPane.showMessageDialog(null, "Mesa ocupada");
                         }
                 	}
             	}
-        		
-        		
-        		
         	}else
         		JOptionPane.showMessageDialog(null, "La cantidad solicitada no puedesuperar al stock del producto");
-        	
     	}else
     		JOptionPane.showMessageDialog(null, "FLACO ELEGI UN PRODUCTO");
-    	
-    	
-    	
-    	
-    	
-    	
+
     }else if (comando.equalsIgnoreCase("Promociones")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaPromocion());

@@ -12,10 +12,11 @@ public class Comanda implements Serializable{
     private ArrayList<Pedido> orden = new ArrayList<Pedido>();
     private String estado;
     
-    
-	public Comanda(GregorianCalendar date, Mesa mesa, String estado) {
+    public Comanda() {
+    	super();
+    }
+	public Comanda(Mesa mesa, String estado) {
 		super();
-		this.date = date;
 		this.mesa = mesa;
 		this.estado = estado;
 	}
@@ -58,7 +59,7 @@ public class Comanda implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Comanda [date=" + date.get(Calendar.DATE)+ " / " + date.get(Calendar.MONTH)+ " / " + date.get(Calendar.YEAR)+ ", mesa=" + mesa + ", orden=" + orden + ", estado=" + estado + "]";
+		return "Comanda [date="+ date.get(Calendar.DATE)+ " / " + date.get(Calendar.MONTH)+ " / " + date.get(Calendar.YEAR)+ ", mesa=" + mesa + ", orden=" + orden + ", estado=" + estado + "]";
 	}
 	
 	
