@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"excepciones"},{"l":"main"},{"l":"modelo"},{"l":"negocio"},{"l":"persistencia"},{"l":"presentacion"},{"l":"test"},{"l":"vista"}];updateSearchResults();
