@@ -21,5 +21,11 @@ public abstract class Promocion implements Serializable {
 
 
 
+	/**
+	 * Calcula el precio dependiendo del tipo de oferta
+	 * @param cant
+	 * @param promo
+	 * @return
+	 */
 	public abstract double calculaPrecio(int cant,String promo);
 }

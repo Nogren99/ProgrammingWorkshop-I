@@ -89,6 +89,12 @@ public class ProductoOferta extends Promocion {
 		this.activo = activa;
 	}
 
+
+	/**
+	 *<b>Pre: </b>cant es un entero positivo<br>
+	 *Promo es una cadena no vacia con el dia de promocion<br>
+	 *
+	 */
 	@Override
 	public double calculaPrecio(int cant,String promo) {
 		double aux=0;

@@ -71,6 +71,7 @@ public class Producto implements Serializable{
 
 	/**
      * F 4.1.1
+     * <b>Post: </b> el precio de venta es menor al costo y ambos son mayores o iguales a 0<br>
      * @param id
      * @param nombre
      * @param costo
@@ -81,7 +82,7 @@ public class Producto implements Serializable{
      */
      
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws precioVentaMenorAlCostoException , precioVentaInvalidoException, costoInvalidoException{
-		super(); //esto no va en la clase producto. deberia ir al agregar en beerhouse yo opino, o bien en la ventana
+		super(); 
 		if(venta>costo && venta>0 && costo>0) {
 			Id = id;
 			this.nombre = nombre;

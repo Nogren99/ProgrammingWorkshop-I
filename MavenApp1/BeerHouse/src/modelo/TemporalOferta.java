@@ -82,6 +82,10 @@ public class TemporalOferta extends Promocion {
 		this.esAcumulable = esAcumulable;
 	}
 
+	/**
+	 *<b>Pre: </b>cant es un entero positivo<br>
+	 *Promo es una cadena no vacia con el dia de promocion<br>
+	 */
 	@Override
 	public double calculaPrecio(int cant,String promo) {
 		if(activo && promo == this.diasDePromo) {

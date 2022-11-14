@@ -171,7 +171,6 @@ public class BeerHouse implements Serializable{
      * @throws UsuarioInactivoException
      * @throws UsuarioInexistenteException
      */
-    
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
     	//System.out.println("username: "+ username + " password: "+ password);
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {

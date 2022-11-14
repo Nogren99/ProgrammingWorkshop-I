@@ -16,6 +16,9 @@ public class Recibo {
         super();
     }
 
+	/**
+	 * ¿Cual recibo?
+	 */
 	public Recibo(GregorianCalendar fecha, Mesa mesa, ArrayList<Pedido> pedidos, ArrayList<Promocion> promociones,
 			double total, String formaDePago)
 	{
