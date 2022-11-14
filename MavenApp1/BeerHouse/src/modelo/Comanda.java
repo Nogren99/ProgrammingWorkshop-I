@@ -22,17 +22,29 @@ public class Comanda implements Serializable{
     public Comanda() {
     	super();
     }
-    
+    /**
+	 * Constructor que genera la comanda
+	 * @param mesa
+	 * @param estado
+	 */
 	public Comanda(Mesa mesa, String estado) {
 		super();
 		this.mesa = mesa;
 		this.estado = estado;
 	}
 
+	/**
+	 * Agrega un pedido a la comanda
+	 * @param pedido
+	 */
 	public void addPedido(Pedido pedido) {
 		orden.add(pedido);
 	}
 	
+	/**
+	 * Devuelve una lista de pedidos.
+	 * @return orden
+	 */
 	public ArrayList<Pedido> getOrden() {
 		return orden;
 	}
@@ -41,6 +53,10 @@ public class Comanda implements Serializable{
 		this.orden = orden;
 	}
 
+	/**
+	 * Devuelve la fecha de la comanda.
+	 * @return date
+	 */
 	public GregorianCalendar getDate() {
 		return date;
 	}
@@ -49,6 +65,10 @@ public class Comanda implements Serializable{
 		this.date = date;
 	}
 
+	/**
+	 * Devuelve la mesa de la comanda.
+	 * @return mesa
+	 */
 	public Mesa getMesa() {
 		return mesa;
 	}
@@ -57,6 +77,10 @@ public class Comanda implements Serializable{
 		this.mesa = mesa;
 	}
 
+	/**
+	 * Devuelve el estado de la comanda.
+	 * @return estado
+	 */
 	public String getEstado() {
 		return estado;
 	}
