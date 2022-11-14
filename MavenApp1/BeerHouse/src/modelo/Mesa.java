@@ -21,9 +21,17 @@ public class Mesa implements Serializable{
     private double consumoTotal;
     private int cantUso;
     
+    /**
+	 * Pre: La cantidad de comensales debe ser >=2 cuando el nro de mesa es > 1.
+	 * Post: Mesa creada
+	 * @param numero
+	 * @param comensales
+	 * @param estado
+	 * @throws CantComensalesException
+	 */
 	public Mesa(int numero, int comensales, String estado) throws CantComensalesException{
 		super();
-		if( (comensales>=2 && numero>1) || numero<=1 ) { //la cantidad de comensales debe ser > =2 cuando el nro de mesa es > 1
+		if( (comensales>=2 && numero>1) || numero<=1 ) {
 			this.numero = numero;
 			this.comensales = comensales;
 			this.mozo=null;
@@ -35,10 +43,17 @@ public class Mesa implements Serializable{
 		}	
 	}
 
+	/**
+	 * Devuelve el consumo de la mesa
+	 * @return consumoTotal
+	 */
 	public double getConsumoTotal() {
 		return consumoTotal;
 	}
 
+	/**
+	 * @return cantUso
+	 */
 	public int getCantUso() {
 		return cantUso;
 	}
@@ -51,6 +66,10 @@ public class Mesa implements Serializable{
 		this.cantUso++;
 	}
 
+	/**
+	 * Devuelve el n\u00famero de mesa
+	 * @return numero
+	 */
 	public int getNumero() {
 		return numero;
 	}
@@ -59,6 +78,10 @@ public class Mesa implements Serializable{
 		this.numero = numero;
 	}
 
+	/**
+	 * Devuelve la cantidad de comenzales de la mesa
+	 * @return comenzales
+	 */
 	public int getComensales() {
 		return comensales;
 	}
@@ -67,6 +90,10 @@ public class Mesa implements Serializable{
 		this.comensales = comensales;
 	}
 
+	/**
+	 * Devuelve el mozo de la mesa
+	 * @return mozo
+	 */
 	public Mozo getMozo() {
 		return mozo;
 	}
@@ -75,6 +102,10 @@ public class Mesa implements Serializable{
 		this.mozo = mozo;
 	}
 
+	/**
+	 * Devuelve el estado de la mesa
+	 * @return estado
+	 */
 	public String getEstado() {
 		return estado;
 	}
@@ -83,6 +114,10 @@ public class Mesa implements Serializable{
 		this.estado = estado;
 	}
 
+	/**
+	 * Devuelve la comanda de la mesa
+	 * @return comanda
+	 */
 	public Comanda getComanda() {
 		return comanda;
 	}
@@ -96,8 +131,5 @@ public class Mesa implements Serializable{
 		return "Mesa [numero=" + numero + ", comensales=" + comensales + ", mozo=" + mozo + ", estado=" + estado
 				+ ", comanda=" + comanda + "]";
 	}
-
-
 	
-   
 }
