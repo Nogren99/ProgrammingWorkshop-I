@@ -381,6 +381,28 @@ public class BeerHouse implements Serializable{
 		return total;	
 	}
 	
+	public boolean verificaPromo(Comanda comanda) {
+		boolean search=true;
+		
+		ArrayList<Pedido> pedidos = comanda.getOrden();
+		Iterator<Pedido> iteratorPedido  = pedidos.iterator(); //pedidos de la comanda de la mesa a evaluar
+		
+		while(iteratorPedido.hasNext() && search) {
+			Pedido ped = iteratorPedido.next();
+			
+			Iterator<Promocion> promo = promociones.iterator();
+			
+	    	while(promo.hasNext() && search) {
+	    		Promocion prom =promo.next();
+	    		if(ped.getProducto()==prom.getProducto() && prom.isActivo()) { //si hay un producto en promocion y esta activo
+	    			search=false;
+	    		}
+	    	}
+		}
+		return search;
+	}
+	
+	
 	public void escribirPersistencia() throws IOException
     { // catchear excepcion en el main
         BeerHouseDTO beerDTO = new BeerHouseDTO();
