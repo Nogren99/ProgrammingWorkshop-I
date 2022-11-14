@@ -8,12 +8,12 @@ public class ProductoOferta extends Promocion {
     private boolean aplicaDtoPorCantidad;
     private int dtoPorCantidad_CantMinima;
     private double dtoPorCantidad_PrecioUnitario;
-    private boolean activa;
+   
     
 
 	public ProductoOferta(int id, Producto producto, String diasDePromo, boolean aplicaDosPorUno,
 			boolean aplicaDtoPorCantidad, int dtoPorCantidad_CantMinima, double dtoPorCantidad_PrecioUnitario,
-			boolean activa) {
+			boolean activo) {
 		super();
 		Id = id;
 		this.producto = producto;
@@ -22,7 +22,7 @@ public class ProductoOferta extends Promocion {
 		this.aplicaDtoPorCantidad = aplicaDtoPorCantidad;
 		this.dtoPorCantidad_CantMinima = dtoPorCantidad_CantMinima;
 		this.dtoPorCantidad_PrecioUnitario = dtoPorCantidad_PrecioUnitario;
-		this.activa = activa;
+		this.activo = activo;
 	}
 
 	public int getId() {
@@ -81,19 +81,12 @@ public class ProductoOferta extends Promocion {
 		this.dtoPorCantidad_PrecioUnitario = dtoPorCantidad_PrecioUnitario;
 	}
 
-	public boolean isActiva() {
-		return activa;
-	}
-
-	public void setActiva(boolean activa) {
-		this.activa = activa;
-	}
 
 	@Override
 	public double calculaPrecio(int cant,String promo) {
 		double aux=0;
 		
-		if(promo==this.diasDePromo && activa) {
+		if(promo==this.diasDePromo && activo) {
 			if(this.aplicaDosPorUno && cant%2==0) 
 				aux=(this.producto.getVenta()*cant)/2;
 			if(this.aplicaDtoPorCantidad && cant>this.dtoPorCantidad_CantMinima) {
@@ -111,6 +104,6 @@ public class ProductoOferta extends Promocion {
 		return "ProductoOferta [Id=" + Id + ", diasDePromo=" + diasDePromo + ", aplicaDosPorUno=" + aplicaDosPorUno
 				+ ", aplicaDtoPorCantidad=" + aplicaDtoPorCantidad + ", dtoPorCantidad_CantMinima="
 				+ dtoPorCantidad_CantMinima + ", dtoPorCantidad_PrecioUnitario=" + dtoPorCantidad_PrecioUnitario
-				+ ", activa=" + activa + "]";
+				+ ", activa=" + activo + "]";
 	}
 }
