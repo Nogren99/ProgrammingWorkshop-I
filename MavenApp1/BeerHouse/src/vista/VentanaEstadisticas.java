@@ -57,6 +57,7 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 	private JButton btnEmpleado;
 	private JButton btnMesa;
 	private ActionListener actionListener;
+	private JButton btnAtras;
 
 	public VentanaEstadisticas() {
 		setTitle("Estadísticas");
@@ -148,7 +149,7 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 		this.panelMasVentas.setBackground(SystemColor.activeCaption);
 		this.panelEmpleadoVentas.add(this.panelMasVentas);
 		
-		this.lblMasVentas = new JLabel("Empleado con mayor volumen de ventas:");
+		this.lblMasVentas = new JLabel("Mayor volumen de ventas:");
 		this.lblMasVentas.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 11));
 		this.panelMasVentas.add(this.lblMasVentas);
 		
@@ -156,33 +157,43 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 		this.panelMenosVentas.setBackground(SystemColor.activeCaption);
 		this.panelEmpleadoVentas.add(this.panelMenosVentas);
 		
-		this.lblMenosVentas = new JLabel("Empleado con menor volumen de ventas:");
+		this.lblMenosVentas = new JLabel("Menor volumen de ventas:");
 		this.lblMenosVentas.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 11));
 		this.panelMenosVentas.add(this.lblMenosVentas);
 		
 		this.panelBotones = new JPanel();
 		this.panelBotones.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		this.contentPane.add(this.panelBotones, BorderLayout.SOUTH);
-		this.panelBotones.setLayout(new GridLayout(1, 2, 0, 0));
+		this.panelBotones.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		this.panelBtnEmpleados = new JPanel();
 		this.panelBtnEmpleados.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
 		this.panelBtnEmpleados.setBackground(SystemColor.inactiveCaption);
 		this.panelBotones.add(this.panelBtnEmpleados);
+		this.panelBtnEmpleados.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		this.btnEmpleado = new JButton("Ver empleado");
+		this.btnEmpleado.setActionCommand("VerEmpleado");
 		this.btnEmpleado.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
 		this.btnEmpleado.setBackground(SystemColor.textHighlight);
 		this.panelBtnEmpleados.add(this.btnEmpleado);
+		
+		this.btnMesa = new JButton("Ver Mesa");
+		this.panelBtnEmpleados.add(this.btnMesa);
+		this.btnMesa.setActionCommand("VerMesa");
+		this.btnMesa.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
+		this.btnMesa.setBackground(SystemColor.textHighlight);
 		
 		this.panelBtnMesas = new JPanel();
 		this.panelBtnMesas.setBackground(SystemColor.inactiveCaption);
 		this.panelBotones.add(this.panelBtnMesas);
 		
-		this.btnMesa = new JButton("Ver Mesa");
-		this.btnMesa.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
-		this.btnMesa.setBackground(SystemColor.textHighlight);
-		this.panelBtnMesas.add(this.btnMesa);
+		this.btnAtras = new JButton("Atr\u00E1s");
+		this.btnAtras.setActionCommand("Atras");
+		this.btnAtras.setBackground(SystemColor.textHighlight);
+		this.btnAtras.setForeground(SystemColor.desktop);
+		this.btnAtras.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 12));
+		this.panelBtnMesas.add(this.btnAtras);
 	}
 
 	@Override
@@ -199,6 +210,7 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 	public void setActionListener(ActionListener actionListener) {
 		this.btnEmpleado.addActionListener(actionListener);
 		this.btnMesa.addActionListener(actionListener);
+		this.btnAtras.addActionListener(actionListener);
 		this.actionListener=actionListener;
 	}
 
@@ -209,6 +221,32 @@ public class VentanaEstadisticas extends JFrame implements IVista {
 	public DefaultListModel getModeloListaMesas() {
 		return modeloListaMesas;
 	}
+
+	public JLabel getLblMasVentas() {
+		return lblMasVentas;
+	}
+
+	public JLabel getLblMenosVentas() {
+		return lblMenosVentas;
+	}
+
+	public JList getListaEmpleados() {
+		return listaEmpleados;
+	}
+
+	public JList getListaMesas() {
+		return listaMesas;
+	}
+
+	public JButton getBtnEmpleado() {
+		return btnEmpleado;
+	}
+
+	public JButton getBtnMesa() {
+		return btnMesa;
+	}
+	
+	
 	
 	
 

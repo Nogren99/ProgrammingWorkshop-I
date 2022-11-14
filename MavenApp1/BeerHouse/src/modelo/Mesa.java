@@ -10,7 +10,8 @@ public class Mesa implements Serializable{
     private Mozo mozo;
     private String estado;
     private Comanda comanda;
-    
+    private double consumoTotal;
+    private int cantUso;
     
 	public Mesa(int numero, int comensales, String estado) throws CantComensalesException{
 		super();
@@ -19,13 +20,31 @@ public class Mesa implements Serializable{
 			this.comensales = comensales;
 			this.mozo=null;
 			this.estado = estado;
-            
-		}else {
-			
+			this.cantUso=0;
+			this.consumoTotal=0;        
+		}else {		
 			throw new CantComensalesException("La cantidad de comensales no es la indicada dado el nro. de mesa");
-		}
-		
-		
+		}	
+	}
+
+
+	
+	public double getConsumoTotal() {
+		return consumoTotal;
+	}
+
+
+
+	public int getCantUso() {
+		return cantUso;
+	}
+
+	public void addConsumoTotal(double monto) {
+		this.consumoTotal+=monto;
+	}
+	
+	public void addUso() {
+		this.cantUso++;
 	}
 
 

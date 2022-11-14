@@ -328,6 +328,34 @@ public class BeerHouse implements Serializable{
     	}
 	}
 	
+	public Mozo mozoMayorVolumen() { //verificar si no hay mosos?
+		Iterator<Mozo> iterador = this.mozos.iterator();
+		Mozo max = null;
+		double ventaMax=-1;
+		while (iterador.hasNext()) {
+			Mozo aux = iterador.next();
+			if (aux.getVolumenDeVenta()>ventaMax) {
+				ventaMax=aux.getVolumenDeVenta();
+				max=aux;
+			}
+		}
+		return max;
+	}
+	
+	public Mozo mozoMenorVolumen() { //verificar si no hay mosos?
+		Iterator<Mozo> iterador = this.mozos.iterator();
+		Mozo min = null;
+		double ventaMin=99999;
+		while (iterador.hasNext()) {
+			Mozo aux = iterador.next();
+			if (aux.getVolumenDeVenta()<ventaMin) {
+				ventaMin=aux.getVolumenDeVenta();
+				min=aux;
+			}
+		}
+		return min;
+	}
+	
 	public double precioComanda(Mesa mesa){
 		
 		double total = 0;

@@ -81,7 +81,49 @@ public class Controlador implements ActionListener {
         } else if (comando.equalsIgnoreCase("Estad\u00edsticas")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaEstadisticas());
-        } else if (comando.equalsIgnoreCase("Operarios")) {
+        		VentanaEstadisticas ventEstadisticas = (VentanaEstadisticas) this.vista;
+        		
+        		ventEstadisticas.getLblMasVentas().setText("Mayor volumen de ventas: "+ sistema.mozoMayorVolumen().getNyA());
+        		ventEstadisticas.getLblMasVentas().setText("Menor volumen de ventas: "+ sistema.mozoMenorVolumen().getNyA());
+        		
+        		Iterator<Mozo> iterador = sistema.getMozos().iterator();
+
+        		while (iterador.hasNext())	{
+            		Mozo mozo = iterador.next();
+            		ventEstadisticas.getModeloListaEmpleados().addElement(mozo);
+        		}
+        		
+        		Iterator<Mesa> iteradorMesa = sistema.getMesa().iterator();
+        		
+        		while (iteradorMesa.hasNext()) {
+        			Mesa mesa = iteradorMesa.next();
+        			ventEstadisticas.getModeloListaMesas().addElement(mesa);  			
+        		}
+        		
+        	/*	boolean vacio=true;
+        		ventEstadisticas.getBtnEmpleado().setEnabled(false);
+        		 while (vacio) {
+        			 vacio = ventEstadisticas.getListaEmpleados().isSelectionEmpty();		 
+        		 }
+        		 ventEstadisticas.getBtnEmpleado().setEnabled(true); */
+        		
+        } else if (comando.equalsIgnoreCase("VerEmpleado")) {
+        	VentanaEstadisticas ventEstadisticas = (VentanaEstadisticas) this.vista;
+        	Mozo mozo = (Mozo) ventEstadisticas.getListaEmpleados().getSelectedValue();
+        	if (mozo!=null)
+        		JOptionPane.showMessageDialog(null, mozo.getNyA() +"\n"+ "Volumen de ventas: "+ mozo.getVolumenDeVenta()); 
+        	else
+        		JOptionPane.showMessageDialog(null, "Debes seleccionar un elemento de la lista");
+        } else if (comando.equalsIgnoreCase("VerMesa")) {
+        	VentanaEstadisticas ventEstadisticas = (VentanaEstadisticas) this.vista;
+        	Mesa mesa = (Mesa) ventEstadisticas.getListaMesas().getSelectedValue();
+        	if (mesa!=null)
+        		JOptionPane.showMessageDialog(null, "Mesa numero "+ mesa.getNumero() +"\n"+ " Consumo total: "+ mesa.getConsumoTotal() +"\n"+ "Veces utilizada:"+ mesa.getCantUso() +"\n"+ "Promedio: "+ mesa.getConsumoTotal()/mesa.getCantUso());
+        	else
+        		JOptionPane.showMessageDialog(null, "Debes seleccionar un elemento de la lista");
+        }
+        
+        else if (comando.equalsIgnoreCase("Operarios")) {
         		this.vista.cerrar();
         		this.setVista(new VentanaABM());
         		VentanaABM ventABM = (VentanaABM) this.vista;
@@ -766,6 +808,8 @@ public class Controlador implements ActionListener {
     	
     	if(mesa!=null) {
     		mesa.setEstado("Libre");
+    		mesa.addConsumoTotal(sistema.precioComanda(mesa));
+    		mesa.addUso();
     		mesa.getMozo().setVolumenDeVenta( sistema.precioComanda(mesa) );
     		Recibo r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, sistema.precioComanda(mesa), null);
     		String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
