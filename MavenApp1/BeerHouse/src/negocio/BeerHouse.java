@@ -2,6 +2,8 @@ package negocio;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,6 +21,7 @@ import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Operario;
+import modelo.Pedido;
 import modelo.Producto;
 import modelo.Promocion;
 import modelo.Usuario;
@@ -64,13 +67,18 @@ public class BeerHouse implements Serializable{
     	mesa.setComanda(comanda); //despues validar y eso
     }
 
-    public void asignaMM(Mesa mesa, Mozo mozo) throws MesaOcupadaException {
-    	if (mesa.getEstado().equalsIgnoreCase("Libre")) {	
-    		mesa.setMozo(mozo);
-    		mesa.setEstado("Ocupada");
+    public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
+    	boolean ok=true;
+    	Iterator<Mesa> IteradorMesa = mesa.iterator();
+    	while(IteradorMesa.hasNext() && ok ) { 
+    		Mesa messa = IteradorMesa.next();
+    		System.out.println(messa);
+    		if (messa.getNumero()==numero) {	
+        		messa.setMozo(mozo);
+        		ok=false;
+        	}
     	}
-    	else
-    		throw new MesaOcupadaException("Esta mesa no está libre!");
+    	
     }
     
     public void modificaIDProducto(Producto producto, int ID) {
@@ -106,9 +114,9 @@ public class BeerHouse implements Serializable{
     }
 
     public void inicializaMesas() { //despues ver como manejamos esto
-    	for (int i=1; i<50;i++) {
+    	for (int i=2; i<20;i++) {
     		try {
-				this.agregaMesa(new Mesa(i,3,"libre"));
+				this.agregaMesa(new Mesa(i,i,"libre"));
 			} catch (CantComensalesException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -240,23 +248,6 @@ public class BeerHouse implements Serializable{
 	}
 
 	
-	
-	
-	public void setMozos(ArrayList<Mozo> mozos) {
-		this.mozos = mozos;
-	}
-
-	public void setMesa(ArrayList<Mesa> mesa) {
-		this.mesa = mesa;
-	}
-
-	public void setOperario(ArrayList<Operario> operario) {
-		this.operario = operario;
-	}
-
-	public void setProducto(ArrayList<Producto> producto) {
-		this.producto = producto;
-	}
 
 	public ArrayList<Mozo> getMozos() {
 		return mozos;
@@ -327,6 +318,56 @@ public class BeerHouse implements Serializable{
 				min=mozo.getVolumenDeVenta();
 		return min;
     }
+	
+	
+	private String dayConverter() {
+		LocalDate today = LocalDate.now();
+
+    	DayOfWeek dayOfWeek = today.getDayOfWeek();
+    	
+    	
+    	switch(dayOfWeek.getValue()) {
+    	case 1:
+    		return "Lunes";
+    	case 2:
+    		return "Martes";
+    	case 3:
+    		return "Miercoles";
+    	case 4:
+    		return "Jueves";
+    	case 5:
+    		return "Viernes";
+    	case 6:
+    		return "Sabado";
+    	default:
+    		return "Domingo";
+    	}
+	}
+	
+	public double precioComanda(Mesa mesa){
+		
+		double total = 0;
+		ArrayList<Pedido> pedido = mesa.getComanda().getOrden();
+		
+		Iterator<Pedido> iterador = pedido.iterator();
+		
+		while(iterador.hasNext()) {
+			Pedido p = iterador.next();
+
+			//Iterator<Promocion> iteradorPromo = promociones.iterator();
+			int i=0;
+			while(i<promociones.size() && !promociones.get(i).getProducto().equals(p.getProducto())) {
+				i++;
+			}
+			if(i<promociones.size()) {
+				total+=promociones.get(i).calculaPrecio(p.getCantidad(), dayConverter());
+			}else {
+				total+=p.getCantidad()*p.getProducto().getVenta();
+			}
+		}
+	
+		return sueldo;	
+	}
 	
 	public void escribirPersistencia() throws IOException
     { // catchear excepcion en el main

@@ -2,7 +2,6 @@ package modelo;
 
 public class TemporalOferta extends Promocion {
 	private String nombre;
-	private Producto producto;
 	private String formaPago;
     private int porcentajeDescuento;
     private String diasDePromo;

@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Comanda implements Serializable{
@@ -12,22 +13,11 @@ public class Comanda implements Serializable{
     private String estado;
     
     
-
-	public Comanda() {
-		super();
-	}
-
 	public Comanda(GregorianCalendar date, Mesa mesa, String estado) {
 		super();
-		try {
-			//probar todo 6.1
-			this.date = date;
-			this.mesa = mesa;
-			this.estado = estado;
-		}catch (Exception e) {
-			System.out.println("ERROR");
-		}
-		
+		this.date = date;
+		this.mesa = mesa;
+		this.estado = estado;
 	}
 
 	public void addPedido(Pedido pedido) {
@@ -64,6 +54,11 @@ public class Comanda implements Serializable{
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	@Override
+	public String toString() {
+		return "Comanda [date=" + date.get(Calendar.DATE)+ " / " + date.get(Calendar.MONTH)+ " / " + date.get(Calendar.YEAR)+ ", mesa=" + mesa + ", orden=" + orden + ", estado=" + estado + "]";
 	}
 	
 	

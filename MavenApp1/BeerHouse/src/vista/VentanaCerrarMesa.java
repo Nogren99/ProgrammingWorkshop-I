@@ -92,7 +92,8 @@ public class VentanaCerrarMesa extends JFrame implements IVista{
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnNewButton.addActionListener(actionListener);
-		this.setActionListener(actionListener);
+		this.btnNewButton_1.addActionListener(actionListener);
+		this.actionListener=actionListener;
 	}
 
 	public JList getList() {

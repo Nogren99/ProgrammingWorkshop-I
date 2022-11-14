@@ -64,7 +64,7 @@ public class Mozo implements Serializable{
 	}
 
 	public void setVolumenDeVenta(double volumenDeVenta) {
-		this.volumenDeVenta = volumenDeVenta;
+		this.volumenDeVenta += volumenDeVenta;
 	}
 
 	@Override

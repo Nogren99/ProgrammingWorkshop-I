@@ -14,13 +14,15 @@ public class Mesa implements Serializable{
     
 	public Mesa(int numero, int comensales, String estado) throws CantComensalesException{
 		super();
-		if( ! (comensales>=2 && numero>1)) //la cantidad de comensales debe ser > =2 cuando el nro de mesa es > 1
-            throw new CantComensalesException("La cantidad de comensales no es la indicada dado el nro. de mesa");
-		else {
+		if( (comensales>=2 && numero>1) || numero<=1 ) { //la cantidad de comensales debe ser > =2 cuando el nro de mesa es > 1
 			this.numero = numero;
 			this.comensales = comensales;
 			this.mozo=null;
 			this.estado = estado;
+            
+		}else {
+			
+			throw new CantComensalesException("La cantidad de comensales no es la indicada dado el nro. de mesa");
 		}
 		
 		

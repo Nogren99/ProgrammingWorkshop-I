@@ -2,7 +2,7 @@ package modelo;
 
 public class ProductoOferta extends Promocion {
 	private int Id;
-    private Producto producto;
+    
     private String diasDePromo;
     private boolean aplicaDosPorUno;
     private boolean aplicaDtoPorCantidad;
