@@ -277,22 +277,6 @@ public class BeerHouse implements Serializable{
 		BeerHouse.instancia = instancia;
 	}
 
-	public void setMozos(ArrayList<Mozo> mozos) {
-		this.mozos = mozos;
-	}
-
-	public void setMesa(ArrayList<Mesa> mesa) {
-		this.mesa = mesa;
-	}
-
-	public void setOperario(ArrayList<Operario> operario) {
-		this.operario = operario;
-	}
-
-	public void setProducto(ArrayList<Producto> producto) {
-		this.producto = producto;
-	}
-
 	public void asociarComanda(Mesa mesa, Comanda comanda) {
         int i = 0;
         while (i < this.mesa.size() && !this.mesa.get(i).equals(mesa))
