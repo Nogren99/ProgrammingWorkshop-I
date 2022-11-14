@@ -638,17 +638,19 @@ public class Controlador implements ActionListener {
     	
     	ventAsignacion.repaint();
     } else if (comando.equalsIgnoreCase("AsignarMM")) {
-    	VentanaAsignacion ventAsignacion = (VentanaAsignacion) this.vista;	
-    	Integer number = (Integer) ventAsignacion.getSpinner().getValue();
-    	int numero = number.intValue();
-    	try {
-			sistema.asignaMM(numero, (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
-			JOptionPane.showMessageDialog(null,"Mesa asignada con exito!");
-		} catch (MesaOcupadaException e1) {
-			JOptionPane.showMessageDialog(null,e1.getMessage());
-		}
-    	
-    	
+        VentanaAsignacion ventAsignacion = (VentanaAsignacion) this.vista;
+        Integer number = (Integer) ventAsignacion.getSpinner().getValue();
+        int numero = number.intValue();
+        if((Mozo) ventAsignacion.getList().getSelectedValue()!=null) {
+            try {
+                sistema.asignaMM(numero, (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
+                JOptionPane.showMessageDialog(null,"Mesa asignada con exito!");
+            } catch (MesaOcupadaException e1) {
+                JOptionPane.showMessageDialog(null,e1.getMessage());
+            }
+        }else
+            JOptionPane.showMessageDialog(null,"Debes seleccionar un mozo de la lista");
+
     } else if (comando.equalsIgnoreCase("Atras")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaAdmin());

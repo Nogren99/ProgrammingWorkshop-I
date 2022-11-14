@@ -38,10 +38,15 @@ public class BeerHouse implements Serializable{
     private ArrayList<Operario> operario = new ArrayList<Operario>();
     private ArrayList<Producto> producto = new ArrayList<Producto>();
     private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
+    
+ 
+    
+    
     public ArrayList<Promocion> getPromociones() {
 		return promociones;
 	}
 
+   
 	public void setPromociones(ArrayList<Promocion> promociones) {
 		this.promociones = promociones;
 	}
@@ -66,7 +71,16 @@ public class BeerHouse implements Serializable{
     public void asignaCM(Comanda comanda, Mesa mesa) {
     	mesa.setComanda(comanda); //despues validar y eso
     }
-
+    
+    /**
+     * @pre: numero es un entero
+     * mozo distinto de null (FALTA VERIFICAR EN VENTANA)
+     * @pre: el mozo es asignado a una mesa
+     * @param numero
+     * @param mozo
+     * @throws MesaOcupadaException
+     * 
+     */
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
     	Iterator<Mesa> IteradorMesa = mesa.iterator();
@@ -113,6 +127,7 @@ public class BeerHouse implements Serializable{
         this.operario.add(operario);
     }
 
+
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=2; i<20;i++) {
     		try {
@@ -143,6 +158,19 @@ public class BeerHouse implements Serializable{
     public void agregaMesa(Mesa mesa) {
     	this.mesa.add(mesa);
     }
+    
+    /**
+     * @pre:username no es vacio ni null
+     * password no es vacio ni null
+     * En el primer ingreso se debe recibir username="ADMIN" y password="1234"
+     * @post:el usuario ingresa al sistema correctamente
+     * en el primer ingreso del admin se cambia la password
+     * @param username
+     * @param password
+     * @return
+     * @throws UsuarioInactivoException
+     * @throws UsuarioInexistenteException
+     */
     
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
     	//System.out.println("username: "+ username + " password: "+ password);
@@ -357,32 +385,29 @@ public class BeerHouse implements Serializable{
 	}
 	
 	/**
-	 * @PRECONDICION comanda distinta de null
+	 * @pre: comanda distinta de null
+	 * mesa distinta de null
+	 * pedido distinto de null
+	 * @post: 
 	 * @param mesa
 	 * @return
 	 */
 	public double precioComanda(Mesa mesa){
-		
 		double total = 0;
 		ArrayList<Pedido> pedido = mesa.getComanda().getOrden();
-		
 		Iterator<Pedido> iterador = pedido.iterator();
-		
 		while(iterador.hasNext()) {
 			Pedido p = iterador.next();
-
 			//Iterator<Promocion> iteradorPromo = promociones.iterator();
 			int i=0;
-			while(i<promociones.size() && !promociones.get(i).getProducto().equals(p.getProducto())) {
+			while(i<promociones.size() && !promociones.get(i).getProducto().equals(p.getProducto()))
 				i++;
-			}
 			if(i<promociones.size()) {
 				total+=promociones.get(i).calculaPrecio(p.getCantidad(), dayConverter());
 			}else {
 				total+=p.getCantidad()*p.getProducto().getVenta();
 			}
 		}
-	
 		return total;	
 	}
 	
