@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import excepciones.CantComensalesException;
 import excepciones.MesaOcupadaException;
 import excepciones.NoMesasHabilitadasException;
-import excepciones.NoMososActivosException;
+import excepciones.NoMozosActivosException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 //zayrux 
@@ -38,25 +38,9 @@ public class BeerHouse implements Serializable{
     private ArrayList<Operario> operario = new ArrayList<Operario>();
     private ArrayList<Producto> producto = new ArrayList<Producto>();
     private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
+    private double sueldo;
     
- 
-    
-    
-    public ArrayList<Promocion> getPromociones() {
-		return promociones;
-	}
-
-   
-	public void setPromociones(ArrayList<Promocion> promociones) {
-		this.promociones = promociones;
-	}
-
-
-	private double sueldo;
-
-    private BeerHouse() {
-
-    }
+    private BeerHouse() {}
 
     public static BeerHouse getInstancia() {
         if (instancia == null)
@@ -73,13 +57,13 @@ public class BeerHouse implements Serializable{
     }
     
     /**
-     * @pre: numero es un entero
-     * mozo distinto de null (FALTA VERIFICAR EN VENTANA)
-     * @pre: el mozo es asignado a una mesa
-     * @param numero
-     * @param mozo
-     * @throws MesaOcupadaException
-     * 
+     * <b>Pre: </b>numero es un entero.<br>
+     * mozo distinto de null.<br>
+     * efectuado la ronda de contrataciones.<br>
+     * <b>Post: </b>el mozo es asignado a una mesa.<br>
+     * @param numero.
+     * @param mozo.
+     * @throws MesaOcupadaException.
      */
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
@@ -92,7 +76,6 @@ public class BeerHouse implements Serializable{
         		ok=false;
         	}
     	}
-    	
     }
     
     public void modificaIDProducto(Producto producto, int ID) {
@@ -127,6 +110,13 @@ public class BeerHouse implements Serializable{
         this.operario.add(operario);
     }
 
+    public ArrayList<Promocion> getPromociones() {
+		return promociones;
+	}
+
+	public void setPromociones(ArrayList<Promocion> promociones) {
+		this.promociones = promociones;
+	}
 
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=2; i<20;i++) {
@@ -160,18 +150,19 @@ public class BeerHouse implements Serializable{
     }
     
     /**
-     * @pre:username no es vacio ni null
-     * password no es vacio ni null
-     * En el primer ingreso se debe recibir username="ADMIN" y password="1234"
-     * @post:el usuario ingresa al sistema correctamente
-     * en el primer ingreso del admin se cambia la password
+     *<b>Pre: </b>username no es vacio ni null<br>
+     * password no es vacio ni null<br>
+     * efectuado la ronda de contrataciones.<br>
+     * <b>Post: </b> En el primer ingreso se debe recibir username="ADMIN" y password="1234".<br>
+	 * el usuario ingresa al sistema correctamente <br>
+     * en el primer ingreso del admin se cambia la password<br>
      * @param username
      * @param password
      * @return
      * @throws UsuarioInactivoException
      * @throws UsuarioInexistenteException
      */
-    
+
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
     	//System.out.println("username: "+ username + " password: "+ password);
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
@@ -203,10 +194,7 @@ public class BeerHouse implements Serializable{
     	if(operario.contains(nombreAdmin)) {
     		operario.get(operario.indexOf(nombreAdmin)).setActivo(true);
     	}
-		
 	}
-
-    
     
     public boolean mesasVacias() throws NoMesasHabilitadasException{
     	if(this.mesa.isEmpty())
@@ -215,9 +203,9 @@ public class BeerHouse implements Serializable{
     		return false;
     }
     
-    public boolean mososVacios() throws NoMososActivosException{
+    public boolean mososVacios() throws NoMozosActivosException{
     	if(this.mozos.isEmpty())
-    		throw new NoMososActivosException("No hay mosos activos");
+    		throw new NoMozosActivosException("No hay mosos activos");
     	else
     		return false;
     }
@@ -225,7 +213,6 @@ public class BeerHouse implements Serializable{
 	public void agregarMozo(Mozo mozo) {
         this.mozos.add(mozo);
     }
-
 
     public void eliminaMozo(Mozo mozo) {
         this.mozos.remove(mozo);
@@ -259,11 +246,6 @@ public class BeerHouse implements Serializable{
     	ope.setNyA(name); 	
     }
 
-    /**
-     * F 1.1.1 && 1.1.2
-     * @param hijos
-     * @return
-     */
     public double sueldo(int hijos) {
 		if(hijos==0)
 			return sueldo;
@@ -274,8 +256,6 @@ public class BeerHouse implements Serializable{
 	public ArrayList<Operario> getOperario() {
 		return operario;
 	}
-
-	
 
 	public ArrayList<Mozo> getMozos() {
 		return mozos;
@@ -331,13 +311,9 @@ public class BeerHouse implements Serializable{
 		return min;
     }
 	
-	
 	private String dayConverter() {
 		LocalDate today = LocalDate.now();
-
     	DayOfWeek dayOfWeek = today.getDayOfWeek();
-    	
-    	
     	switch(dayOfWeek.getValue()) {
     	case 1:
     		return "Lunes";
@@ -385,10 +361,10 @@ public class BeerHouse implements Serializable{
 	}
 	
 	/**
-	 * @pre: comanda distinta de null
-	 * mesa distinta de null
-	 * pedido distinto de null
-	 * @post: 
+	 * *<b>Pre: </b>comanda distinta de null.<br>
+     * mesa distinta de null.<br>
+     * pedido distinto de null.<br>
+     * <b>Post: </b>devuelve el precio total de la comanda.<br>
 	 * @param mesa
 	 * @return
 	 */
@@ -411,19 +387,20 @@ public class BeerHouse implements Serializable{
 		return total;	
 	}
 	
+	/**
+     * <b>Post: </b>devuelve si un producto se encuentra en promo en la comanda.<br>
+	 * @param comanda
+	 * @return
+	 */
+	
 	public boolean verificaPromo(Comanda comanda) {
 		boolean search=true;
-		
-		
 		if(comanda!=null) {
 			ArrayList<Pedido> pedidos = comanda.getOrden();
 			Iterator<Pedido> iteratorPedido  = pedidos.iterator(); //pedidos de la comanda de la mesa a evaluar
-			
 			while(iteratorPedido.hasNext() && search) {
 				Pedido ped = iteratorPedido.next();
-				
 				Iterator<Promocion> promo = promociones.iterator();
-				
 		    	while(promo.hasNext() && search) {
 		    		Promocion prom =promo.next();
 		    		if(ped.getProducto()==prom.getProducto() && prom.isActivo()) { //si hay un producto en promocion y esta activo
@@ -432,13 +409,10 @@ public class BeerHouse implements Serializable{
 		    	}
 			}
 		}
-		
 		return search;
 	}
 	
-	
-	public void escribirPersistencia() throws IOException
-    { // catchear excepcion en el main
+	public void escribirPersistencia() throws IOException{ // catchear excepcion en el main
         BeerHouseDTO beerDTO = new BeerHouseDTO();
         beerDTO.setMesa(this.mesa);
         beerDTO.setMozos(this.mozos);
@@ -454,9 +428,7 @@ public class BeerHouse implements Serializable{
         System.out.println("Archivo cerrado");
     }
 	
-	
-	public void leerPersistencia() throws ClassNotFoundException, IOException, Exception
-    {
+	public void leerPersistencia() throws ClassNotFoundException, IOException, Exception{
         IPersistencia persistencia = new PersistenciaBIN();
         persistencia.abrirInput("Datos.bin");
         System.out.println("Archivo abierto");
@@ -470,7 +442,5 @@ public class BeerHouse implements Serializable{
         this.operario=beerDTO.getOperario();
         this.producto=beerDTO.getProducto();
     }
-	
-
 	
 }

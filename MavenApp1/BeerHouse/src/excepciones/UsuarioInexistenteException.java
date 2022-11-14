@@ -5,8 +5,6 @@ public class UsuarioInexistenteException extends Exception {
 
     public UsuarioInexistenteException(String mensajito) {
         super(mensajito);
-
     }
-
 
 }

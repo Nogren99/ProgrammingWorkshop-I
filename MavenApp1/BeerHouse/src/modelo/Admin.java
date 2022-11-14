@@ -9,9 +9,6 @@ public class Admin extends Operario  {
 		this.categoria=20;
 	}
     
+	public void darDeAlta(){}
 	
-	
-	public void darDeAlta() {
-		
-	}
 }
