@@ -20,7 +20,14 @@ public class TemporalOferta extends Promocion {
 		this.esAcumulable = esAcumulable;
 	}
 
-    public Producto getProducto() {
+    @Override
+	public String toString() {
+		return "TemporalOferta [nombre=" + nombre + ", formaPago=" + formaPago + ", porcentajeDescuento="
+				+ porcentajeDescuento + ", diasDePromo=" + diasDePromo + ", activo=" + activo + ", esAcumulable="
+				+ esAcumulable + "]";
+	}
+
+	public Producto getProducto() {
 		return producto;
 	}
 

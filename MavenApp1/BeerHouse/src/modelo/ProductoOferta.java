@@ -105,4 +105,12 @@ public class ProductoOferta extends Promocion {
 		return aux;
 		
 	}
+
+	@Override
+	public String toString() {
+		return "ProductoOferta [Id=" + Id + ", diasDePromo=" + diasDePromo + ", aplicaDosPorUno=" + aplicaDosPorUno
+				+ ", aplicaDtoPorCantidad=" + aplicaDtoPorCantidad + ", dtoPorCantidad_CantMinima="
+				+ dtoPorCantidad_CantMinima + ", dtoPorCantidad_PrecioUnitario=" + dtoPorCantidad_PrecioUnitario
+				+ ", activa=" + activa + "]";
+	}
 }

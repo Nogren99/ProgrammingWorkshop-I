@@ -20,6 +20,7 @@ import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
 import modelo.ProductoOferta;
+import modelo.Promocion;
 import modelo.TemporalOferta;
 import negocio.BeerHouse;
 import vista.IVista;
@@ -680,47 +681,62 @@ public class Controlador implements ActionListener {
     }else if (comando.equalsIgnoreCase("Promociones")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaPromocion());
-    
-		
-		VentanaPromocion ventProm = (VentanaPromocion) this.vista;
+    	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
 		Iterator<Producto> iterador = sistema.getProducto().iterator();
 		
 		while (iterador.hasNext())
 		{
 			Producto producto = iterador.next();
 			ventProm.getModeloLista_1().addElement(producto);
+			
+			ventProm.repaint();
 		}
+		  
+		
+		Iterator<Promocion> iteradorProm = sistema.getPromociones().iterator();
+		
+		while (iteradorProm.hasNext())
+		{
+			Promocion prom = iteradorProm.next();
+			ventProm.getModeloLista().addElement(prom);
+			ventProm.repaint();
+		}
+		
+		
 		ventProm.getBtnNuevaPromocion().setActionCommand("NuevaPromo");
 		ventProm.getbtnNuevaOfertaTemp().setActionCommand("PromoTemp");
-		
 		ventProm.repaint();
     	
     }else if (comando.equalsIgnoreCase("NuevaPromo")) {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
-    	//aca se traeria el arraylist de promociones
+    	ArrayList<Promocion> promociones= sistema.getPromociones();
     	
-    	if(ventProm.getList_1().getSelectedValue()!=null ) { // esto es cuando no hay producto seleccionado, hay q actualizarlo
+    	if(ventProm.getList_1().getSelectedValue()!=null ) {
     		boolean dosPorUno =ventProm.getRdbtnNewRadioButton().isSelected();
     		boolean descuentoCantidad=ventProm.getRdbtnNewRadioButton_2().isSelected();
     		
     		if(dosPorUno || descuentoCantidad) {
-    			String diaspromo=""; //pendiente
-    			Producto temporal=null; //ahora selecciona textfield, va a seleccionar productos
+    			String diaspromo=(String)ventProm.getSpinner_3().getValue(); 
+    			System.out.println(diaspromo);
+    			Producto temporal=(Producto) ventProm.getList_1().getSelectedValue(); 
+    			System.out.println(temporal);
+    			
     			boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
+    			
     			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_1().getValue(),(double)ventProm.getSpinner_2().getValue(), activa);
-    			//aca se va a agregar al arraylist
+    			promociones.add(prod);
+    			System.out.println(promociones);
     			JOptionPane.showMessageDialog(null,"Oferta agregada satisfactoriamente");
     		}else
     			JOptionPane.showMessageDialog(null,"Debes seleccionar al menos un tipo de promocion");
-    		
     	}else
     		JOptionPane.showMessageDialog(null,"Debes seleccionar un producto");
     }else if (comando.equalsIgnoreCase("PromoTemp")) {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
-    	//aca se traeria el arraylist de promociones
-    	//���el contrato no pide verificar nada!!!
-    	String diaspromo="";//pendiente
+    	ArrayList<Promocion> promociones= sistema.getPromociones();
+    	String diaspromo=(String)ventProm.getSpinner_3().getValue(); 
     	TemporalOferta prod = new TemporalOferta(ventProm.getTextField_2().getText(), ventProm.getTextField_1().getText(), diaspromo,(int)ventProm.getSpinner_4().getValue() , ventProm.getRdbtnNewRadioButton_6().isSelected(), ventProm.getRdbtnNewRadioButton_10().isSelected());
+    	promociones.add(prod);
     	JOptionPane.showMessageDialog(null, "Oferta temporal agregada satisfactoriamente");
     }else if (comando.equalsIgnoreCase("Cerrar Mesa")) {
     	
