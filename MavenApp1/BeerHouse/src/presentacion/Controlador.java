@@ -699,19 +699,23 @@ public class Controlador implements ActionListener {
                         	System.out.println(m.getEstado().equalsIgnoreCase("libre"));
                         	*/
                             if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo
-                            	if(m.getComanda()==null) {
-	                            	Comanda	comanda = new Comanda();
-	                            	m.setComanda(comanda);
-	                            	//m.getComanda().setMesa(m);
-	                            	m.getComanda().setDate(new GregorianCalendar());
-	                            	m.getComanda().setEstado("abierta");
-                            	}
-                            	m.getComanda().addPedido(pedido);
-                            	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                            	m.setEstado("Ocupada");
-                            	System.out.println("comanda:"+m.getComanda());
-                            	System.out.println("mesa:"+m.toString());
-                            	search=false;
+                            	
+                            		
+                            	if(sistema.verificaPromo(m.getComanda())) {
+                            		if(m.getComanda()==null) {
+    	                            	Comanda	comanda = new Comanda();
+    	                            	m.setComanda(comanda);
+    	                            	//m.getComanda().setMesa(m);
+    	                            	m.getComanda().setDate(new GregorianCalendar());
+    	                            	m.getComanda().setEstado("abierta");
+                                	}
+                                	m.getComanda().addPedido(pedido);
+                                	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
+                                	System.out.println("comanda:"+m.getComanda());
+                                	System.out.println("mesa:"+m.toString());
+                                	search=false;
+                            	}else
+                            		JOptionPane.showMessageDialog(null, "No pueden haber dos o mas productos en promocion en la misma comanda");
                             }else
                             	JOptionPane.showMessageDialog(null, "Mesa ocupada");
                         }
@@ -793,7 +797,7 @@ public class Controlador implements ActionListener {
 		while (iterador.hasNext())
 		{
 			Mesa mesa = iterador.next();
-			if (mesa.getEstado().equalsIgnoreCase("Ocupada")) {
+			if (mesa.getEstado().equalsIgnoreCase("Ocupada") && mesa.getComanda()!=null) {
 				ventClose.getModeloLista().addElement(mesa);
 			}
 		}
@@ -818,7 +822,7 @@ public class Controlador implements ActionListener {
         	JOptionPane.showMessageDialog(null, r.getTotal());
         	ventClose.repaint();
     	}else
-    		JOptionPane.showMessageDialog(null,"Debes seleccionar una mesa");
+    		JOptionPane.showMessageDialog(null,"Debes seleccionar una mesa con una comanda valida");
 
     }
     

@@ -356,6 +356,11 @@ public class BeerHouse implements Serializable{
 		return min;
 	}
 	
+	/**
+	 * @PRECONDICION comanda distinta de null
+	 * @param mesa
+	 * @return
+	 */
 	public double precioComanda(Mesa mesa){
 		
 		double total = 0;
@@ -384,21 +389,25 @@ public class BeerHouse implements Serializable{
 	public boolean verificaPromo(Comanda comanda) {
 		boolean search=true;
 		
-		ArrayList<Pedido> pedidos = comanda.getOrden();
-		Iterator<Pedido> iteratorPedido  = pedidos.iterator(); //pedidos de la comanda de la mesa a evaluar
 		
-		while(iteratorPedido.hasNext() && search) {
-			Pedido ped = iteratorPedido.next();
+		if(comanda!=null) {
+			ArrayList<Pedido> pedidos = comanda.getOrden();
+			Iterator<Pedido> iteratorPedido  = pedidos.iterator(); //pedidos de la comanda de la mesa a evaluar
 			
-			Iterator<Promocion> promo = promociones.iterator();
-			
-	    	while(promo.hasNext() && search) {
-	    		Promocion prom =promo.next();
-	    		if(ped.getProducto()==prom.getProducto() && prom.isActivo()) { //si hay un producto en promocion y esta activo
-	    			search=false;
-	    		}
-	    	}
+			while(iteratorPedido.hasNext() && search) {
+				Pedido ped = iteratorPedido.next();
+				
+				Iterator<Promocion> promo = promociones.iterator();
+				
+		    	while(promo.hasNext() && search) {
+		    		Promocion prom =promo.next();
+		    		if(ped.getProducto()==prom.getProducto() && prom.isActivo()) { //si hay un producto en promocion y esta activo
+		    			search=false;
+		    		}
+		    	}
+			}
 		}
+		
 		return search;
 	}
 	
