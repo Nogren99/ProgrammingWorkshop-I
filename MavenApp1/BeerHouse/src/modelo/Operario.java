@@ -5,6 +5,15 @@ import java.io.Serializable;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa a un usuario operario del sistema de cervecería.
+ * <br>
+ *
+ */
 public class Operario extends Usuario{
 	
 	private String NyA;

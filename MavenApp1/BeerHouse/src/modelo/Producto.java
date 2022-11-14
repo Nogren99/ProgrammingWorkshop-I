@@ -8,6 +8,14 @@ import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
 
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa un producto de la cervecería. Contiene un id, precio de costo y venta, su nombre y su stock actual.
+ *
+ */
 public class Producto implements Serializable{
 	private int Id;
     private String nombre;

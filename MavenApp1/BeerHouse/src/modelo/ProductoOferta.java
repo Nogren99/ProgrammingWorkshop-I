@@ -1,5 +1,14 @@
 package modelo;
 
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa un producto que está en promoción en la cervecería. 
+ * <br>
+ *
+ */
 public class ProductoOferta extends Promocion {
 	private int Id;
     

@@ -6,6 +6,13 @@ import java.time.LocalDateTime;
 
 import java.util.GregorianCalendar;
 
+
+
+/**
+ * @author Nico
+ * Clase que representa un pedido que se asociará a una comanda. Contiene un producto y una cantidad.
+ *
+ */
 public class Pedido implements Serializable{
 
     private Producto producto;

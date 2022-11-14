@@ -2,6 +2,14 @@ package modelo;
 
 import java.io.Serializable;
 
+
+/**
+ * @author Nico
+ * <br>
+ * Clase padre que representa a un producto en promoción. Posteriormente se determinará mediante sus clases hijas qué tipo de promoción se aplicará.
+ * <br>
+ *
+ */
 public abstract class Promocion implements Serializable {
 	protected Producto producto;
 	protected boolean activo;

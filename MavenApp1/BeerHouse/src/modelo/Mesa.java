@@ -2,8 +2,16 @@ package modelo;
 
 import java.io.Serializable;
 
+
+
 import excepciones.CantComensalesException;
 
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa una mesa de la cervecería. Se vincula con un mozo y contiene una comanda.
+ *
+ */
 public class Mesa implements Serializable{
 	private int numero;
     private int comensales;

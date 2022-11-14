@@ -3,6 +3,13 @@ package modelo;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa un recibo de la cervecería. Se generará durante el cierre de mesas. Contiene una colección de pedidos, una colección de promociones aplicadas, un precio total, la mesa en la que fue efectuado, la fecha del día y la forma de pago.
+ * <br>
+ */
 public class Recibo {
     private GregorianCalendar fecha;
     private Mesa mesa;

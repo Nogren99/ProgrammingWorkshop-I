@@ -1,5 +1,14 @@
 package modelo;
 
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa una promoción temporal.
+ * <br>
+ *
+ */
 public class TemporalOferta extends Promocion {
 	private String nombre;
 	private String formaPago;

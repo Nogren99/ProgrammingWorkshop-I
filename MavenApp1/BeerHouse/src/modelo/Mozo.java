@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa a un mozo de la cervecería.
+ * <br>
+ */
 public class Mozo implements Serializable{
 	
 	private String NyA;

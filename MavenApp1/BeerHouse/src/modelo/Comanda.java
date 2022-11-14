@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+
+
+/**
+ * @author Nico
+ * <br>
+ * Clase que representa la comanda de una mesa. Contiene una mesa, una colección de pedidos, la fecha actual y el estado.
+ */
 public class Comanda implements Serializable{
 
     private GregorianCalendar date;
