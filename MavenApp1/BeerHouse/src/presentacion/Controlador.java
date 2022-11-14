@@ -597,7 +597,7 @@ public class Controlador implements ActionListener {
                 	Iterator<Mesa> IteradorMesa = mesas.iterator();
                 	while(IteradorMesa.hasNext() && search) { 
                         Mesa m = IteradorMesa.next();
-                        if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue()) {
+                        if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue() ) {
                         	/*
                         	System.out.println(m);
                         	System.out.println(m.getMozo());
@@ -605,25 +605,32 @@ public class Controlador implements ActionListener {
                         	System.out.println(m.getMozo().getEstado()==0);
                         	System.out.println(m.getEstado().equalsIgnoreCase("libre"));
                         	*/
-                            if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo	
-                            	if(sistema.verificaPromo(m.getComanda())) {
-                            		if(m.getComanda()==null) {
-    	                            	Comanda	comanda = new Comanda();
-    	                            	m.setComanda(comanda);
-    	                            	//m.getComanda().setMesa(m);
-    	                            	m.getComanda().setDate(new GregorianCalendar());
-    	                            	m.getComanda().setEstado("abierta");
-                                	}
-                                	m.getComanda().addPedido(pedido);
-                                	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                                	System.out.println("comanda:"+m.getComanda());
-                                	System.out.println("mesa:"+m.toString());
-                                	search=false;
-                            	}else
-                            		JOptionPane.showMessageDialog(null, "No pueden haber dos o mas productos en promocion en la misma comanda");
-                            }else
-                            	JOptionPane.showMessageDialog(null, "Mesa ocupada");
+                        	if(m.getMozo()!=null) {
+                        		if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo	
+                                	if(sistema.verificaPromo(m.getComanda())) {
+                                		if(m.getComanda()==null) {
+        	                            	Comanda	comanda = new Comanda();
+        	                            	m.setComanda(comanda);
+        	                            	m.getComanda().setDate(new GregorianCalendar());
+        	                            	m.getComanda().setEstado("abierta");
+                                    	}
+                                    	m.getComanda().addPedido(pedido);
+                                    	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
+                                    	//System.out.println("comanda:"+m.getComanda());
+                                    	//System.out.println("mesa:"+m.toString());
+                                    	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
+                                    	search=false;
+                                	}else
+                                		JOptionPane.showMessageDialog(null, "No pueden haber dos o mas productos en promocion en la misma comanda");
+                                }else
+                                	JOptionPane.showMessageDialog(null, "Mesa ocupada");
+                        	}else
+                            	JOptionPane.showMessageDialog(null, "Imposible seleccionar esa mesa");
+                        
+                        	
+                            
                         }
+                        
                 	}
             	}
         	}else
@@ -638,6 +645,7 @@ public class Controlador implements ActionListener {
 		while (iterador.hasNext()){
 			Producto producto = iterador.next();
 			ventProm.getModeloLista_1().addElement(producto);
+			ventProm.getModeloLista_2().addElement(producto);
 			ventProm.repaint();
 		}
 		Iterator<Promocion> iteradorProm = sistema.getPromociones().iterator();
@@ -646,6 +654,10 @@ public class Controlador implements ActionListener {
 			ventProm.getModeloLista().addElement(prom);
 			ventProm.repaint();
 		}
+		
+		
+		
+		
 		ventProm.getBtnNuevaPromocion().setActionCommand("NuevaPromo");
 		ventProm.getbtnNuevaOfertaTemp().setActionCommand("PromoTemp");
 		ventProm.repaint();
@@ -673,7 +685,8 @@ public class Controlador implements ActionListener {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
     	ArrayList<Promocion> promociones= sistema.getPromociones();
     	String diaspromo=(String)ventProm.getSpinner_3().getValue(); 
-    	TemporalOferta prod = new TemporalOferta(ventProm.getTextField_2().getText(), ventProm.getTextField_1().getText(), diaspromo,(int)ventProm.getSpinner_4().getValue() , ventProm.getRdbtnNewRadioButton_6().isSelected(), ventProm.getRdbtnNewRadioButton_10().isSelected());
+    	Producto producto =(Producto)ventProm.getList_2().getSelectedValue();
+    	TemporalOferta prod = new TemporalOferta(producto,producto.getNombre(), ventProm.getTextField_1().getText(), diaspromo,(int)ventProm.getSpinner_4().getValue() , ventProm.getRdbtnNewRadioButton_6().isSelected(), ventProm.getRdbtnNewRadioButton_10().isSelected());
     	promociones.add(prod);
     	JOptionPane.showMessageDialog(null, "Oferta temporal agregada satisfactoriamente");
     }else if (comando.equalsIgnoreCase("Cerrar Mesa")) {

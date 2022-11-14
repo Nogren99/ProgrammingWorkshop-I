@@ -107,17 +107,21 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 	private JPanel panel_41;
 	private JRadioButton rdbtnNewRadioButton_10;
 	private JRadioButton rdbtnNewRadioButton_11;
-	private JTextField textField_2;
 	private JList list_1;
 	private JScrollPane scrollPane_1;
 	private DefaultListModel modeloLista_1;
+	private DefaultListModel modeloLista_2;
 	private JSpinner spinner_3;
 	private JSpinner spinner_5;
+	private JScrollPane scrollPane_2;
+	private JList list_2;
+	
 
 	public VentanaPromocion() {
 		setTitle("Promociones");
 		this.modeloLista = new DefaultListModel();
 		this.modeloLista_1 = new DefaultListModel();
+		this.modeloLista_2 = new DefaultListModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 524, 392);
 		this.contentPane = new JPanel();
@@ -333,9 +337,12 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		this.panel_27 = new JPanel();
 		this.panel_25.add(this.panel_27);
 		
-		this.textField_2 = new JTextField();
-		this.textField_2.setColumns(10);
-		this.panel_27.add(this.textField_2);
+		this.scrollPane_2 = new JScrollPane();
+		this.panel_27.add(this.scrollPane_2);
+		
+		this.list_2 = new JList();
+		this.list_2.setModel(modeloLista_2);
+		this.scrollPane_2.setViewportView(this.list_2);
 		
 		this.panel_28 = new JPanel();
 		this.panel_25.add(this.panel_28);
@@ -406,6 +413,14 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		
 		this.rdbtnNewRadioButton_11 = new JRadioButton("No");
 		this.panel_41.add(this.rdbtnNewRadioButton_11);
+	}
+
+	public DefaultListModel getModeloLista_2() {
+		return modeloLista_2;
+	}
+
+	public JList getList_2() {
+		return list_2;
 	}
 
 	public DefaultListModel getModeloLista_1()
@@ -733,9 +748,6 @@ public class VentanaPromocion extends JFrame implements IVista, ActionListener{
 		return rdbtnNewRadioButton_11;
 	}
 
-	public JTextField getTextField_2() {
-		return textField_2;
-	}
 
 	@Override
 	public void cerrar() {
