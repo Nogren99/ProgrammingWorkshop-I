@@ -350,7 +350,7 @@ public class BeerHouse implements Serializable{
 			}
 		}
 	
-		return sueldo;	
+		return total;	
 	}
 	
 	public void escribirPersistencia() throws IOException

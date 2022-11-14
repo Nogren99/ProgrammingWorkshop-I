@@ -56,7 +56,7 @@ public class VentanaCerrarMesa extends JFrame implements IVista{
 		this.btnNewButton_1.setBackground(SystemColor.textHighlight);
 		this.btnNewButton_1.setForeground(SystemColor.desktop);
 		this.btnNewButton_1.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 12));
-		this.btnNewButton_1.setActionCommand("Atras");
+		this.btnNewButton_1.setActionCommand("Salir");
 		this.panel_1.add(this.btnNewButton_1);
 		
 		this.panel_2 = new JPanel();

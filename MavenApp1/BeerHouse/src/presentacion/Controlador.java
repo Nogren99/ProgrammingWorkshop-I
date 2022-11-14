@@ -21,6 +21,7 @@ import modelo.Pedido;
 import modelo.Producto;
 import modelo.ProductoOferta;
 import modelo.Promocion;
+import modelo.Recibo;
 import modelo.TemporalOferta;
 import negocio.BeerHouse;
 import vista.IVista;
@@ -179,7 +180,7 @@ public class Controlador implements ActionListener {
             		
         			
         		}else {
-        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 d�gito y 1 may�scula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 d\u00EDgito y 1 may\u00FAscula");
         			this.setVista(new VentanaABM());
             		VentanaABM ventABM = (VentanaABM) this.vista;
             		ventABM.getBtnAlta().setActionCommand("AltaOpe");
@@ -224,7 +225,7 @@ public class Controlador implements ActionListener {
         				) 
         			sistema.modificaPasswordOpe(ope, pass);
         		else
-        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 d�gito y 1 may�scula");
+        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 d\u00EDgito y 1 may\u00FAscula");
         	break;
         	case 3:
         		int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
@@ -276,7 +277,7 @@ public class Controlador implements ActionListener {
         			}
         		}else {
         			VentanaABM ventABM = (VentanaABM) this.vista;
-        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 a�os");
+        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 a\u00F1os");
             		ventABM.repaint();
         		}
         	}else {
@@ -665,6 +666,7 @@ public class Controlador implements ActionListener {
                             	}
                             	m.getComanda().addPedido(pedido);
                             	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
+                            	m.setEstado("Ocupada");
                             	System.out.println("comanda:"+m.getComanda());
                             	System.out.println("mesa:"+m.toString());
                             	search=false;
@@ -674,7 +676,7 @@ public class Controlador implements ActionListener {
                 	}
             	}
         	}else
-        		JOptionPane.showMessageDialog(null, "La cantidad solicitada no puedesuperar al stock del producto");
+        		JOptionPane.showMessageDialog(null, "La cantidad solicitada no puede superar al stock del producto");
     	}else
     		JOptionPane.showMessageDialog(null, "FLACO ELEGI UN PRODUCTO");
 
@@ -754,7 +756,7 @@ public class Controlador implements ActionListener {
 			}
 		}
 
-    	
+		ventClose.repaint();
     }else if (comando.equalsIgnoreCase("CerrarMesaSeleccionada")) {
     	
     	
@@ -765,6 +767,12 @@ public class Controlador implements ActionListener {
     	if(mesa!=null) {
     		mesa.setEstado("Libre");
     		mesa.getMozo().setVolumenDeVenta( sistema.precioComanda(mesa) );
+    		Recibo r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, sistema.precioComanda(mesa), null);
+    		String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
+        	int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
+        	r.setFormaDePago(opcionesPago[i-1]);
+        	JOptionPane.showMessageDialog(null, r.getTotal());
+        	ventClose.repaint();
     	}else
     		JOptionPane.showMessageDialog(null,"Debes seleccionar una mesa");
 
