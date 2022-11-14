@@ -33,8 +33,4 @@ public abstract class Usuario implements Serializable{
 		return "Usuario [username=" + username + ", password=" + password + "]";
 	}
 
-    
-    
-    
-
 }

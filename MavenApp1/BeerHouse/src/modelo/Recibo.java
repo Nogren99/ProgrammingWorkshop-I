@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Recibo {
-
     private GregorianCalendar fecha;
     private Mesa mesa;
     private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
@@ -20,8 +19,7 @@ public class Recibo {
 	 * ¿Cual recibo?
 	 */
 	public Recibo(GregorianCalendar fecha, Mesa mesa, ArrayList<Pedido> pedidos, ArrayList<Promocion> promociones,
-			double total, String formaDePago)
-	{
+			double total, String formaDePago){
 		super();
 		this.fecha = fecha;
 		this.mesa = mesa;
@@ -31,63 +29,51 @@ public class Recibo {
 		this.formaDePago = formaDePago;
 	}
 
-	public GregorianCalendar getFecha()
-	{
+	public GregorianCalendar getFecha(){
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha)
-	{
+	public void setFecha(GregorianCalendar fecha){
 		this.fecha = fecha;
 	}
 
-	public Mesa getMesa()
-	{
+	public Mesa getMesa(){
 		return mesa;
 	}
 
-	public void setMesa(Mesa mesa)
-	{
+	public void setMesa(Mesa mesa){
 		this.mesa = mesa;
 	}
 
-	public ArrayList<Pedido> getPedidos()
-	{
+	public ArrayList<Pedido> getPedidos(){
 		return pedidos;
 	}
 
-	public void setPedidos(ArrayList<Pedido> pedidos)
-	{
+	public void setPedidos(ArrayList<Pedido> pedidos){
 		this.pedidos = pedidos;
 	}
 
-	public ArrayList<Promocion> getPromociones()
-	{
+	public ArrayList<Promocion> getPromociones(){
 		return promociones;
 	}
 
-	public void setPromociones(ArrayList<Promocion> promociones)
-	{
+	public void setPromociones(ArrayList<Promocion> promociones){
 		this.promociones = promociones;
 	}
 
-	public double getTotal()
-	{
+	public double getTotal(){
 		return total;
 	}
 
-	public void setTotal(double total)
-	{
+	public void setTotal(double total){
 		this.total = total;
 	}
 
-	public String getFormaDePago()
-	{
+	public String getFormaDePago(){
 		return formaDePago;
 	}
 
-	public void setFormaDePago(String formaDePago)
-	{
+	public void setFormaDePago(String formaDePago){
 		this.formaDePago = formaDePago;
 	}
     

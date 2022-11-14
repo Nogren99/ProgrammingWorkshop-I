@@ -15,6 +15,7 @@ public class Comanda implements Serializable{
     public Comanda() {
     	super();
     }
+    
 	public Comanda(Mesa mesa, String estado) {
 		super();
 		this.mesa = mesa;
@@ -61,9 +62,5 @@ public class Comanda implements Serializable{
 	public String toString() {
 		return "Comanda [date="+ date.get(Calendar.DATE)+ " / " + date.get(Calendar.MONTH)+ " / " + date.get(Calendar.YEAR)+ ", mesa=" + mesa + ", orden=" + orden + ", estado=" + estado + "]";
 	}
-	
-	
-    
-	
-    
+	 
 }

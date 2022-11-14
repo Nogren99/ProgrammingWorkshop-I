@@ -93,4 +93,5 @@ public class TemporalOferta extends Promocion {
 		}else
 			return cant*this.producto.getVenta();
 	}
+	
 }
