@@ -17,7 +17,7 @@ public class testMozo {
 	public void setUp(){
 		mozo = null;
 		try {
-			 mozo = new Mozo ("Mirta",new GregorianCalendar(), 2 ,0);
+			 mozo = new Mozo ("Mirta",new GregorianCalendar(), 2);
 			 mozo.setEstado((byte) 0);
 		} catch (Exception e) {
 			Assert.fail("El mozo se deberia haber creado correctamente");
@@ -27,7 +27,7 @@ public class testMozo {
 	@After
 	public void tearDown() throws Exception {
 	}
-	//GregorianCalendar;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
 	@Test
 	public void testConstructor() {
 		String NyA = this.mozo.getNyA();
@@ -41,7 +41,6 @@ public class testMozo {
 		Assert.assertEquals("La cantidad de hijos no se cargo correctamente",2,hijos);
 		Assert.assertEquals("El estado no se cargo correctamente",0,estado);
 		Assert.assertEquals("El volumen de venta no se cargo correctamente",0.0,volumenDeVenta);
-
 	}
 	
 }
