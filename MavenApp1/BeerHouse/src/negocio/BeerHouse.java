@@ -323,16 +323,6 @@ public class BeerHouse implements Serializable{
 	public static void setInstancia(BeerHouse instancia) {
 		BeerHouse.instancia = instancia;
 	}
-
-	public void asociarComanda(Mesa mesa, Comanda comanda) {
-        int i = 0;
-        while (i < this.mesa.size() && !this.mesa.get(i).equals(mesa))
-            i++;
-        if (i < this.mesa.size()) {
-            this.mesa.get(i).setComanda(comanda);
-            this.mesa.get(i).setEstado("Ocupada");
-        }
-    }
     
 	public double mayorVolumenDeVenta() {
 		double max = 0.0;
