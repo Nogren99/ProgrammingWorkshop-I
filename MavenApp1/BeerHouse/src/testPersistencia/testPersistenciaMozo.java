@@ -94,8 +94,8 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	@Test
 	private void completaConMozos(ArrayList<Mozo> mozos) {
 		try {
-			this.mozos.add( new Mozo(null,new GregorianCalendar(),-1));
-			this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1));
+			this.mozos.add( new Mozo(null,new GregorianCalendar(),-1,0));
+			this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1,0));
 		}catch (Exception e) {
 			Assert.fail("No deberia lanzar esta exepcion");
 		}	
