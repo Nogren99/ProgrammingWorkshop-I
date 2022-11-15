@@ -11,6 +11,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
+import excepciones.EstadoInvalidoException;
+import excepciones.HijosInvalidosException;
 import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
@@ -19,6 +21,7 @@ import excepciones.NoHayMesasHabilitadasException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.NumeroInvalidoException;
+import excepciones.PasswordInvalidaException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
@@ -36,6 +39,7 @@ import persistencia.BeerHouseDTO;
 import persistencia.IPersistencia;
 
 import persistencia.PersistenciaBIN;
+import vista.VentanaABM;
 
 public class BeerHouse implements Serializable{
 
@@ -70,8 +74,35 @@ public class BeerHouse implements Serializable{
      * <b>Post: </b>el mozo es asignado a una mesa.<br>
      * @param numero.
      * @param mozo.
+     * @throws EstadoInvalidoException 
+     * @throws HijosInvalidosException 
+     * @throws PasswordInvalidaException 
      * @throws MesaOcupadaException.
      */
+    
+    public Mozo altaMozo(String nombre, int hijos, int estado) throws EstadoInvalidoException, HijosInvalidosException {
+    	Mozo mozo = null;
+    	if(hijos>=0) {
+    		if(estado==0 || estado==1 || estado ==2) {
+                this.mozos.add(new Mozo(nombre, new GregorianCalendar(),hijos,estado));
+    		}else 
+    			throw new EstadoInvalidoException("El estado debe ser 1, 2 o 3");	
+    	} else 
+    		throw new HijosInvalidosException("No se puede tener hijos negativos");
+    	return mozo;
+    }
+    
+    public Operario altaOpe (String username, String pass, String name, boolean activo) throws PasswordInvalidaException {
+    	Operario ope = null;
+    	if(pass.length()>6 && pass.length()<12&& pass.matches(".*\\d+.*") && pass.chars().anyMatch(Character::isUpperCase) ) {
+    		ope=new Operario(username,pass,name,activo);
+    		this.operario.add(ope);
+    	} else
+    		throw new PasswordInvalidaException("Contraseï¿½a invalida.");
+	
+    	return ope;
+    }
+    
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
     	Iterator<Mesa> IteradorMesa = mesa.iterator();
@@ -188,7 +219,7 @@ public class BeerHouse implements Serializable{
                 if (i<operario.size())
                 	flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
             }
-            if (i < operario.size()) { //se encontró usuario. verificar activo
+            if (i < operario.size()) { //se encontrï¿½ usuario. verificar activo
                 if (operario.get(i).isActivo())
                     return operario.get(i);
                 else
@@ -465,7 +496,7 @@ public class BeerHouse implements Serializable{
                             	}
                             	m.getComanda().addPedido(pedido);
                             	actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                            	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
+                            	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con ï¿½xito");
                             	search=false;
                         	}else
                         		throw new MuchosProductosEnPromoException("No pueden haber dos o mas productos en promocion en la misma comanda");
@@ -482,7 +513,7 @@ public class BeerHouse implements Serializable{
     	}
 	}
 	/** <b> Pre: Recibe null o una mesa con estado "Ocupada" </b>
-	 * <b> Post:</b> Cierra la mesa y carga sus datos estadísticos en caso de ser correcta o lanza excepción si es mesa nula o comanda inexistente. 
+	 * <b> Post:</b> Cierra la mesa y carga sus datos estadï¿½sticos en caso de ser correcta o lanza excepciï¿½n si es mesa nula o comanda inexistente. 
 	 * @param mesa
 	 * 
 	 * 
@@ -514,7 +545,7 @@ public class BeerHouse implements Serializable{
 				r.setFormaDePago(formaPago);
 				
 			} catch (comandaInexistenteExeption e) {
-				//nunca entrará aquí por precondición
+				//nunca entrarï¿½ aquï¿½ por precondiciï¿½n
 			}
 			return r;
 
