@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
 import excepciones.MesaImposibleException;
+import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
@@ -677,26 +678,19 @@ public class Controlador implements ActionListener {
     }else if (comando.equalsIgnoreCase("CerrarMesaSeleccionada")) {
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
     	
-    	Mesa mesa = (Mesa) ventClose.getList().getSelectedValue();
-    	if(mesa!=null) {
-    		mesa.setEstado("Libre");
-    		try {
-				mesa.addConsumoTotal(sistema.precioComanda(mesa));
-				mesa.getMozo().setVolumenDeVenta( sistema.precioComanda(mesa) );
-				mesa.addUso();
-	    		
-	    		Recibo r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, sistema.precioComanda(mesa), null);
-	    		String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
-	        	int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
-	        	r.setFormaDePago(opcionesPago[i-1]);
-	        	JOptionPane.showMessageDialog(null, r.getTotal());
-			} catch (comandaInexistenteExeption e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-			}
-    		
-        	ventClose.repaint();
-    	}else
-    		JOptionPane.showMessageDialog(null,"Debes seleccionar una mesa con una comanda valida");
+    	try {
+			sistema.cerrarMesa((Mesa) ventClose.getList().getSelectedValue());
+			String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
+			int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
+			JOptionPane.showMessageDialog(null, ((Recibo) sistema.generaRecibo((Mesa) ventClose.getList().getSelectedValue(), opcionesPago[i-1])).toString());		
+			JOptionPane.showMessageDialog(null, "Mesa cerrada!");
+			ventClose.repaint();
+		} catch (MesaNulaException | comandaInexistenteExeption e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+    	
+    	
+    	
     	}
     }
     

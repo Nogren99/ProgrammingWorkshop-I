@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
 import excepciones.MesaImposibleException;
+import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
@@ -20,7 +21,6 @@ import excepciones.NoMozosActivosException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
-//zayrux 
 import modelo.Admin;
 import modelo.Comanda;
 import modelo.Mesa;
@@ -29,6 +29,7 @@ import modelo.Operario;
 import modelo.Pedido;
 import modelo.Producto;
 import modelo.Promocion;
+import modelo.Recibo;
 import modelo.Usuario;
 import persistencia.BeerHouseDTO;
 import persistencia.IPersistencia;
@@ -475,6 +476,49 @@ public class BeerHouse implements Serializable{
     	}else {
     		throw new NoHayMesasHabilitadasException(" No hay mesas habilitadas");
     	}
+	}
+	/** <b> Pre: Recibe null o una mesa con estado "Ocupada" </b>
+	 * <b> Post:</b> Cierra la mesa y carga sus datos estadísticos en caso de ser correcta o lanza excepción si es mesa nula o comanda inexistente. 
+	 * @param mesa
+	 * 
+	 * 
+	 */
+	public void cerrarMesa(Mesa mesa) throws MesaNulaException, comandaInexistenteExeption{
+		if(mesa!=null && mesa.getComanda()!=null) {
+    		mesa.setEstado("Libre");
+    		try {
+				mesa.addConsumoTotal(this.precioComanda(mesa));
+				mesa.getMozo().setVolumenDeVenta( this.precioComanda(mesa) );
+				mesa.addUso();
+			} catch (comandaInexistenteExeption e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
+    	
+    	}else if (mesa==null)
+    		throw new MesaNulaException("No seleccionaste ninguna mesa");
+    	else
+    		throw new comandaInexistenteExeption("Esta mesa no tiene una comanda asignada");
+	}
+	
+	/**
+	 * <b>Pre: </b> Recibe una mesa no nula con una comanda no nula y un String correspondiente a una forma de pago del recibo.
+	 * <b>Post: </b> Devuelve el recibo correspondiende a una mesa cerrada.
+	 * @param mesa
+	 * @param formaPago
+	 * @return
+	 */
+	
+	public Recibo generaRecibo (Mesa mesa, String formaPago) {
+			Recibo r=null;
+			try {
+				r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, this.precioComanda(mesa), null);
+				r.setFormaDePago(formaPago);
+				
+			} catch (comandaInexistenteExeption e) {
+				//nunca entrará aquí por precondición
+			}
+			return r;
+
 	}
 	
 	public void escribirPersistencia() throws IOException{ // catchear excepcion en el main
