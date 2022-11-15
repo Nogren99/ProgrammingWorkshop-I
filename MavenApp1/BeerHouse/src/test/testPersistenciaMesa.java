@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import excepciones.CantComensalesException;
 
 import  org.junit.Assert;
 
@@ -17,13 +18,14 @@ import java.util.TreeSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import modelo.Mozo;
+
+import modelo.Mesa;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 
-public class testPersistenciaMozo {
+public class testPersistenciaMesa {
 private  IPersistencia persistencia = new PersistenciaBIN();
-private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
+private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 
 	@Before
 	public void setUp() throws Exception     {
@@ -48,10 +50,10 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	}
 	
 	@Test
-	public void testEscrituraMozosVacio() {
+	public void testEscrituraMesasVacio() {
 		 try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         persistencia.escribir(this.mozos);
+	         persistencia.escribir(this.mesas);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
 	         Assert.fail("Error en la escritura vacia");
@@ -59,14 +61,14 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	}
 	
 	@Test
-	public void testEscrituraConMozos() {
+	public void testEscrituraConMesas() {
 		try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         this.completaConMozos(this.mozos);
-	         persistencia.escribir(this.mozos);
+	         this.completaConMesasCorrectas(this.mesas);
+	         persistencia.escribir(this.mesas);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
-	         Assert.fail("Error en la escritura de mozos");
+	         Assert.fail("Error en la escritura de mesas");
 	     }
 	}
 	
@@ -74,7 +76,7 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	public void despersistirSinArchivo() {
 		try {
 			persistencia.abrirInput("Datooz.bin");
-            this.mozos = (ArrayList<Mozo>) persistencia.leer();
+            this.mesas = (ArrayList<Mesa>) persistencia.leer();
             Assert.fail("Deberia tirar error porque no existe el archivo");
         } catch (Exception e) {        
         }
@@ -84,20 +86,30 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	public void despersistirConArchivo() {
 		try {
             persistencia.abrirInput("DatosPrueba.bin");
-            this.mozos = (ArrayList<Mozo>) persistencia.leer();
+            this.mesas = (ArrayList<Mesa>) persistencia.leer();
             persistencia.cerrarInput();
         } catch (Exception e) {
            Assert.fail("No deberia tirar error porque el archivo ya existe");
         }
 	}
+
+	@Test
+	private void completaConMesasCorrectas(ArrayList<Mesa> mesas) {
+		try {
+			this.mesas.add( new Mesa(2,3,"libre"));
+			this.mesas.add( new Mesa(1,1,"libre"));
+		}catch (CantComensalesException e) {
+			Assert.fail("No deberia lanzar esta exepcion");
+		}	
+	}
 	
 	@Test
-	private void completaConMozos(ArrayList<Mozo> mozos) {
+	private void completaConMesasIncorrectas(ArrayList<Mesa> mesas) {
 		try {
-			this.mozos.add( new Mozo(null,new GregorianCalendar(),-1));
-			this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1));
-		}catch (Exception e) {
-			Assert.fail("No deberia lanzar esta exepcion");
+			this.mesas.add( new Mesa(4,1,"libre"));
+			Assert.fail("Deberia lanzar CantidadDeComensales exepcion");
+		}catch (CantComensalesException e) {
+			System.out.println(e.getMessage());//ESTA BIEN LANZAR UN SYSOUT???
 		}	
 	}
 	
