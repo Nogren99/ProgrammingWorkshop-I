@@ -331,6 +331,11 @@ public class BeerHouse implements Serializable{
     	}
 	}
 	
+	/**
+	 * <b>Pre: </b>Mozo distinto de null.<br>
+     * <b>Post: </b>Devuelve el mozo con el mayor volumen de venta.<br>
+	 * @return max
+	 */
 	public Mozo mozoMayorVolumen() { //verificar si no hay mosos?
 		Iterator<Mozo> iterador = this.mozos.iterator();
 		Mozo max = null;
@@ -344,7 +349,11 @@ public class BeerHouse implements Serializable{
 		}
 		return max;
 	}
-	
+	/**
+	 * <b>Pre: </b>Mozo distinto de null.<br>
+     * <b>Post: </b>Devuelve el mozo con el menor volumen de venta.<br>
+	 * @return min
+	 */
 	public Mozo mozoMenorVolumen() { //verificar si no hay mosos?
 		Iterator<Mozo> iterador = this.mozos.iterator();
 		Mozo min = null;
