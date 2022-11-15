@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
 import excepciones.MesaOcupadaException;
+import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
@@ -451,6 +452,7 @@ public class Controlador implements ActionListener {
         	Producto producto=null;
     		try {
     			producto = new Producto(sistema.getProducto().size()+1,name,precioCosto,precioVenta,stock);
+    			JOptionPane.showMessageDialog(null, "Producto agregado satisfactoriamente");
     		} catch (precioVentaMenorAlCostoException e1) {
     			JOptionPane.showMessageDialog(null, e1.getMessage());
     		} catch (precioVentaInvalidoException e1) {
@@ -559,13 +561,13 @@ public class Controlador implements ActionListener {
         int numero = number.intValue();
         if((Mozo) ventAsignacion.getList().getSelectedValue()!=null) {
             try {
-                sistema.asignaMM(numero, (Mozo) ventAsignacion.getList().getSelectedValue()); //tambien hay que validar que no sea un valor invalido (negativos o numeros muy altos) pero lo hare con el jspinner en la ventana
+                sistema.asignaMM(numero, (Mozo) ventAsignacion.getList().getSelectedValue());
                 JOptionPane.showMessageDialog(null,"Mesa asignada con exito!");
             } catch (MesaOcupadaException e1) {
                 JOptionPane.showMessageDialog(null,e1.getMessage());
             }
         }else
-            JOptionPane.showMessageDialog(null,"Debes seleccionar un mozo de la lista");
+            JOptionPane.showMessageDialog(null,"Debes seleccionar un mozo valido de la lista");
     } else if (comando.equalsIgnoreCase("Atras")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaAdmin());
@@ -626,11 +628,7 @@ public class Controlador implements ActionListener {
                                 	JOptionPane.showMessageDialog(null, "Mesa ocupada");
                         	}else
                             	JOptionPane.showMessageDialog(null, "Imposible seleccionar esa mesa");
-                        
-                        	
-                            
                         }
-                        
                 	}
             	}
         	}else
@@ -696,24 +694,31 @@ public class Controlador implements ActionListener {
     	Iterator<Mesa> iterador = sistema.getMesa().iterator();
 		while (iterador.hasNext()){
 			Mesa mesa = iterador.next();
-			if (mesa.getEstado().equalsIgnoreCase("Ocupada") && mesa.getComanda()!=null) {
+			if (mesa.getEstado().equalsIgnoreCase("Ocupada")) {
 				ventClose.getModeloLista().addElement(mesa);
 			}
 		}
 		ventClose.repaint();
     }else if (comando.equalsIgnoreCase("CerrarMesaSeleccionada")) {
     	VentanaCerrarMesa ventClose = (VentanaCerrarMesa) this.vista;
+    	
     	Mesa mesa = (Mesa) ventClose.getList().getSelectedValue();
     	if(mesa!=null) {
     		mesa.setEstado("Libre");
-    		mesa.addConsumoTotal(sistema.precioComanda(mesa));
-    		mesa.addUso();
-    		mesa.getMozo().setVolumenDeVenta( sistema.precioComanda(mesa) );
-    		Recibo r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, sistema.precioComanda(mesa), null);
-    		String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
-        	int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
-        	r.setFormaDePago(opcionesPago[i-1]);
-        	JOptionPane.showMessageDialog(null, r.getTotal());
+    		try {
+				mesa.addConsumoTotal(sistema.precioComanda(mesa));
+				mesa.getMozo().setVolumenDeVenta( sistema.precioComanda(mesa) );
+				mesa.addUso();
+	    		
+	    		Recibo r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, sistema.precioComanda(mesa), null);
+	    		String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
+	        	int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
+	        	r.setFormaDePago(opcionesPago[i-1]);
+	        	JOptionPane.showMessageDialog(null, r.getTotal());
+			} catch (comandaInexistenteExeption e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
+    		
         	ventClose.repaint();
     	}else
     		JOptionPane.showMessageDialog(null,"Debes seleccionar una mesa con una comanda valida");

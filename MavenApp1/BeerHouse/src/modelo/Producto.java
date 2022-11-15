@@ -102,7 +102,7 @@ public class Producto implements Serializable{
 				throw new precioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 			else
 				if(costo<=0)
-					throw new costoInvalidoException("costo INVALIDO , debe ser mayor a 0");
+					throw new costoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
 				else 
 					if (venta<costo)
 						throw new precioVentaMenorAlCostoException("Precio de venta menor al costo");

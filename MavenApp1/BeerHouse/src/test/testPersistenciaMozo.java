@@ -1,5 +1,10 @@
 package test;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
 import  org.junit.Assert;
 
 import java.io.File;
@@ -84,9 +89,14 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	}
 
 	private void completaConMozos(ArrayList<Mozo> mozos) {
-	
-		this.mozos.add( new Mozo("ElGordoSanguchero",new GregorianCalendar(),69));
+	try {
+		this.mozos.add( new Mozo(null,new GregorianCalendar(),-1));
 		this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1));
 
+		
+	}catch (Exception e) {
+		Assert.fail("No deberia lanzar esta exepcion");
+	}
+		
 }
 }

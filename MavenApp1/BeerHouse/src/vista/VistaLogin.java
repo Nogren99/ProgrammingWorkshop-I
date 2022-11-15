@@ -37,7 +37,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 
-public class VistaLogin extends JFrame implements IVista, KeyListener {
+public class VistaLogin extends JFrame implements IVista {
 
     private JPanel contentPane;
     private JPanel panel;
@@ -146,7 +146,6 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         this.textField = new JTextField();
         this.panel_14.add(this.textField, BorderLayout.CENTER);
         this.textField.setColumns(10);
-        this.textField.addKeyListener(this);
         
         this.panel_16 = new JPanel();
         this.panel_16.setBackground(SystemColor.inactiveCaption);
@@ -195,7 +194,6 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         
         this.passwordField = new JPasswordField();
         this.panel_20.add(this.passwordField, BorderLayout.CENTER);
-        this.passwordField.addKeyListener(this);
         
         this.panel_21 = new JPanel();
         this.panel_21.setBackground(SystemColor.inactiveCaption);
@@ -233,7 +231,7 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         	public void actionPerformed(ActionEvent e) {
         	}
         });
-        btnNewButton.setEnabled(false);
+        btnNewButton.setEnabled(true);
         this.btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
         this.contentPane.add(this.btnNewButton, BorderLayout.SOUTH);
     }
@@ -253,27 +251,9 @@ public class VistaLogin extends JFrame implements IVista, KeyListener {
         this.setVisible(true);
     }
 
-	@Override
-	public void keyTyped(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
-		this.btnNewButton.setEnabled(!(this.textField.getText().isBlank() || this.passwordField.getText().isBlank()));
-	}
 
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 	
 
 	public JPasswordField getPasswordField()

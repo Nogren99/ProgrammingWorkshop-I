@@ -15,6 +15,7 @@ import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
+import excepciones.comandaInexistenteExeption;
 //zayrux 
 import modelo.Admin;
 import modelo.Comanda;
@@ -75,6 +76,9 @@ public class BeerHouse implements Serializable{
         		messa.setMozo(mozo);
         		ok=false;
         	}
+    	}
+    	if (ok) {
+    		throw new MesaOcupadaException("Ese numero no corresponde a una mesa");
     	}
     }
     
@@ -367,23 +371,29 @@ public class BeerHouse implements Serializable{
 	 * @param mesa
 	 * @return
 	 */
-	public double precioComanda(Mesa mesa){
+	public double precioComanda(Mesa mesa)throws comandaInexistenteExeption{
 		double total = 0;
-		ArrayList<Pedido> pedido = mesa.getComanda().getOrden();
-		Iterator<Pedido> iterador = pedido.iterator();
-		while(iterador.hasNext()) {
-			Pedido p = iterador.next();
-			//Iterator<Promocion> iteradorPromo = promociones.iterator();
-			int i=0;
-			while(i<promociones.size() && !promociones.get(i).getProducto().equals(p.getProducto()))
-				i++;
-			if(i<promociones.size()) {
-				total+=promociones.get(i).calculaPrecio(p.getCantidad(), dayConverter());
-			}else {
-				total+=p.getCantidad()*p.getProducto().getVenta();
+		if(mesa.getComanda()!=null) {
+			ArrayList<Pedido> pedido = mesa.getComanda().getOrden();
+			Iterator<Pedido> iterador = pedido.iterator();
+			while(iterador.hasNext()) {
+				Pedido p = iterador.next();
+				//Iterator<Promocion> iteradorPromo = promociones.iterator();
+				int i=0;
+				while(i<promociones.size() && !promociones.get(i).getProducto().equals(p.getProducto()))
+					i++;
+				if(i<promociones.size()) {
+					total+=promociones.get(i).calculaPrecio(p.getCantidad(), dayConverter());
+				}else {
+					total+=p.getCantidad()*p.getProducto().getVenta();
+				}
 			}
-		}
-		return total;	
+			return total;
+		}else
+			throw new comandaInexistenteExeption("Mesa sin comanda asignada");
+
+		
+			
 	}
 	
 	/**
