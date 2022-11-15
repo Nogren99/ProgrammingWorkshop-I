@@ -21,6 +21,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 public class VentanaAsignacionComanda extends JFrame implements IVista{
 
@@ -131,6 +132,7 @@ public class VentanaAsignacionComanda extends JFrame implements IVista{
 		this.panel_30.setLayout(new BorderLayout(0, 0));
 		
 		this.spinnerProductos = new JSpinner();
+		this.spinnerProductos.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		this.panel_30.add(this.spinnerProductos, BorderLayout.CENTER);
 		
 		this.panel_22 = new JPanel();

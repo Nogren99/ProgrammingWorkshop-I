@@ -588,13 +588,8 @@ public class Controlador implements ActionListener {
     	ventAsignacionComanda.repaint();
     } else if (comando.equalsIgnoreCase("AgregarAComanda")) { // PRIMER BOTONCITO
     	VentanaAsignacionComanda ventAsignacionComanda = (VentanaAsignacionComanda) this.vista;
-    	ArrayList<Mesa> mesas= sistema.getMesa();
     	Producto producto =(Producto) ventAsignacionComanda.getList().getSelectedValue();
     	int cantidadProductos=(int) ventAsignacionComanda.getSpinner_1().getValue();
-    	//boolean search=true;
-    	
-    	
-    	
     	if(producto!=null) {
     		
     		if(cantidadProductos <= producto.getStock()) {

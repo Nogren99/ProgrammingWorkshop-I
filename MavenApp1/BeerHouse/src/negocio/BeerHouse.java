@@ -439,7 +439,7 @@ public class BeerHouse implements Serializable{
 	 * 
 	 * <b>Pre:</b> Pedido distinto de null <br>
 	 * Producto distinto de null <br>
-	 * numeroMesa entero <br>
+	 * numeroMesa entero mayor o igual a 0<br>
 	 * @param pedido
 	 * @param producto
 	 * @param numeroMesa
