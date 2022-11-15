@@ -14,6 +14,7 @@ import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
+import excepciones.NumeroInvalidoException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
@@ -602,7 +603,7 @@ public class Controlador implements ActionListener {
             	try {
 					sistema.agregaMesaComanda(pedido,producto,numeroMesa);
 				} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException
-						| NoHayMesasHabilitadasException e1) {
+						| NoHayMesasHabilitadasException | NumeroInvalidoException e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());
 				}
     		}else
@@ -683,7 +684,7 @@ public class Controlador implements ActionListener {
 			String[] opcionesPago = {"Efectivo", "Tarjeta", "Mercado Pago", "Cuenta DNI"};
 			int i = JOptionPane.showOptionDialog(null, "\u00bfM\u00e9todo de pago?", "Clickea una opci\u00f3n", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcionesPago, opcionesPago[0])+1;
 			JOptionPane.showMessageDialog(null, ((Recibo) sistema.generaRecibo((Mesa) ventClose.getList().getSelectedValue(), opcionesPago[i-1])).toString());		
-			JOptionPane.showMessageDialog(null, "Mesa cerrada!");
+			JOptionPane.showMessageDialog(null, "Mesa cerrada correctamente");
 			ventClose.repaint();
 		} catch (MesaNulaException | comandaInexistenteExeption e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());

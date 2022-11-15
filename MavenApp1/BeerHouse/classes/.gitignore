@@ -1,6 +1,3 @@
-/negocio/
-/presentacion/
 /test/
-/vista/
-/modelo/
-/excepciones/
+/testCajaNegra/
+/testPersistencia/

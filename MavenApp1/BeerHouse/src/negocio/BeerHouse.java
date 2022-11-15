@@ -18,6 +18,7 @@ import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
+import excepciones.NumeroInvalidoException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
@@ -172,7 +173,7 @@ public class BeerHouse implements Serializable{
      * @throws UsuarioInexistenteException
      */
     public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
-    	//System.out.println("username: "+ username + " password: "+ password);
+    	
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
             String nombreAdmin = JOptionPane.showInputDialog(null,"\u00bfQuien sos?");
@@ -187,13 +188,13 @@ public class BeerHouse implements Serializable{
                 if (i<operario.size())
                 	flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
             }
-            if (i < operario.size()) { //se encontr\u00f3 usuario. verificar activo
+            if (i < operario.size()) { //se encontró usuario. verificar activo
                 if (operario.get(i).isActivo())
                     return operario.get(i);
                 else
-                    throw new UsuarioInactivoException("Usuario iNativo");
-            } else //no se encontr\u00f3 el usuario. lanzar excepci\u00f3n (despues crearla)
-                throw new UsuarioInexistenteException("No existis");
+                    throw new UsuarioInactivoException("Usuario inactivo");
+            } else 
+                throw new UsuarioInexistenteException("Usuario inexistente");
         }
     }
 
@@ -444,8 +445,9 @@ public class BeerHouse implements Serializable{
 	 * @param pedido
 	 * @param producto
 	 * @param numeroMesa
+	 * @throws NumeroInvalidoException ,MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException
 	 */
-	public void agregaMesaComanda(Pedido pedido,Producto producto,int numeroMesa) throws MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException{
+	public void agregaMesaComanda(Pedido pedido,Producto producto,int numeroMesa) throws MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException, NumeroInvalidoException{
 		boolean search=true;
 		if(mesa.size()!=0) {
 			Iterator<Mesa> IteradorMesa = mesa.iterator();
@@ -473,6 +475,8 @@ public class BeerHouse implements Serializable{
                     	throw new  MesaImposibleException("Imposible seleccionar esa mesa");
                 }
         	}
+        	if(search)
+        		throw new NumeroInvalidoException("Ese numero no corresponde a una mesa habilitada"); 
     	}else {
     		throw new NoHayMesasHabilitadasException(" No hay mesas habilitadas");
     	}
@@ -486,14 +490,9 @@ public class BeerHouse implements Serializable{
 	public void cerrarMesa(Mesa mesa) throws MesaNulaException, comandaInexistenteExeption{
 		if(mesa!=null && mesa.getComanda()!=null) {
     		mesa.setEstado("Libre");
-    		try {
-				mesa.addConsumoTotal(this.precioComanda(mesa));
-				mesa.getMozo().setVolumenDeVenta( this.precioComanda(mesa) );
-				mesa.addUso();
-			} catch (comandaInexistenteExeption e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-			}
-    	
+			mesa.addConsumoTotal(this.precioComanda(mesa));
+			mesa.getMozo().setVolumenDeVenta( this.precioComanda(mesa) );
+			mesa.addUso();
     	}else if (mesa==null)
     		throw new MesaNulaException("No seleccionaste ninguna mesa");
     	else
