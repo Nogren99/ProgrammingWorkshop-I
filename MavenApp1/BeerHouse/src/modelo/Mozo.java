@@ -29,11 +29,12 @@ public class Mozo implements Serializable{
      * @param hijos - la cant de hijos debe ser >= 0
      * @param volumenDeVenta - Volumen de venta del mozo
      */
-	public Mozo(String nyA, GregorianCalendar date, int hijos) {
+	public Mozo(String nyA, GregorianCalendar date, int hijos, int estado) {
 		super();
 		this.NyA=nyA;
 		this.date = date;
 		this.hijos = hijos;
+		this.estado= (byte) estado;
 		this.volumenDeVenta = 0.0;
 	}
 	/**

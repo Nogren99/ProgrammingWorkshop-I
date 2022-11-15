@@ -9,11 +9,14 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
+import excepciones.EstadoInvalidoException;
+import excepciones.HijosInvalidosException;
 import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
+import excepciones.PasswordInvalidaException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
@@ -171,36 +174,27 @@ public class Controlador implements ActionListener {
         		ventABM.getBtnModif().setActionCommand("ModifProd");
         		ventABM.repaint();
         } else if (comando.equalsIgnoreCase("AltaOpe")) {
-        		this.vista.cerrar();
         		String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo operario");   
         		String username=JOptionPane.showInputDialog(null,"Ingresa username del nuevo operario");
         		String pass=JOptionPane.showInputDialog(null,"Ingresa contrase\u00f1a del nuevo operario");
-        		if(pass.length()>6 && pass.length()<12
-        				&& pass.matches(".*\\d+.*") // contiene al menos un digito
-        				&& pass.chars().anyMatch(Character::isUpperCase) //contiene al menos una mayuscula
-        				) {
         			int dialogResult = JOptionPane.showConfirmDialog(null, "\u00bfEs activo?", "Escoger", JOptionPane.YES_NO_OPTION);
             		boolean activo=false;
             		if (dialogResult == JOptionPane.YES_OPTION)
             			activo=true;
-            		Operario ope = new Operario(username,pass,name,activo);
-            		sistema.agregaOperario(ope);
-            		this.setVista(new VentanaABM());
-            		VentanaABM ventABM = (VentanaABM) this.vista;
-            		ventABM.getModeloLista().addElement(ope);
-            		ventABM.getBtnAlta().setActionCommand("AltaOpe");
-            		ventABM.getBtnbaja().setActionCommand("BajaOpe");
-            		ventABM.getBtnModif().setActionCommand("ModifOpe");
-            		ventABM.repaint();	
-        		}else {
-        			JOptionPane.showMessageDialog(null, "La contrase\u00f1a debe contener entre 6 y 12 caracteres. Con al menos 1 d\u00EDgito y 1 may\u00FAscula");
-        			this.setVista(new VentanaABM());
-            		VentanaABM ventABM = (VentanaABM) this.vista;
-            		ventABM.getBtnAlta().setActionCommand("AltaOpe");
-            		ventABM.getBtnbaja().setActionCommand("BajaOpe");
-            		ventABM.getBtnModif().setActionCommand("ModifOpe");
-            		ventABM.repaint();
-        		}
+            		Operario ope;
+					try {
+						ope = sistema.altaOpe(username, pass, username, activo);
+						//this.setVista(new VentanaABM());
+						VentanaABM ventABM = (VentanaABM) this.vista;
+						ventABM.getModeloLista().addElement(ope);
+						ventABM.getBtnAlta().setActionCommand("AltaOpe");
+						ventABM.getBtnbaja().setActionCommand("BajaOpe");
+						ventABM.getBtnModif().setActionCommand("ModifOpe");
+						ventABM.repaint();	
+					} catch (PasswordInvalidaException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage());
+					}
+            		
         		//this.setVista(new VistaLogin());    		
         } else if (comando.equalsIgnoreCase("BajaOpe")) {
         	VentanaABM ventABM = (VentanaABM) this.vista;
@@ -262,33 +256,20 @@ public class Controlador implements ActionListener {
         	else
         		JOptionPane.showMessageDialog(ventABM, "Debe seleccionar un operario de la lista");
         } else if (comando.equalsIgnoreCase("AltaMozo")) {
+        	
         	String name=JOptionPane.showInputDialog(null,"Ingresa nombre y apellido del nuevo mozo");  
         	int hijos = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de bendiciones del nuevo mozo"));
-        	if(hijos>=0) {
-        		int edad = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa la edad del nuevo mozo"));
-        		if(edad>18) {
-        			int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
-        			if(estado==0 || estado==1 || estado ==2) {
-        				Mozo mozo = new Mozo(name,new GregorianCalendar(),hijos);
-                    	sistema.agregarMozo(mozo);
-                    	VentanaABM ventABM = (VentanaABM) this.vista;       		
-                		ventABM.getModeloLista().addElement(mozo);
-                		ventABM.repaint();
-        			}else {
-        				VentanaABM ventABM = (VentanaABM) this.vista;
-        				JOptionPane.showMessageDialog(null, "Estado Invalido (0=Activo ; 1=De franco ; 2 =Ausente)");
-                		ventABM.repaint();
-        			}
-        		}else {
-        			VentanaABM ventABM = (VentanaABM) this.vista;
-        			JOptionPane.showMessageDialog(null, "El mozo debe ser mayor de 18 a\u00F1os");
-            		ventABM.repaint();
-        		}
-        	}else {
-        		VentanaABM ventABM = (VentanaABM) this.vista;
-        		JOptionPane.showMessageDialog(null, "La cantidad de bendis debe ser mayor o igual a ");
-        		ventABM.repaint();
-        	}	
+        	int estado = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa estado del nuevo mozo"));
+        	Mozo mozo;
+			try {
+				mozo = sistema.altaMozo(name, hijos, estado);
+				VentanaABM ventABM = (VentanaABM) this.vista;       		
+				ventABM.getModeloLista().addElement(mozo);
+				ventABM.repaint();
+			} catch (EstadoInvalidoException | HijosInvalidosException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
+            		
         } else if (comando.equalsIgnoreCase("BajaMozo")){
         	VentanaABM ventABM = (VentanaABM) this.vista;
         	Mozo mozo = (Mozo) ventABM.getList().getSelectedValue();
@@ -598,7 +579,6 @@ public class Controlador implements ActionListener {
             	ventAsignacionComanda.getTextPane().setText(ventAsignacionComanda.getTextPane().getText()+"\n"+pedido.toString());
             	ventAsignacionComanda.repaint();	
             	int numeroMesa=(int) ventAsignacionComanda.getSpinner().getValue();
-            	
             	try {
 					sistema.agregaMesaComanda(pedido,producto,numeroMesa);
 				} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException

@@ -11,6 +11,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
+import excepciones.EstadoInvalidoException;
+import excepciones.HijosInvalidosException;
 import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
@@ -18,6 +20,7 @@ import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
+import excepciones.PasswordInvalidaException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
@@ -35,6 +38,7 @@ import persistencia.BeerHouseDTO;
 import persistencia.IPersistencia;
 
 import persistencia.PersistenciaBIN;
+import vista.VentanaABM;
 
 public class BeerHouse implements Serializable{
 
@@ -69,8 +73,35 @@ public class BeerHouse implements Serializable{
      * <b>Post: </b>el mozo es asignado a una mesa.<br>
      * @param numero.
      * @param mozo.
+     * @throws EstadoInvalidoException 
+     * @throws HijosInvalidosException 
+     * @throws PasswordInvalidaException 
      * @throws MesaOcupadaException.
      */
+    
+    public Mozo altaMozo(String nombre, int hijos, int estado) throws EstadoInvalidoException, HijosInvalidosException {
+    	Mozo mozo = null;
+    	if(hijos>=0) {
+    		if(estado==0 || estado==1 || estado ==2) {
+                this.mozos.add(new Mozo(nombre, new GregorianCalendar(),hijos,estado));
+    		}else 
+    			throw new EstadoInvalidoException("El estado debe ser 1, 2 o 3");	
+    	} else 
+    		throw new HijosInvalidosException("No se puede tener hijos negativos");
+    	return mozo;
+    }
+    
+    public Operario altaOpe (String username, String pass, String name, boolean activo) throws PasswordInvalidaException {
+    	Operario ope = null;
+    	if(pass.length()>6 && pass.length()<12&& pass.matches(".*\\d+.*") && pass.chars().anyMatch(Character::isUpperCase) ) {
+    		ope=new Operario(username,pass,name,activo);
+    		this.operario.add(ope);
+    	} else
+    		throw new PasswordInvalidaException("Contraseña invalida.");
+	
+    	return ope;
+    }
+    
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
     	Iterator<Mesa> IteradorMesa = mesa.iterator();

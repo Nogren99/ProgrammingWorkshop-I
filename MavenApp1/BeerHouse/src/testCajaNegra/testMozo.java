@@ -17,7 +17,7 @@ public class testMozo {
 	public void setUp(){
 		mozo = null;
 		try {
-			 mozo = new Mozo ("Mirta",new GregorianCalendar(), 2);
+			 mozo = new Mozo ("Mirta",new GregorianCalendar(), 2 ,0);
 			 mozo.setEstado((byte) 0);
 		} catch (Exception e) {
 			Assert.fail("El mozo se deberia haber creado correctamente");
