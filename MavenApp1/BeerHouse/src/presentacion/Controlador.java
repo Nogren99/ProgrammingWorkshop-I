@@ -9,7 +9,10 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
+import excepciones.MesaImposibleException;
 import excepciones.MesaOcupadaException;
+import excepciones.MuchosProductosEnPromoException;
+import excepciones.NoHayMesasHabilitadasException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
@@ -587,54 +590,31 @@ public class Controlador implements ActionListener {
     	VentanaAsignacionComanda ventAsignacionComanda = (VentanaAsignacionComanda) this.vista;
     	ArrayList<Mesa> mesas= sistema.getMesa();
     	Producto producto =(Producto) ventAsignacionComanda.getList().getSelectedValue();
-    	boolean search=true;
+    	int cantidadProductos=(int) ventAsignacionComanda.getSpinner_1().getValue();
+    	//boolean search=true;
+    	
+    	
+    	
     	if(producto!=null) {
-    		if((int) ventAsignacionComanda.getSpinner_1().getValue() <= producto.getStock()) {
-        		Pedido pedido = new Pedido(producto,(int) ventAsignacionComanda.getSpinner_1().getValue());
+    		
+    		if(cantidadProductos <= producto.getStock()) {
+        		Pedido pedido = new Pedido(producto,cantidadProductos);
             	ventAsignacionComanda.getTextPane().setText(ventAsignacionComanda.getTextPane().getText()+"\n"+pedido.toString());
             	ventAsignacionComanda.repaint();	
-            	if(mesas.size()==0) {
-            		JOptionPane.showMessageDialog(null, "No hay mesas habilitadas");
-            	}else {
-                	Iterator<Mesa> IteradorMesa = mesas.iterator();
-                	while(IteradorMesa.hasNext() && search) { 
-                        Mesa m = IteradorMesa.next();
-                        if(m.getNumero()==(int) ventAsignacionComanda.getSpinner().getValue() ) {
-                        	/*
-                        	System.out.println(m);
-                        	System.out.println(m.getMozo());
-                        	System.out.println((int) ventAsignacionComanda.getSpinner().getValue());
-                        	System.out.println(m.getMozo().getEstado()==0);
-                        	System.out.println(m.getEstado().equalsIgnoreCase("libre"));
-                        	*/
-                        	if(m.getMozo()!=null) {
-                        		if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo	
-                                	if(sistema.verificaPromo(m.getComanda())) {
-                                		if(m.getComanda()==null) {
-        	                            	Comanda	comanda = new Comanda();
-        	                            	m.setComanda(comanda);
-        	                            	m.getComanda().setDate(new GregorianCalendar());
-        	                            	m.getComanda().setEstado("abierta");
-                                    	}
-                                    	m.getComanda().addPedido(pedido);
-                                    	sistema.actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                                    	//System.out.println("comanda:"+m.getComanda());
-                                    	//System.out.println("mesa:"+m.toString());
-                                    	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
-                                    	search=false;
-                                	}else
-                                		JOptionPane.showMessageDialog(null, "No pueden haber dos o mas productos en promocion en la misma comanda");
-                                }else
-                                	JOptionPane.showMessageDialog(null, "Mesa ocupada");
-                        	}else
-                            	JOptionPane.showMessageDialog(null, "Imposible seleccionar esa mesa");
-                        }
-                	}
-            	}
-        	}else
-        		JOptionPane.showMessageDialog(null, "La cantidad solicitada no puede superar al stock del producto");
-    	}else
-    		JOptionPane.showMessageDialog(null, "FLACO ELEGI UN PRODUCTO");
+            	int numeroMesa=(int) ventAsignacionComanda.getSpinner().getValue();
+            	
+            	try {
+					sistema.agregaMesaComanda(pedido,producto,numeroMesa);
+				} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException
+						| NoHayMesasHabilitadasException e1) {
+					JOptionPane.showMessageDialog(null,e1.getMessage());
+				}
+    		}else
+    			JOptionPane.showMessageDialog(null, "No hay suficiente stock");
+        }else
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+    	
+    	
     }else if (comando.equalsIgnoreCase("Promociones")) {
     	this.vista.cerrar();
     	this.setVista(new VentanaPromocion());

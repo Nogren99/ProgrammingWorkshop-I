@@ -5,12 +5,16 @@ import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
 import excepciones.CantComensalesException;
+import excepciones.MesaImposibleException;
 import excepciones.MesaOcupadaException;
+import excepciones.MuchosProductosEnPromoException;
+import excepciones.NoHayMesasHabilitadasException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.UsuarioInactivoException;
@@ -428,6 +432,49 @@ public class BeerHouse implements Serializable{
 			}
 		}
 		return search;
+	}
+	
+	
+	/**
+	 * 
+	 * <b>Pre:</b> Pedido distinto de null <br>
+	 * Producto distinto de null <br>
+	 * numeroMesa entero <br>
+	 * @param pedido
+	 * @param producto
+	 * @param numeroMesa
+	 */
+	public void agregaMesaComanda(Pedido pedido,Producto producto,int numeroMesa) throws MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException{
+		boolean search=true;
+		if(mesa.size()!=0) {
+			Iterator<Mesa> IteradorMesa = mesa.iterator();
+        	while(IteradorMesa.hasNext() && search) { 
+                Mesa m = IteradorMesa.next();
+                if(m.getNumero()==numeroMesa ) {
+                	if(m.getMozo()!=null) {
+                		if(m.getMozo().getEstado()==0 && m.getEstado().equalsIgnoreCase("libre")) { //la mesa asociada encuentra un mozo asociado y se fija q este activo	
+                        	if(verificaPromo(m.getComanda())) {
+                        		if(m.getComanda()==null) {
+	                            	Comanda	comanda = new Comanda();
+	                            	m.setComanda(comanda);
+	                            	m.getComanda().setDate(new GregorianCalendar());
+	                            	m.getComanda().setEstado("abierta");
+                            	}
+                            	m.getComanda().addPedido(pedido);
+                            	actualizaStock(pedido.getProducto(), pedido.getCantidad());
+                            	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
+                            	search=false;
+                        	}else
+                        		throw new MuchosProductosEnPromoException("No pueden haber dos o mas productos en promocion en la misma comanda");
+                        }else
+                        	throw new MesaOcupadaException(" Mesa ocupada");
+                	}else
+                    	throw new  MesaImposibleException("Imposible seleccionar esa mesa");
+                }
+        	}
+    	}else {
+    		throw new NoHayMesasHabilitadasException(" No hay mesas habilitadas");
+    	}
 	}
 	
 	public void escribirPersistencia() throws IOException{ // catchear excepcion en el main
