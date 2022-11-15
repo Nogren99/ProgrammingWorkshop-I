@@ -73,19 +73,6 @@ public class VistaLogin extends JFrame implements IVista {
     private JPanel panel_22;
     private JPanel panel_23;
 
-    /*public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VistaLogin frame = new VistaLogin();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }*/
-
     public VistaLogin() {
     	setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -234,6 +221,9 @@ public class VistaLogin extends JFrame implements IVista {
         btnNewButton.setEnabled(true);
         this.btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
         this.contentPane.add(this.btnNewButton, BorderLayout.SOUTH);
+        this.textField.setName("textField");
+        this.passwordField.setName("passwordField");
+        this.btnNewButton.setName("btnNewButton");
     }
 
     public void setActionListener(ActionListener actionListener) {
@@ -250,11 +240,6 @@ public class VistaLogin extends JFrame implements IVista {
     public void mostrar() {
         this.setVisible(true);
     }
-
-
-
-
-	
 
 	public JPasswordField getPasswordField()
 	{

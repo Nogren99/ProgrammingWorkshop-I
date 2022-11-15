@@ -1,5 +1,6 @@
 package presentacion;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -54,13 +55,28 @@ public class Controlador implements ActionListener {
         this.vista.mostrar();
     }
     
-    private void setVista(IVista vista) {
+    public IVista getVista()
+	{
+		return vista;
+	}
+
+	private void setVista(IVista vista) {
     	this.vista=vista;
     	this.vista.setActionListener(this);
     	this.vista.mostrar();
     }
 
-    @Override
+    public Operario getUser()
+	{
+		return user;
+	}
+
+	public void setUser(Operario user)
+	{
+		this.user = user;
+	}
+
+	@Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         System.out.println("Comando: " + comando);
@@ -673,5 +689,4 @@ public class Controlador implements ActionListener {
     	
     	}
     }
-    
 }
