@@ -1,4 +1,4 @@
-package test;
+package testPersistencia;
 
 import static org.junit.Assert.*;
 
@@ -17,13 +17,13 @@ import java.util.TreeSet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import modelo.Operario;
+import modelo.Mozo;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 
-public class testPersistenciaOperario {
+public class testPersistenciaMozo {
 private  IPersistencia persistencia = new PersistenciaBIN();
-private ArrayList<Operario> operarios = new ArrayList<Operario>();
+private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 
 	@Before
 	public void setUp() throws Exception     {
@@ -48,10 +48,10 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	}
 	
 	@Test
-	public void testEscrituraOperariosVacio() {
+	public void testEscrituraMozosVacio() {
 		 try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         persistencia.escribir(this.operarios);
+	         persistencia.escribir(this.mozos);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
 	         Assert.fail("Error en la escritura vacia");
@@ -59,14 +59,14 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	}
 	
 	@Test
-	public void testEscrituraConOperarios() {
+	public void testEscrituraConMozos() {
 		try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         this.completaConOperarios(this.operarios);
-	         persistencia.escribir(this.operarios);
+	         this.completaConMozos(this.mozos);
+	         persistencia.escribir(this.mozos);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
-	         Assert.fail("Error en la escritura de operarios");
+	         Assert.fail("Error en la escritura de mozos");
 	     }
 	}
 	
@@ -74,7 +74,7 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	public void despersistirSinArchivo() {
 		try {
 			persistencia.abrirInput("Datooz.bin");
-            this.operarios = (ArrayList<Operario>) persistencia.leer();
+            this.mozos = (ArrayList<Mozo>) persistencia.leer();
             Assert.fail("Deberia tirar error porque no existe el archivo");
         } catch (Exception e) {        
         }
@@ -84,7 +84,7 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	public void despersistirConArchivo() {
 		try {
             persistencia.abrirInput("DatosPrueba.bin");
-            this.operarios = (ArrayList<Operario>) persistencia.leer();
+            this.mozos = (ArrayList<Mozo>) persistencia.leer();
             persistencia.cerrarInput();
         } catch (Exception e) {
            Assert.fail("No deberia tirar error porque el archivo ya existe");
@@ -92,10 +92,10 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	}
 	
 	@Test
-	private void completaConOperarios(ArrayList<Operario> OPERARIOS) {
+	private void completaConMozos(ArrayList<Mozo> mozos) {
 		try {
-			this.operarios.add( new Operario("Maxim","Aqqnip1241","Maximiliano Martin",true));
-			this.operarios.add( new Operario("Zanoveal","nawgH8a","Maria Teresa",true));
+			this.mozos.add( new Mozo(null,new GregorianCalendar(),-1));
+			this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1));
 		}catch (Exception e) {
 			Assert.fail("No deberia lanzar esta exepcion");
 		}	
