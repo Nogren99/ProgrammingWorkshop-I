@@ -18,6 +18,7 @@ import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
+import excepciones.ProductoAsociadoAComandaException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
@@ -471,24 +472,13 @@ public class Controlador implements ActionListener {
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	Producto producto = (Producto) ventABM.getList().getSelectedValue();
     	if (producto!=null) {
-    	ArrayList<Mesa> mesas= sistema.getMesa();
-    	Iterator<Mesa> Iterador = mesas.iterator();
-    	//si en el arraylist mesa,hay una mesa que contiene una comanda, en la cual su arraylist contiene un pedido que tenga un producto igual al selccionado
-		//se elimina
-    	while(Iterador.hasNext()) { //me fijo en cada mesa
-    		Mesa m = Iterador.next();
-    		System.out.println(m.toString());
-    		Comanda comanda= m.getComanda();
-    		if(comanda!=null) { //comanda de cada mesa
-    			ArrayList<Pedido> pedidos= comanda.getOrden(); //pedidos de cada comanda
-        		if(pedidos!=null && pedidos.contains( (Producto) ventABM.getList().getSelectedValue() )) { //producto del pedido
-        			JOptionPane.showMessageDialog(null, "No se puede eliminar el producto, pertenece a una comanda");
-                	}
-        		}
-    	}
-    	sistema.eliminaProducto((Producto) ventABM.getList().getSelectedValue());
-    	ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
-    	ventABM.repaint();
+	    	try {
+				sistema.eliminaProducto(producto);
+				ventABM.getModeloLista().removeElement(ventABM.getList().getSelectedValue());
+				ventABM.repaint();
+			} catch (ProductoAsociadoAComandaException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}	
     	}else
     		JOptionPane.showMessageDialog(ventABM, "Debes seleccionar un producto de la lista");
     } else if (comando.equalsIgnoreCase("ModifProd")) {
@@ -596,7 +586,7 @@ public class Controlador implements ActionListener {
             	ventAsignacionComanda.repaint();	
             	int numeroMesa=(int) ventAsignacionComanda.getSpinner().getValue();
             	try {
-					sistema.agregaMesaComanda(pedido,producto,numeroMesa);
+					sistema.agregaMesaComanda(pedido,numeroMesa);
 				} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException
 						| NoHayMesasHabilitadasException e1) {
 					JOptionPane.showMessageDialog(null,e1.getMessage());

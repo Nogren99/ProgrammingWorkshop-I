@@ -59,14 +59,20 @@ public class Producto implements Serializable{
 
 
 
-	public void setCosto(double costo) {
-		this.costo = costo;
+	public void setCosto(double costo) throws costoInvalidoException {
+		if(costo>0)
+			this.costo = costo;
+		else 
+			throw new costoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
 	}
 
 
 
-	public void setVenta(double venta) {
-		this.venta = venta;
+	public void setVenta(double venta) throws precioVentaInvalidoException {
+		if(venta>0)
+			this.venta = venta;
+		else
+			throw new precioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 	}
 
 

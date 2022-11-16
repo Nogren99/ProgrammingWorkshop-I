@@ -21,9 +21,12 @@ import excepciones.NoHayMesasHabilitadasException;
 import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.PasswordInvalidaException;
+import excepciones.ProductoAsociadoAComandaException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
+import excepciones.costoInvalidoException;
+import excepciones.precioVentaInvalidoException;
 import modelo.Admin;
 import modelo.Comanda;
 import modelo.Mesa;
@@ -50,7 +53,7 @@ public class BeerHouse implements Serializable{
     private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
     private double sueldo;
     
-    private BeerHouse() {}
+    public BeerHouse() {}
 
     public static BeerHouse getInstancia() {
         if (instancia == null)
@@ -101,7 +104,13 @@ public class BeerHouse implements Serializable{
 	
     	return ope;
     }
-    
+    /**
+     * numero es un entero
+     * Mozo distinto de null
+     * @param numero
+     * @param mozo
+     * @throws MesaOcupadaException
+     */
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
     	Iterator<Mesa> IteradorMesa = mesa.iterator();
@@ -123,11 +132,19 @@ public class BeerHouse implements Serializable{
     }
     
     public void modificaPrecioCosto(Producto producto, float precioCosto) {// hay inflacion ahre
-    	producto.setCosto(precioCosto);
+    	try {
+			producto.setCosto(precioCosto);
+		} catch (costoInvalidoException e) {
+			e.printStackTrace();
+		}
     }
     
     public void modificaPrecioVenta(Producto producto, float precioVenta) {
-    	producto.setVenta(precioVenta);
+    	try {
+			producto.setVenta(precioVenta);
+		} catch (precioVentaInvalidoException e) {
+			e.printStackTrace();
+		}
     }
     
     public void modificaNombreProducto(Producto producto, String nombre) {
@@ -142,8 +159,35 @@ public class BeerHouse implements Serializable{
     	this.producto.add(producto);
     }
     
-    public void eliminaProducto(Producto producto) {
-    	this.producto.remove(producto);
+    /**
+     * <b>Pre: </b> producto distinto de null <br>
+     * @param producto
+     * @throws ProductoAsociadoAComandaException
+     */
+    public void eliminaProducto(Producto producto)  throws ProductoAsociadoAComandaException{
+    	boolean ok=true;
+    	Iterator<Mesa> Iterador = mesa.iterator();
+    	//si en el arraylist mesa,hay una mesa que contiene una comanda, en la cual su arraylist contiene un pedido que tenga un producto igual al selccionado
+		//se elimina
+    	while(Iterador.hasNext() && ok) { //me fijo en cada mesa
+    		Mesa m = Iterador.next();
+    		System.out.println(m.toString());
+    		Comanda comanda= m.getComanda();
+    		if(comanda!=null) { //comanda de cada mesa
+    			ArrayList<Pedido> pedidos= comanda.getOrden(); //pedidos de cada comanda
+    			Iterator<Pedido> IteradorPed = pedidos.iterator();
+    			while(IteradorPed.hasNext() && ok) {
+    				Pedido p = IteradorPed.next();
+    				if(pedidos!=null && p.getProducto()==producto ) { //producto del pedido	
+            			ok=false;
+            			throw new ProductoAsociadoAComandaException("No se puede eliminar el producto, pertenece a una comanda");
+                    	}
+            		}
+    			}	
+    	}
+    	if(ok) {
+    		this.producto.remove(producto);
+    	}
     }
     
     public void agregaOperario(Operario operario) {
@@ -476,7 +520,7 @@ public class BeerHouse implements Serializable{
 	 * @param producto
 	 * @param numeroMesa
 	 */
-	public void agregaMesaComanda(Pedido pedido,Producto producto,int numeroMesa) throws MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException{
+	public void agregaMesaComanda(Pedido pedido,int numeroMesa) throws MuchosProductosEnPromoException , MesaOcupadaException ,  MesaImposibleException, NoHayMesasHabilitadasException{
 		boolean search=true;
 		if(mesa.size()!=0) {
 			Iterator<Mesa> IteradorMesa = mesa.iterator();
@@ -494,7 +538,7 @@ public class BeerHouse implements Serializable{
                             	}
                             	m.getComanda().addPedido(pedido);
                             	actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                            	JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
+                            	//JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
                             	search=false;
                         	}else
                         		throw new MuchosProductosEnPromoException("No pueden haber dos o mas productos en promocion en la misma comanda");
