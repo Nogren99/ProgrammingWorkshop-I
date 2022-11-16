@@ -21,6 +21,7 @@ import excepciones.PasswordInvalidaException;
 import excepciones.ProductoAsociadoAComandaException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
+import excepciones.mesaRepetidaException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
 import modelo.Comanda;
@@ -344,30 +345,15 @@ public class Controlador implements ActionListener {
     } else if (comando.equalsIgnoreCase("AltaMesa")) {
     	int numero = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa numero de mesa"));
     	int sillas = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa cantidad de comensales"));
-    	
-    	ArrayList<Mesa> mesas= sistema.getMesa();
-        Iterator<Mesa> Iterador = mesas.iterator();
-        boolean existe=false;
-        while(Iterador.hasNext()) { 
-            Mesa m = Iterador.next();
-            if(m.getNumero()==numero) {
-            	existe=true;
-            	JOptionPane.showMessageDialog(null,"Esa mesa ya existe!!!!!!!!");
-            }
-        }
-        if(!existe) {
-        	Mesa mesa=null;
-    		try {
-    			mesa = new Mesa(numero,sillas,"Libre");
-    			sistema.agregaMesa(mesa);
-    			VentanaABM ventABM = (VentanaABM) this.vista;
-    			ventABM.getModeloLista().addElement(mesa);
-    			ventABM.repaint();
-    		} catch (CantComensalesException e1) {
-    			JOptionPane.showMessageDialog(null,e1.getMessage());
-    		}
-        	
-        }
+    	Mesa mesa=null;
+    	try {
+			mesa=sistema.agregaMesa(numero,sillas);
+			VentanaABM ventABM = (VentanaABM) this.vista;
+			ventABM.getModeloLista().addElement(mesa);
+			ventABM.repaint();
+		} catch (mesaRepetidaException | CantComensalesException e1) {
+			JOptionPane.showMessageDialog(null,e1.getMessage());
+		}
     } else if (comando.equalsIgnoreCase("BajaMesa")) {   	
     	VentanaABM ventABM = (VentanaABM) this.vista;
     	Mesa mesa = (Mesa) ventABM.getList().getSelectedValue();

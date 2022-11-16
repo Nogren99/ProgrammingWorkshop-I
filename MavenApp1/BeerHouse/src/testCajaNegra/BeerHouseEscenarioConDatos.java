@@ -42,13 +42,13 @@ public class BeerHouseEscenarioConDatos
     public void setUp()
     {
         try {
-            beerHouse.agregaMesa(new Mesa (2,4,"libre"));
+            beerHouse.creaMesa(new Mesa (2,4,"libre"));
         } catch (CantComensalesException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
             e.printStackTrace();
         }
         try {
-            beerHouse.agregaMesa(new Mesa (3,4,"libre"));
+            beerHouse.creaMesa(new Mesa (3,4,"libre"));
         } catch (CantComensalesException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
             e.printStackTrace();
