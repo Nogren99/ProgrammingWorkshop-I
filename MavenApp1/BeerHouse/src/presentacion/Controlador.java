@@ -38,6 +38,8 @@ import modelo.Promocion;
 import modelo.Recibo;
 import modelo.TemporalOferta;
 import negocio.BeerHouse;
+import testGUI.InterfazOptionPanel;
+import testGUI.MiOptionPane;
 import vista.IVista;
 import vista.VentanaABM;
 import vista.VentanaAdmin;
@@ -53,7 +55,7 @@ public class Controlador implements ActionListener {
     private IVista vista;
     private Operario user;
     private BeerHouse sistema = BeerHouse.getInstancia();
-
+    private InterfazOptionPanel op = new MiOptionPane();
     public Controlador() {
         this.vista = new VistaLogin();
         this.vista.setActionListener(this);
@@ -98,7 +100,7 @@ public class Controlador implements ActionListener {
         		this.setVista(new VentanaOperario());
             } catch (Exception ex) {
             	 this.vista.cerrar();
-            	 JOptionPane.showMessageDialog(null,"ERROR " + ex.getMessage()); 
+            	 op.ShowMessage(null,"ERROR " + ex.getMessage()); 
             	 this.setVista(new VistaLogin());
             }  	
         }else if (comando.equalsIgnoreCase("Desloguearse")) { //para 6.1

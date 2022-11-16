@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +42,11 @@ public class TestVentanaContrasenaInvalida
         TestUtils.clickComponent(leerPersistencia, robot);
         ((IVista) ventana).cerrar();
     }
-	
+	@After
+    public void tearDown() throws Exception
+    {
+        controlador.getVista().cerrar();
+    }
 	@Test
 	public void testLogin()
 	{
