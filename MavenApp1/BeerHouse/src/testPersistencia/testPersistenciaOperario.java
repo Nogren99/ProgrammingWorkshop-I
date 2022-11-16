@@ -62,7 +62,7 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	public void testEscrituraConOperarios() {
 		try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         this.completaConOperarios(this.operarios);
+	         this.completaConOperarios();
 	         persistencia.escribir(this.operarios);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
@@ -92,7 +92,7 @@ private ArrayList<Operario> operarios = new ArrayList<Operario>();
 	}
 	
 	@Test
-	private void completaConOperarios(ArrayList<Operario> OPERARIOS) {
+	public void completaConOperarios() {
 		try {
 			this.operarios.add( new Operario("Maxim","Aqqnip1241","Maximiliano Martin",true));
 			this.operarios.add( new Operario("Zanoveal","nawgH8a","Maria Teresa",true));

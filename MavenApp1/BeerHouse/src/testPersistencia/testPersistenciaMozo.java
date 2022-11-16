@@ -62,7 +62,7 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	public void testEscrituraConMozos() {
 		try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         this.completaConMozos(this.mozos);
+	         this.completaConMozos();
 	         persistencia.escribir(this.mozos);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
@@ -92,7 +92,7 @@ private ArrayList<Mozo> mozos = new ArrayList<Mozo>();
 	}
 	
 	@Test
-	private void completaConMozos(ArrayList<Mozo> mozos) {
+	public void completaConMozos() {
 		try {
 			this.mozos.add( new Mozo(null,new GregorianCalendar(),-1,0));
 			this.mozos.add(new Mozo("AlexandraConX",new GregorianCalendar(),1,0));

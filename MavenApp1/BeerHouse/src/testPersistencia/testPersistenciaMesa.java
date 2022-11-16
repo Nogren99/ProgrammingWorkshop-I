@@ -64,7 +64,7 @@ private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 	public void testEscrituraConMesas() {
 		try {
 	         persistencia.abrirOutput("DatosPrueba.bin");
-	         this.completaConMesasCorrectas(this.mesas);
+	         this.completaConMesasCorrectas();
 	         persistencia.escribir(this.mesas);
 	         persistencia.cerrarOutput();
 	     } catch (IOException e) {
@@ -94,7 +94,7 @@ private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 	}
 
 	@Test
-	private void completaConMesasCorrectas(ArrayList<Mesa> mesas) {
+	public void completaConMesasCorrectas() {
 		try {
 			this.mesas.add( new Mesa(2,3,"libre"));
 			this.mesas.add( new Mesa(1,1,"libre"));
@@ -104,7 +104,7 @@ private ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 	}
 	
 	@Test
-	private void completaConMesasIncorrectas(ArrayList<Mesa> mesas) {
+	public void completaConMesasIncorrectas() {
 		try {
 			this.mesas.add( new Mesa(4,1,"libre"));
 			Assert.fail("Deberia lanzar CantidadDeComensales exepcion");
