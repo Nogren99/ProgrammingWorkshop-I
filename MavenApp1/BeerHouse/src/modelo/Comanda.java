@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 /**
  * @author Nico
  * <br>
- * Clase que representa la comanda de una mesa. Contiene una mesa, una colecci�n de pedidos, la fecha actual y el estado.
+ * Clase que representa la comanda de una mesa. Contiene una colecci\u00f3n de pedidos, la fecha actual y el estado.
  */
 
 public class Comanda implements Serializable{
@@ -22,7 +22,6 @@ public class Comanda implements Serializable{
     
     /**
 	 * Constructor que genera la comanda
-	 * @param mesa
 	 * @param estado
 	 */
     
@@ -65,11 +64,6 @@ public class Comanda implements Serializable{
 	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
-
-	/**
-	 * Devuelve la mesa de la comanda.
-	 * @return mesa
-	 */
 
 	/**
 	 * Devuelve el estado de la comanda.

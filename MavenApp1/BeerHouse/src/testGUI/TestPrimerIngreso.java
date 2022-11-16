@@ -9,43 +9,27 @@ import javax.swing.JTextField;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import negocio.BeerHouse;
 import presentacion.Controlador;
-import presentacion.ControladorPersistencia;
-import vista.IVista;
 
-class TestVentanaLoginOperario
+public class TestPrimerIngreso
 {
 	Robot robot;
 	Controlador controlador;
-	ControladorPersistencia controladorPersistencia;
 	BeerHouse sistema;
+	
 	@Before
-	public void setUp() throws Exception
-	{
-		robot = new Robot();
+	public void setUp() throws Exception {
+        robot = new Robot();
         controlador = new Controlador();
-        controladorPersistencia = new ControladorPersistencia();
-        sistema = BeerHouse.getInstancia();
-	}
-
-	@Before
-	public void testPersistencia()
-    {
-        Component ventana = (Component) controladorPersistencia.getVista();
-		robot.delay(TestUtils.getDelay());
-        //obtengo las referencias a los componentes necesarios
-        JButton leerPersistencia = (JButton) TestUtils.getComponentForName(ventana, "btnLeerPersistencia");
-        TestUtils.clickComponent(leerPersistencia, robot);
-        ((IVista) ventana).cerrar();
+        sistema = BeerHouse.getInstancia(); 
     }
 	
 	@Test
 	public void testLogin()
-	{
+    {
 		Component ventana = (Component) controlador.getVista();
 		robot.delay(TestUtils.getDelay());
         //obtengo las referencias a los componentes necesarios
@@ -55,13 +39,12 @@ class TestVentanaLoginOperario
         JButton aceptarLog = (JButton) TestUtils.getComponentForName(ventana, "btnNewButton");
         //lleno los JTextField
         TestUtils.clickComponent(nombre, robot);
-        TestUtils.tipeaTexto("Jose", robot);
+        TestUtils.tipeaTexto("ADMIN", robot);
         TestUtils.clickComponent(contrasena, robot);
-        TestUtils.tipeaTexto("Q123456", robot);
+        TestUtils.tipeaTexto("ADMIN1234", robot);
         TestUtils.clickComponent(aceptarLog, robot);
         //verifico los resultados
-        Assert.assertEquals("Deberia coincidir el nombre de usuario con el nombre ingresado", "Jose", controlador.getUser().getUsername());
-
-	}
+        Assert.assertEquals("Deberia coincidir el nombre de usuario con el nombre ingresado", "ADMIN", controlador.getUser().getUsername());
+    }
 
 }
