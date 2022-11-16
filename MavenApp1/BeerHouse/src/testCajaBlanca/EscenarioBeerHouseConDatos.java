@@ -16,9 +16,11 @@ import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
+import excepciones.SinPromosException;
 import excepciones.costoInvalidoException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
+import excepciones.productoInexistenteException;
 import junit.framework.Assert;
 import modelo.Comanda;
 import modelo.Mesa;
@@ -78,7 +80,7 @@ public class EscenarioBeerHouseConDatos
         	comanda.addPedido(new Pedido(producto1,2));
         	mesa.setComanda(comanda);
             beerHouse.creaMesa(mesa);
-        } catch (CantComensalesException | precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+        } catch (CantComensalesException | precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException | SinPromosException | productoInexistenteException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
         }
         
