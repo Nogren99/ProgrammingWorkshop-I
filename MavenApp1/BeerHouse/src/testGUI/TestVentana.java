@@ -1,4 +1,4 @@
-package test;
+package testGUI;
 
 import java.awt.Component;
 import java.awt.Robot;

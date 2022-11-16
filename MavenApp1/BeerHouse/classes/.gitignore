@@ -1,5 +1,10 @@
-/testCajaNegra/
-/negocio/
-/presentacion/
-/modelo/
 /excepciones/
+/persistencia/
+/presentacion/
+/testCajaNegra/
+/testGUI/
+/testPersistencia/
+/vista/
+/main/
+/modelo/
+/negocio/
