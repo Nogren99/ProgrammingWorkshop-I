@@ -51,5 +51,9 @@ public class ControladorPersistencia implements ActionListener{
 		this.vista.setActionListener(this);
 		this.vista.mostrar();
 	}
+	public IVista getVista()
+	{
+		return vista;
+	}
 
 }

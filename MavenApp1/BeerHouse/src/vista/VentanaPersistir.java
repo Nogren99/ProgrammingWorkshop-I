@@ -59,6 +59,9 @@ public class VentanaPersistir extends JFrame implements IVista {
 		
 		this.btnLeerPersistencia = new JButton("LeerPersistencia");
 		this.panel_1.add(this.btnLeerPersistencia);
+		
+		this.btnPersistir.setName("btnPersistir");
+		this.btnLeerPersistencia.setName("btnLeerPersistencia");
 	}
 
 	@Override
