@@ -20,6 +20,7 @@ public class ProductoOferta extends Promocion {
     private double dtoPorCantidad_PrecioUnitario;
     
     
+    
 
 	public ProductoOferta(int id, Producto producto, String diasDePromo, boolean aplicaDosPorUno,
 			boolean aplicaDtoPorCantidad, int dtoPorCantidad_CantMinima, double dtoPorCantidad_PrecioUnitario,

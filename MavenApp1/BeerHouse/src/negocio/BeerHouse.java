@@ -172,7 +172,7 @@ public class BeerHouse implements Serializable{
 		//se elimina
     	while(Iterador.hasNext() && ok) { //me fijo en cada mesa
     		Mesa m = Iterador.next();
-    		System.out.println(m.toString());
+    		//System.out.println(m.toString());
     		Comanda comanda= m.getComanda();
     		if(comanda!=null) { //comanda de cada mesa
     			ArrayList<Pedido> pedidos= comanda.getOrden(); //pedidos de cada comanda
