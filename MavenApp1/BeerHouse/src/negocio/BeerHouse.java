@@ -270,10 +270,9 @@ public class BeerHouse implements Serializable{
      * @param username
      * @param password
      * @return
-     * @throws UsuarioInactivoException
-     * @throws UsuarioInexistenteException
+     * @throws Exception 
      */
-    public Usuario login(String username, String password) throws UsuarioInactivoException, UsuarioInexistenteException{
+    public Usuario login(String username, String password) throws Exception{
     	//System.out.println("username: "+ username + " password: "+ password);
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
@@ -281,21 +280,25 @@ public class BeerHouse implements Serializable{
             estaActivo(nombreAdmin);
             return new Admin(username, nuevaPassword,nombreAdmin,true);
         } else {
-            int i = 0;
-            boolean flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
-            while (i < operario.size() && !flag) {
-                System.out.println("Analizando username "+ operario.get(i).getUsername() + "password "+ operario.get(i).getPassword());
-                i++;
-                if (i<operario.size())
-                	flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
+        	if (!operario.isEmpty()){
+	            int i = 0;
+	            boolean flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
+	            while (i < operario.size() && !flag) {
+	                System.out.println("Analizando username "+ operario.get(i).getUsername() + "password "+ operario.get(i).getPassword());
+	                i++;
+	                if (i<operario.size())
+	                	flag = operario.get(i).getUsername().equals(username) && operario.get(i).getPassword().equals(password);
+	            }
+	            if (i < operario.size()) { //se encontr\u00f3 usuario. verificar activo
+	                if (operario.get(i).isActivo())
+	                    return operario.get(i);
+	                else
+	                    throw new UsuarioInactivoException("Usuario iNativo");
+	            } else //no se encontr\u00f3 el usuario. lanzar excepci\u00f3n (despues crearla)
+	                throw new UsuarioInexistenteException("No existis");
             }
-            if (i < operario.size()) { //se encontr\u00f3 usuario. verificar activo
-                if (operario.get(i).isActivo())
-                    return operario.get(i);
-                else
-                    throw new UsuarioInactivoException("Usuario iNativo");
-            } else //no se encontr\u00f3 el usuario. lanzar excepci\u00f3n (despues crearla)
-                throw new UsuarioInexistenteException("No existis");
+        	else
+        		throw new Exception("Sin operarios");
         }
     }
 
