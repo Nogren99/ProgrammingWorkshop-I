@@ -1,12 +1,12 @@
 package modelo;
 
 import excepciones.SinPromosException;
-import excepciones.productoInexistenteException;
+import excepciones.ProductoInexistenteException;
 
 /**
  * @author Nico
  * <br>
- * Clase que representa un producto que está en promoción en la cervecería. 
+ * Clase que representa un producto que estï¿½ en promociï¿½n en la cervecerï¿½a. 
  * <br>
  *
  */
@@ -24,13 +24,13 @@ public class ProductoOferta extends Promocion {
 
 	public ProductoOferta(int id, Producto producto, String diasDePromo, boolean aplicaDosPorUno,
 			boolean aplicaDtoPorCantidad, int dtoPorCantidad_CantMinima, double dtoPorCantidad_PrecioUnitario,
-			boolean activa) throws SinPromosException, productoInexistenteException {
+			boolean activa) throws SinPromosException, ProductoInexistenteException {
 		super();
 		if(!aplicaDosPorUno && !aplicaDtoPorCantidad ) {
 			throw new SinPromosException("El producto debe tener al menos un tipo de promocion");
 		}else {
 			if(producto==null) {
-				throw new productoInexistenteException("Debes seleccionar un producto valido");
+				throw new ProductoInexistenteException("Debes seleccionar un producto valido");
 			}else {
 				Id = id;
 				this.producto = producto;

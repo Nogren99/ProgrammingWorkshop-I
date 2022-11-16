@@ -2,15 +2,15 @@ package modelo;
 
 import java.io.Serializable;
 
-
-
 /**
  * @author Nico
  * <br>
- * Clase que representa un usuario administrador del sistema de cervecería 
+ * Clase que representa un usuario administrador del sistema de cervecerï¿½a 
  * <br>
  */
+
 public class Admin extends Operario  {
+	
 	/**
 	 * Crea el usuario Admin
 	 * @param username
@@ -18,10 +18,10 @@ public class Admin extends Operario  {
 	 * @param nyA
 	 * @param activo
 	 */
+	
 	public Admin(String username, String password, String nyA, boolean activo) {
 		super(username, password, null, true);
 		this.categoria=20;
 	}
-    
 
 }

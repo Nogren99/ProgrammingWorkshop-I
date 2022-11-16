@@ -16,9 +16,9 @@ import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
 import junit.framework.Assert;
 import modelo.Mesa;
 import modelo.Mozo;
@@ -58,13 +58,13 @@ public class BeerHouseEscenarioConDatos
         beerHouse.agregaOperario(new Operario ("Marco","Q12345678","Marcos Lopez",true));
         try {
             beerHouse.agregaProducto(new Producto(12,"Pochoclo",10,20,5));
-        } catch (precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+        } catch (PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
             e.printStackTrace();
         }
         try {
             beerHouse.agregaProducto(new Producto(24,"Pollo",50,500,10));
-        } catch (precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+        } catch (PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
             e.printStackTrace();
         }

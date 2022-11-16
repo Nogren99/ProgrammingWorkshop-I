@@ -20,12 +20,12 @@ import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
 import excepciones.ProductoAsociadoAComandaException;
 import excepciones.SinPromosException;
-import excepciones.comandaInexistenteExeption;
-import excepciones.costoInvalidoException;
-import excepciones.mesaRepetidaException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
-import excepciones.productoInexistenteException;
+import excepciones.ComandaInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.MesaRepetidaException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
+import excepciones.ProductoInexistenteException;
 import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
@@ -353,7 +353,7 @@ public class Controlador implements ActionListener {
 			VentanaABM ventABM = (VentanaABM) this.vista;
 			ventABM.getModeloLista().addElement(mesa);
 			ventABM.repaint();
-		} catch (mesaRepetidaException | CantComensalesException e1) {
+		} catch (MesaRepetidaException | CantComensalesException e1) {
 			JOptionPane.showMessageDialog(null,e1.getMessage());
 		}
     } else if (comando.equalsIgnoreCase("BajaMesa")) {   	
@@ -443,11 +443,11 @@ public class Controlador implements ActionListener {
     		try {
     			producto = new Producto(sistema.getProducto().size()+1,name,precioCosto,precioVenta,stock);
     			JOptionPane.showMessageDialog(null, "Producto agregado satisfactoriamente");
-    		} catch (precioVentaMenorAlCostoException e1) {
+    		} catch (PrecioVentaMenorAlCostoException e1) {
     			JOptionPane.showMessageDialog(null, e1.getMessage());
-    		} catch (precioVentaInvalidoException e1) {
+    		} catch (PrecioVentaInvalidoException e1) {
     			JOptionPane.showMessageDialog(null, e1.getMessage());
-    		} catch (costoInvalidoException e1) {
+    		} catch (CostoInvalidoException e1) {
     			JOptionPane.showMessageDialog(null, e1.getMessage());
     		}
         	sistema.agregaProducto(producto);
@@ -624,7 +624,7 @@ public class Controlador implements ActionListener {
 			promociones.add(prod);
 		} catch (SinPromosException e1) {
 			JOptionPane.showMessageDialog(null,e1.getMessage());
-		} catch (productoInexistenteException e1) {
+		} catch (ProductoInexistenteException e1) {
 			JOptionPane.showMessageDialog(null,e1.getMessage());
 		}
 
@@ -658,7 +658,7 @@ public class Controlador implements ActionListener {
 			JOptionPane.showMessageDialog(null, ((Recibo) sistema.generaRecibo((Mesa) ventClose.getList().getSelectedValue(), opcionesPago[i-1])).toString());		
 			JOptionPane.showMessageDialog(null, "Mesa cerrada!");
 			ventClose.repaint();
-		} catch (MesaNulaException | comandaInexistenteExeption e1) {
+		} catch (MesaNulaException | ComandaInexistenteException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
     	

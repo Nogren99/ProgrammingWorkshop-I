@@ -6,16 +6,15 @@ import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 
 
-
 /**
  * @author Nico
  * <br>
- * Clase que representa a un usuario operario del sistema de cervecería.
+ * Clase que representa a un usuario operario del sistema de cervecerï¿½a.
  * <br>
  *
  */
+
 public class Operario extends Usuario{
-	
 	private String NyA;
     private boolean activo;
     protected byte categoria;
@@ -27,6 +26,7 @@ public class Operario extends Usuario{
 	 * @param nyA
 	 * @param activo
 	 */
+    
     public Operario(String username, String password, String nyA, boolean activo) {
 		super(username, password);
 		NyA = nyA;
@@ -38,6 +38,7 @@ public class Operario extends Usuario{
 	 * Devuelve el nombre y apellido del operario
 	 * @return NyA
 	 */
+    
 	public String getNyA() {
 		return NyA;
 	}
@@ -50,6 +51,7 @@ public class Operario extends Usuario{
 	 * Devuelve la categor\u00eda del operario
 	 * @return activo
 	 */
+	
 	public byte getCategoria() {
 		return categoria;
 	}
@@ -65,6 +67,7 @@ public class Operario extends Usuario{
 	 * Devuelve si el operario est\u00e1 activo
 	 * @return activo
 	 */
+	
 	public boolean isActivo() {
 		return activo;
     }

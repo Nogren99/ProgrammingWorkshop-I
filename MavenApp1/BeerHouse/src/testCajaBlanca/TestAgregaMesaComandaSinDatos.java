@@ -11,9 +11,9 @@ import excepciones.MesaImposibleException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
 import modelo.Pedido;
 import modelo.Producto;
 import negocio.BeerHouse;
@@ -40,7 +40,7 @@ public class TestAgregaMesaComandaSinDatos {
 	        try {
 				beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 5);
 			} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException
-					| NoHayMesasHabilitadasException | precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+					| NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
 				Assert.fail();
 			}
 	 }

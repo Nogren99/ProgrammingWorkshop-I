@@ -14,7 +14,7 @@ import org.junit.Test;
 import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
-import excepciones.comandaInexistenteExeption;
+import excepciones.ComandaInexistenteException;
 
 import static org.junit.Assert.*;
 
@@ -72,7 +72,7 @@ public class testMesa {
 		try {
 			sistema.precioComanda(this.mesa);
 			Assert.fail("Se deberia tirar comandaInexistenteExeption");
-		} catch (comandaInexistenteExeption e) {
+		} catch (ComandaInexistenteException e) {
 			System.out.println(e.getMessage());
 		}
 		return 0;
@@ -83,7 +83,7 @@ public class testMesa {
 		try {
 			sistema.cerrarMesa(this.mesa);
 			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia poder cerrar la mesa");
-		} catch (comandaInexistenteExeption e) {
+		} catch (ComandaInexistenteException e) {
 			e.printStackTrace();
 		}catch(MesaNulaException e1) {
 			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia tirar un error por mesa nula");

@@ -12,8 +12,8 @@ import excepciones.EstadoInvalidoException;
 import excepciones.HijosInvalidosException;
 import excepciones.MesaOcupadaException;
 import excepciones.ProductoAsociadoAComandaException;
-import excepciones.comandaInexistenteExeption;
-import excepciones.mesaRepetidaException;
+import excepciones.ComandaInexistenteException;
+import excepciones.MesaRepetidaException;
 import modelo.Mesa;
 import modelo.Mozo;
 import negocio.BeerHouse;
@@ -83,7 +83,7 @@ public class TestBeerHouse {
 	public void precioComanda() {
 		try {
 			beerHouse.precioComanda(beerHouse.getMesa().get(1));
-		}catch (comandaInexistenteExeption e) {
+		}catch (ComandaInexistenteException e) {
 			Assert.fail("No deberia lanzar comandaInexistenteExeption ");
 		}
 	}
@@ -93,7 +93,7 @@ public class TestBeerHouse {
 		try {
 			beerHouse.precioComanda(beerHouse.getMesa().get(0));
 			Assert.fail("No deberia poder realizarse");
-		}catch (comandaInexistenteExeption e) {
+		}catch (ComandaInexistenteException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -168,7 +168,7 @@ public class TestBeerHouse {
 	public void agregaMesa() {
 		try {
 			Mesa mesa = beerHouse.agregaMesa(99,33);
-		} catch (mesaRepetidaException e) {
+		} catch (MesaRepetidaException e) {
 			Assert.fail("No deberia lanzar mesaRepetidaException ");
 		} catch (CantComensalesException e) {
 			Assert.fail("No deberia lanzar CantComensalesException ");
@@ -180,7 +180,7 @@ public class TestBeerHouse {
 		try {
 			Mesa mesa = beerHouse.agregaMesa(2,33);
 			Assert.fail("No deberia poder crear mesa ");
-		} catch (mesaRepetidaException e) {
+		} catch (MesaRepetidaException e) {
 			System.out.println("Todo ok");
 		} catch (CantComensalesException e) {
 			Assert.fail("No deberia lanzar CantComensalesException ");
@@ -192,7 +192,7 @@ public class TestBeerHouse {
 		try {
 			Mesa mesa = beerHouse.agregaMesa(99,33);
 			Assert.fail("No deberia poder crear mesa ");
-		} catch (mesaRepetidaException e) {
+		} catch (MesaRepetidaException e) {
 			Assert.fail("No deberia lanzar mesaRepetidaException ");
 		} catch (CantComensalesException e) {
 			System.out.println("Todo ok");

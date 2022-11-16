@@ -17,10 +17,10 @@ import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
 import excepciones.SinPromosException;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
-import excepciones.productoInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
+import excepciones.ProductoInexistenteException;
 import junit.framework.Assert;
 import modelo.Comanda;
 import modelo.Mesa;
@@ -80,7 +80,7 @@ public class EscenarioBeerHouseConDatos
         	comanda.addPedido(new Pedido(producto1,2));
         	mesa.setComanda(comanda);
             beerHouse.creaMesa(mesa);
-        } catch (CantComensalesException | precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException | SinPromosException | productoInexistenteException e) {
+        } catch (CantComensalesException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException | SinPromosException | ProductoInexistenteException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
         }
         
@@ -107,12 +107,12 @@ public class EscenarioBeerHouseConDatos
         beerHouse.agregaOperario(new Operario ("Marco","Q12345678","Marcos Lopez",true));
         try {
             beerHouse.agregaProducto(new Producto(12,"Pochoclo",10,20,5));
-        } catch (precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+        } catch (PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
         }
         try {
             beerHouse.agregaProducto(new Producto(24,"Pollo",50,500,10));
-        } catch (precioVentaMenorAlCostoException | precioVentaInvalidoException | costoInvalidoException e) {
+        } catch (PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
         }
         beerHouse.agregarMozo(new Mozo("Jose", new GregorianCalendar(),2,0));

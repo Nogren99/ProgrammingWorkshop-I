@@ -10,7 +10,7 @@ import org.junit.Test;
 import excepciones.EstadoInvalidoException;
 import excepciones.HijosInvalidosException;
 import excepciones.MesaOcupadaException;
-import excepciones.comandaInexistenteExeption;
+import excepciones.ComandaInexistenteException;
 import modelo.Mozo;
 import negocio.BeerHouse;
 
@@ -47,7 +47,7 @@ public class TestBeerHouseSinDatos {
 	public void precioComanda() {
 		try {
 			beerHouse.precioComanda(beerHouse.getMesa().get(1));
-		}catch (comandaInexistenteExeption e) {
+		}catch (ComandaInexistenteException e) {
 			Assert.fail("No deberia lanzar comandaInexistenteExeption ");
 		}
 	}
@@ -56,7 +56,7 @@ public class TestBeerHouseSinDatos {
 		try {
 			beerHouse.precioComanda(beerHouse.getMesa().get(0));
 			Assert.fail("No deberia poder realizarse");
-		}catch (comandaInexistenteExeption e) {
+		}catch (ComandaInexistenteException e) {
 			System.out.println(e.getMessage());
 		}
 	}

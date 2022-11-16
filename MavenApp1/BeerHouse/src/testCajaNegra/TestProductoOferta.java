@@ -8,10 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excepciones.SinPromosException;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
-import excepciones.productoInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
+import excepciones.ProductoInexistenteException;
 import modelo.Producto;
 import modelo.ProductoOferta;
 
@@ -25,7 +25,7 @@ public class TestProductoOferta {
 			productoOfertaCorrecto= new ProductoOferta(1,new Producto(1,"Pochoclo",50,300,1000), "Lunes", true, true, 2, 50, true);
 		}catch(SinPromosException e1) {
 			Assert.fail("No deberia mostrar SinPromosException");
-		}catch(productoInexistenteException e2) {
+		}catch(ProductoInexistenteException e2) {
 			Assert.fail("No deberia mostrar productoInexistenteException");
 		}
 
@@ -61,13 +61,13 @@ public class TestProductoOferta {
 			productoO= new ProductoOferta(1,new Producto(1,"Pochoclo",50,300,1000), "Lunes", false, false, 2, 50, true);
 		} catch (SinPromosException e) {
 			System.out.println("todo ok");
-		} catch (productoInexistenteException e) {
+		} catch (ProductoInexistenteException e) {
 			Assert.fail("No deberia mostrar productoInexistenteException");
-		} catch (precioVentaMenorAlCostoException e) {
+		} catch (PrecioVentaMenorAlCostoException e) {
 			Assert.fail("No deberia mostrar precioVentaMenorAlCostoExceptio");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
 		}
 			
@@ -82,7 +82,7 @@ public class TestProductoOferta {
 			productoO= new ProductoOferta(1,null, "Lunes", true, true, 2, 50, true);
 		} catch (SinPromosException e) {
 			Assert.fail("SinPromosException");
-		} catch (productoInexistenteException e) {
+		} catch (ProductoInexistenteException e) {
 			System.out.println("todo ok");
 		} 
 	}

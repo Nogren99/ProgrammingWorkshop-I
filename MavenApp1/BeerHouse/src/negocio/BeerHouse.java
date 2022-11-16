@@ -22,12 +22,13 @@ import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.PasswordInvalidaException;
 import excepciones.ProductoAsociadoAComandaException;
+import excepciones.SinPromoAsociadaException;
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
-import excepciones.comandaInexistenteExeption;
-import excepciones.costoInvalidoException;
-import excepciones.mesaRepetidaException;
-import excepciones.precioVentaInvalidoException;
+import excepciones.ComandaInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.MesaRepetidaException;
+import excepciones.PrecioVentaInvalidoException;
 import modelo.Admin;
 import modelo.Comanda;
 import modelo.Mesa;
@@ -101,7 +102,7 @@ public class BeerHouse implements Serializable{
     		ope=new Operario(username,pass,name,activo);
     		this.operario.add(ope);
     	} else
-    		throw new PasswordInvalidaException("Contraseña invalida.");
+    		throw new PasswordInvalidaException("Contraseï¿½a invalida.");
 	
     	return ope;
     }
@@ -135,7 +136,7 @@ public class BeerHouse implements Serializable{
     public void modificaPrecioCosto(Producto producto, float precioCosto) {// hay inflacion ahre
     	try {
 			producto.setCosto(precioCosto);
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			e.printStackTrace();
 		}
     }
@@ -143,7 +144,7 @@ public class BeerHouse implements Serializable{
     public void modificaPrecioVenta(Producto producto, float precioVenta) {
     	try {
 			producto.setVenta(precioVenta);
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			e.printStackTrace();
 		}
     }
@@ -172,7 +173,7 @@ public class BeerHouse implements Serializable{
 		//se elimina
     	while(Iterador.hasNext() && ok) { //me fijo en cada mesa
     		Mesa m = Iterador.next();
-    		//System.out.println(m.toString());
+    		System.out.println(m.toString());
     		Comanda comanda= m.getComanda();
     		if(comanda!=null) { //comanda de cada mesa
     			ArrayList<Pedido> pedidos= comanda.getOrden(); //pedidos de cada comanda
@@ -236,7 +237,7 @@ public class BeerHouse implements Serializable{
     	this.mesa.add(mesa);
     }
     
-    public Mesa agregaMesa(int numero,int sillas) throws mesaRepetidaException, CantComensalesException {
+    public Mesa agregaMesa(int numero,int sillas) throws MesaRepetidaException, CantComensalesException {
     	Mesa mesaNueva=null;
         Iterator<Mesa> Iterador = mesa.iterator();
         boolean existe=false;
@@ -247,7 +248,7 @@ public class BeerHouse implements Serializable{
             }
         }
         if(existe)
-        	throw new mesaRepetidaException("Esa mesa ya existe!!");
+        	throw new MesaRepetidaException("Esa mesa ya existe!!");
         else{
         	try {
 				mesaNueva = new Mesa(numero,sillas,"Libre");
@@ -306,9 +307,9 @@ public class BeerHouse implements Serializable{
     	}
 	}
     
-    public boolean mesasVacias() throws NoMesasHabilitadasException{
+    public boolean mesasVacias() throws NoHayMesasHabilitadasException{
     	if(this.mesa.isEmpty())
-    		throw new NoMesasHabilitadasException("No hay mesas habilitadas");
+    		throw new NoHayMesasHabilitadasException("No hay mesas habilitadas");
     	else
     		return false;
     }
@@ -487,7 +488,7 @@ public class BeerHouse implements Serializable{
 	 * @param mesa
 	 * @return
 	 */
-	public double precioComanda(Mesa mesa)throws comandaInexistenteExeption{
+	public double precioComanda(Mesa mesa)throws ComandaInexistenteException{
 		double total = 0;
 		if(mesa.getComanda()!=null) {
 			ArrayList<Pedido> pedido = mesa.getComanda().getOrden();
@@ -506,7 +507,7 @@ public class BeerHouse implements Serializable{
 			}
 			return total;
 		}else
-			throw new comandaInexistenteExeption("Mesa sin comanda asignada");
+			throw new ComandaInexistenteException("Mesa sin comanda asignada");
 
 		
 			
@@ -565,7 +566,7 @@ public class BeerHouse implements Serializable{
                             	}
                             	m.getComanda().addPedido(pedido);
                             	actualizaStock(pedido.getProducto(), pedido.getCantidad());
-                            	//JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con éxito");
+                            	//JOptionPane.showMessageDialog(null, "Mesa: "+ m.getNumero() + "asignada con ï¿½xito");
                             	search=false;
                         	}else
                         		throw new MuchosProductosEnPromoException("No pueden haber dos o mas productos en promocion en la misma comanda");
@@ -580,26 +581,30 @@ public class BeerHouse implements Serializable{
     	}
 	}
 	/** <b> Pre: Recibe null o una mesa con estado "Ocupada" </b>
-	 * <b> Post:</b> Cierra la mesa y carga sus datos estadísticos en caso de ser correcta o lanza excepción si es mesa nula o comanda inexistente. 
+	 * <b> Post:</b> Cierra la mesa y carga sus datos estadï¿½sticos en caso de ser correcta o lanza excepciï¿½n si es mesa nula o comanda inexistente. 
 	 * @param mesa
 	 * 
 	 * 
 	 */
-	public void cerrarMesa(Mesa mesa) throws MesaNulaException, comandaInexistenteExeption{
+	
+	public void cerrarMesa(Mesa mesa) throws MesaNulaException, ComandaInexistenteException, SinPromoAsociadaException{
 		if(mesa!=null && mesa.getComanda()!=null) {
     		mesa.setEstado("Libre");
     		try {
 				mesa.addConsumoTotal(this.precioComanda(mesa));
 				mesa.getMozo().setVolumenDeVenta( this.precioComanda(mesa) );
 				mesa.addUso();
-			} catch (comandaInexistenteExeption e1) {
+			} catch (ComandaInexistenteException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
     	
     	}else if (mesa==null)
     		throw new MesaNulaException("No seleccionaste ninguna mesa");
     	else
-    		throw new comandaInexistenteExeption("Esta mesa no tiene una comanda asignada");
+    		if(this.mesa.c)
+    			throw new ComandaInexistenteException("Esta mesa no tiene una comanda asignada");
+    		else
+    			throw new SinPromoAsociadaException("Esta mesa no cumple con ninguna promocion");
 	}
 	
 	/**
@@ -616,8 +621,8 @@ public class BeerHouse implements Serializable{
 				r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, this.precioComanda(mesa), null);
 				r.setFormaDePago(formaPago);
 				
-			} catch (comandaInexistenteExeption e) {
-				//nunca entrará aquí por precondición
+			} catch (ComandaInexistenteException e) {
+				//nunca entrarï¿½ aquï¿½ por precondiciï¿½n
 			}
 			return r;
 

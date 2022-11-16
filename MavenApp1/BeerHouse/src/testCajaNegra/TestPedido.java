@@ -16,10 +16,10 @@ import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
-import excepciones.comandaInexistenteExeption;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
+import excepciones.ComandaInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
 
 import static org.junit.Assert.*;
 

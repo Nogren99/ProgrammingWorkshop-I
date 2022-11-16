@@ -16,10 +16,10 @@ import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
-import excepciones.comandaInexistenteExeption;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
+import excepciones.ComandaInexistenteException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
 
 import static org.junit.Assert.*;
 
@@ -39,11 +39,11 @@ public class TestProducto {
 		productoCorrecto=null;
 		try {
 			productoCorrecto = new Producto(1,"Pochoclo",50,300,1000);
-		} catch (precioVentaMenorAlCostoException e) {
+		} catch (PrecioVentaMenorAlCostoException e) {
 			Assert.fail("No deberia mostrar precioVentaMenorAlCostoExceptio");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
 		}
 	}
@@ -78,11 +78,11 @@ public class TestProducto {
 			double costo = producto.getCosto();
 			double venta = producto.getVenta();
 			double stock = producto.getStock();
-		} catch (precioVentaMenorAlCostoException e) {
+		} catch (PrecioVentaMenorAlCostoException e) {
 			Assert.fail("No deberia mostrar precioVentaMenorAlCostoException");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			System.out.println("todo ok");
 		}
 		
@@ -98,11 +98,11 @@ public class TestProducto {
 			double costo = producto.getCosto();
 			double venta = producto.getVenta();
 			double stock = producto.getStock();
-		} catch (precioVentaMenorAlCostoException e) {
+		} catch (PrecioVentaMenorAlCostoException e) {
 			Assert.fail("No deberia mostrar precioVentaMenorAlCostoException");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			System.out.println("todo ok");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
 		}
 		
@@ -118,11 +118,11 @@ public class TestProducto {
 			double costo = producto.getCosto();
 			double venta = producto.getVenta();
 			double stock = producto.getStock();
-		} catch (precioVentaMenorAlCostoException e) {
+		} catch (PrecioVentaMenorAlCostoException e) {
 			System.out.println("todo ok");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
 		}
 		
@@ -132,7 +132,7 @@ public class TestProducto {
 	public void testSetcostoCorrecto() {
 		try {
 			productoCorrecto.setCosto(1);
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia tirar costoInvalidoException");
 		}
 		
@@ -143,7 +143,7 @@ public class TestProducto {
 		try {
 			productoCorrecto.setCosto(0);
 			Assert.fail("No deberia poder setear");
-		} catch (costoInvalidoException e) {
+		} catch (CostoInvalidoException e) {
 			System.out.println("todo ok");
 		}
 		
@@ -153,7 +153,7 @@ public class TestProducto {
 	public void testSetventaCorrecto() {
 		try {
 			productoCorrecto.setVenta(2);;
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia tirar costoInvalidoException");
 		}
 		
@@ -164,7 +164,7 @@ public class TestProducto {
 		try {
 			productoCorrecto.setVenta(0);
 			Assert.fail("No deberia poder setear");
-		} catch (precioVentaInvalidoException e) {
+		} catch (PrecioVentaInvalidoException e) {
 			System.out.println("todo ok");
 		}
 		

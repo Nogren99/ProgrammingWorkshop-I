@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
-import excepciones.costoInvalidoException;
-import excepciones.precioVentaInvalidoException;
-import excepciones.precioVentaMenorAlCostoException;
+import excepciones.CostoInvalidoException;
+import excepciones.PrecioVentaInvalidoException;
+import excepciones.PrecioVentaMenorAlCostoException;
 
 
 
 /**
  * @author Nico
  * <br>
- * Clase que representa un producto de la cervecería. Contiene un id, precio de costo y venta, su nombre y su stock actual.
+ * Clase que representa un producto de la cervecerï¿½a. Contiene un id, precio de costo y venta, su nombre y su stock actual.
  *
  */
 public class Producto implements Serializable{
@@ -59,20 +59,20 @@ public class Producto implements Serializable{
 
 
 
-	public void setCosto(double costo) throws costoInvalidoException {
+	public void setCosto(double costo) throws CostoInvalidoException {
 		if(costo>0)
 			this.costo = costo;
 		else 
-			throw new costoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
+			throw new CostoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
 	}
 
 
 
-	public void setVenta(double venta) throws precioVentaInvalidoException {
+	public void setVenta(double venta) throws PrecioVentaInvalidoException {
 		if(venta>0)
 			this.venta = venta;
 		else
-			throw new precioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
+			throw new PrecioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 	}
 
 
@@ -91,13 +91,13 @@ public class Producto implements Serializable{
      * @param costo
      * @param venta
      * @param stock
-     * @throws precioVentaMenorAlCostoException
+     * @throws PrecioVentaMenorAlCostoException
      * 
      */
      
 	
 	
-	public Producto(int id, String nombre, double costo, double venta, int stock) throws precioVentaMenorAlCostoException , precioVentaInvalidoException, costoInvalidoException{
+	public Producto(int id, String nombre, double costo, double venta, int stock) throws PrecioVentaMenorAlCostoException , PrecioVentaInvalidoException, CostoInvalidoException{
 		super(); 
 		if(venta>costo && venta>0 && costo>0) {
 			Id = id;
@@ -107,13 +107,13 @@ public class Producto implements Serializable{
 			this.stock = stock;
 		}else {
 			if(venta<=0)
-				throw new precioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
+				throw new PrecioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 			else
 				if(costo<=0)
-					throw new costoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
+					throw new CostoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
 				else 
 					if (venta<costo)
-						throw new precioVentaMenorAlCostoException("Precio de venta menor al costo");
+						throw new PrecioVentaMenorAlCostoException("Precio de venta menor al costo");
 		}
 		
 	}
