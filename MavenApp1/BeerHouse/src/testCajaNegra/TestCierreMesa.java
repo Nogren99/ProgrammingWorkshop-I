@@ -12,85 +12,65 @@ import org.junit.Test;
 import excepciones.MesaNulaException;
 import excepciones.SinPromoAsociadaException;
 import excepciones.ComandaInexistenteException;
+import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
 import negocio.BeerHouse;
 
 public class TestCierreMesa {
-	private Mesa mesa;
 	private BeerHouse sistema = BeerHouse.getInstancia();
+	private BeerHouse beerHouse;
+	private BeerHouseEscenarioConDatos BHDatos = new BeerHouseEscenarioConDatos();
 	
 	@Before
 	public void setUp(){
-		mesa = null;
-		try {
-			 mesa = new Mesa (2,4,"libre");
-		} catch (Exception e) {
-			Assert.fail("La mesa se deberia haber creado correctamente");
-		}
+		this.BHDatos.setUp();
+		this.beerHouse=this.BHDatos.getBeerHouse();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
+		BHDatos.tearDown();
 	}
 	
 	@Test
-	public void cerrarMesaCorrecta(Mesa mesa) {
+	public void cerrarMesaCorrecta() {
 		try {
-			sistema.cerrarMesa(this.mesa);
+			sistema.cerrarMesa(beerHouse.getMesa().get(1));
 			System.out.println("Todo OK");
 		} catch (MesaNulaException e) {
 			Assert.fail("No deberia mostrar MesaNulaException");
-			e.printStackTrace();
+			
 		} catch (ComandaInexistenteException e) {
-			Assert.fail("No deberia mostrar MesaNulaException");
-		}catch (SinPromoAsociadaException e) {
-			Assert.fail("No deberia mostrar SinPromoAsociadaException");
+			Assert.fail("No deberia mostrar ComandaInexistenteException");
 		}
 	}
 	
-	@Test
-	public void cerrarMesaNull(Mesa mesa) {
-		this.mesa.setEstado("Ocupada");
-		try {
-			sistema.cerrarMesa(this.mesa);
-			Assert.fail("Deberia mostrar MesaNulaException");
-		} catch (MesaNulaException e) {
-			System.out.println("Todo OK");
-		} catch (ComandaInexistenteException e) {
-			Assert.fail("No deberia mostrar comandaInexistenteExeption");
-		}catch (SinPromoAsociadaException e) {
-			Assert.fail("No deberia mostrar SinPromoAsociadaException");
-		}
-	}
+
 	
 	@Test
-	public void cerrarMesaSinComandaAsignada(Mesa mesa) {
+	public void cerrarMesaSinComandaAsignada() {
 		try {
-			sistema.cerrarMesa(this.mesa);
+			sistema.cerrarMesa(beerHouse.getMesa().get(0));
 			Assert.fail("Deberia mostrar comandaInexistenteExeption");
 		} catch (MesaNulaException e) {
 			Assert.fail("No deberia mostrar MesaNulaException");
 		} catch (ComandaInexistenteException e) {
 			System.out.println("Todo OK");
-		}catch (SinPromoAsociadaException e) {
-			Assert.fail("No deberia mostrar SinPromoAsociadaException");
 		}
 	}
 	
 	@Test
-	public void grabaMesaCorrecta(Mesa mesa) {
+	public void grabaMesaCorrecta() {
 		try {
-			sistema.cerrarMesa(this.mesa);
-			Assert.assertEquals("La mesa asociada a la comanda deberia estar libre","Libre",this.mesa.getEstado());
+			sistema.cerrarMesa(beerHouse.getMesa().get(1));
+			Assert.assertEquals("La mesa asociada a la comanda deberia estar libre","Libre",beerHouse.getMesa().get(1).getEstado());
 			System.out.println("Todo OK");
 		} catch (MesaNulaException e) {
 			Assert.fail("No deberia mostrar MesaNulaException");
-			e.printStackTrace();
+			
 		} catch (ComandaInexistenteException e) {
-			Assert.fail("No deberia mostrar MesaNulaException");
-		}catch (SinPromoAsociadaException e) {
-			Assert.fail("No deberia mostrar SinPromoAsociadaException");
+			Assert.fail("No deberia mostrar ComandaInexistenteException");
 		}
 	}
 	

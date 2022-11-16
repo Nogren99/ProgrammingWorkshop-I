@@ -586,24 +586,22 @@ public class BeerHouse implements Serializable{
 	 * 
 	 */
 	
-	public void cerrarMesa(Mesa mesa) throws MesaNulaException, ComandaInexistenteException, SinPromoAsociadaException{
+	public void cerrarMesa(Mesa mesa) throws MesaNulaException, ComandaInexistenteException{
 		if(mesa!=null && mesa.getComanda()!=null) {
     		mesa.setEstado("Libre");
-    		try {
+
+			try {
 				mesa.addConsumoTotal(this.precioComanda(mesa));
 				mesa.getMozo().setVolumenDeVenta( this.precioComanda(mesa) );
 				mesa.addUso();
 			} catch (ComandaInexistenteException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage());
 			}
-    	
+    		
     	}else if (mesa==null)
     		throw new MesaNulaException("No seleccionaste ninguna mesa");
     	else
-    		if(mesa==null)//CORREGIR ESTO, ESTA MAL
-    			throw new ComandaInexistenteException("Esta mesa no tiene una comanda asignada");
-    		else
-    			throw new SinPromoAsociadaException("Esta mesa no cumple con ninguna promocion");
+    		throw new ComandaInexistenteException("Esta mesa no tiene una comanda asignada");   			
 	}
 	
 	/**

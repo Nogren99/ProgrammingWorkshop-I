@@ -659,7 +659,7 @@ public class Controlador implements ActionListener {
 			JOptionPane.showMessageDialog(null, ((Recibo) sistema.generaRecibo((Mesa) ventClose.getList().getSelectedValue(), opcionesPago[i-1])).toString());		
 			JOptionPane.showMessageDialog(null, "Mesa cerrada!");
 			ventClose.repaint();
-		} catch (MesaNulaException | ComandaInexistenteException | SinPromoAsociadaException e1) {
+		} catch (MesaNulaException | ComandaInexistenteException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 

@@ -61,9 +61,9 @@ public class TestProducto {
 		double stock = this.productoCorrecto.getStock();
 		Assert.assertEquals("El numero de ID no se cargo correctamente",1,id);
 		Assert.assertEquals("El nombre no se cargo correctamente","Pochoclo",nombre);
-		Assert.assertEquals("El costo no se cargo correctamente",50,costo);
-		Assert.assertEquals("El precio de venta no se cargo correctamente",300,venta);
-		Assert.assertEquals("El stock de venta no se cargo correctamente",1000,stock);
+		Assert.assertEquals("El costo no se cargo correctamente",(double)50.0,costo);
+		Assert.assertEquals("El precio de venta no se cargo correctamente",(double)300.0,venta);
+		Assert.assertEquals("El stock de venta no se cargo correctamente",(double)1000.0,stock);
 	}
 	
 	@Test

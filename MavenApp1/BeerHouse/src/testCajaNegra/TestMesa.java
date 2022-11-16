@@ -15,6 +15,7 @@ import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.SinPromoAsociadaException;
+import excepciones.CantComensalesException;
 import excepciones.ComandaInexistenteException;
 
 import static org.junit.Assert.*;
@@ -26,7 +27,7 @@ import modelo.Pedido;
 import modelo.Recibo;
 import negocio.BeerHouse;
 
-public class testMesa {
+public class TestMesa {
 	private Mesa mesa;
 	private BeerHouse sistema = BeerHouse.getInstancia();
 	
@@ -59,7 +60,21 @@ public class testMesa {
 	}
 	
 	@Test
-	public void testAsignaMM(int numero,Mozo mozo) {
+	public void testConstructorInvalido() {
+		Mesa mesaInvalida;
+		try {
+			mesa = new Mesa(10,1,"libre");
+			Assert.fail("No deberia poder crearse");
+		} catch (CantComensalesException e) {
+			System.out.println("todo ok");
+		}
+		
+	}
+	
+	
+	
+	@Test
+	public void testAsignaMM() {
 		try {
 			sistema.asignaMM(99, new Mozo("Mirta",new GregorianCalendar(), 2, 0));
 			Assert.fail("Deberia tirar MesaOcupadaException. No debe poder agregarse a una mesa inexistente");
@@ -69,28 +84,14 @@ public class testMesa {
 	}
 
 	@Test
-	public double precioComanda(Mesa mesa){
+	public void precioComanda(){
 		try {
 			sistema.precioComanda(this.mesa);
 			Assert.fail("Se deberia tirar comandaInexistenteExeption");
 		} catch (ComandaInexistenteException e) {
 			System.out.println(e.getMessage());
 		}
-		return 0;
 	}
 	
-	@Test
-	public void cerrarMesa(Mesa mesa) {
-		try {
-			sistema.cerrarMesa(this.mesa);
-			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia poder cerrar la mesa");
-		} catch (ComandaInexistenteException e) {
-			e.printStackTrace();
-		}catch(MesaNulaException e1) {
-			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia tirar un error por mesa nula");
-		}catch(SinPromoAsociadaException e1) {
-			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia tirar un error por promo no asociada");
-		}
-	}
 	
 }

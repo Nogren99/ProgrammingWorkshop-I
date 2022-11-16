@@ -25,7 +25,7 @@ public class TestBeerHouse {
 	@Before
 	public void setUp() throws Exception {
 		this.BHDatos.setUp();
-		this.beerHouse=this.BHDatos.getBeerHouse();//nose
+		this.beerHouse=this.BHDatos.getBeerHouse();
 	}
 
 	@After
@@ -139,7 +139,7 @@ public class TestBeerHouse {
 			beerHouse.eliminaProducto(beerHouse.getProducto().get(0));
 			Assert.fail("No deberia permitirse, producto en comanda");
 		}catch(ProductoAsociadoAComandaException e) {
-			Assert.fail("Todo ok");
+			System.out.println("Todo ok");
 		}
 	}
 	

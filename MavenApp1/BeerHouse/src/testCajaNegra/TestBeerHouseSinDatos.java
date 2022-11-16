@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import excepciones.EstadoInvalidoException;
 import excepciones.HijosInvalidosException;
+import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.ComandaInexistenteException;
+import modelo.Mesa;
 import modelo.Mozo;
 import negocio.BeerHouse;
 
@@ -30,64 +32,17 @@ public class TestBeerHouseSinDatos {
 	}
 	
 	@Test
-	public void asignaMMINCORRECTO() {
-		try {
-			beerHouse.asignaMM(beerHouse.getMesa().get(0).getNumero(),beerHouse.getMozos().get(0));
-		} catch (MesaOcupadaException e) {
-			Assert.fail("No deberia lanzar MesaOcupadaException");
-		}
+	public void cerrarMesaNull() {
+		
+		if(this.beerHouse.getMesa().isEmpty())
+			try {
+				beerHouse.cerrarMesa(null);
+				Assert.fail("Deberia mostrar MesaNulaException");
+			} catch (MesaNulaException e1) {
+				System.out.println("todo ok");
+			} catch (ComandaInexistenteException e1) {
+				Assert.fail("No deberia mostrar comandaInexistenteExeption");
+			}
 	}
-
-	public void precioComanda() {
-		try {
-			beerHouse.precioComanda(beerHouse.getMesa().get(1));
-		}catch (ComandaInexistenteException e) {
-			Assert.fail("No deberia lanzar comandaInexistenteExeption ");
-		}
-	}
-	
-	public void precioComandaInexistente() {
-		try {
-			beerHouse.precioComanda(beerHouse.getMesa().get(0));
-			Assert.fail("No deberia poder realizarse");
-		}catch (ComandaInexistenteException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-	
-	@Test
-    public void altaMozo() {
-    	try {
-    		beerHouse.altaMozo("Jose", 2, 0);
-    	}catch(EstadoInvalidoException e) {
-    		Assert.fail("Deberia haber creado correctamente ");
-    	}catch (HijosInvalidosException e) {
-    		Assert.fail("Deberia haber creado correctamente ");
-    	}
-    }
-	
-	@Test
-    public void altaMozoHijosInvalidos() {
-    	try {
-    		beerHouse.altaMozo("Jose", -1, 0);
-    		Assert.fail("No deberia crearse ");
-    	}catch(EstadoInvalidoException e) {
-    		Assert.fail("Deberia haber creado correctamente ");
-    	}catch (HijosInvalidosException e) {
-    		System.out.println(e.getMessage());
-    	}
-    }
-	
-	@Test
-    public void altaMozoEstadoInvalido() {
-    	try {
-    		beerHouse.altaMozo("Jose", 2, 999);
-    		Assert.fail("No deberia crearse ");
-    	}catch(EstadoInvalidoException e) {
-    		System.out.println(e.getMessage());
-    	}catch (HijosInvalidosException e) {
-    		Assert.fail("Deberia haber creado correctamente ");
-    	}
-    }
 
 }
