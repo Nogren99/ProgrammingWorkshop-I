@@ -1,6 +1,7 @@
 package modelo;
 
-
+import excepciones.SinPromosException;
+import excepciones.productoInexistenteException;
 
 /**
  * @author Nico
@@ -22,16 +23,25 @@ public class ProductoOferta extends Promocion {
 
 	public ProductoOferta(int id, Producto producto, String diasDePromo, boolean aplicaDosPorUno,
 			boolean aplicaDtoPorCantidad, int dtoPorCantidad_CantMinima, double dtoPorCantidad_PrecioUnitario,
-			boolean activa) {
+			boolean activa) throws SinPromosException, productoInexistenteException {
 		super();
-		Id = id;
-		this.producto = producto;
-		this.diasDePromo = diasDePromo;
-		this.aplicaDosPorUno = aplicaDosPorUno;
-		this.aplicaDtoPorCantidad = aplicaDtoPorCantidad;
-		this.dtoPorCantidad_CantMinima = dtoPorCantidad_CantMinima;
-		this.dtoPorCantidad_PrecioUnitario = dtoPorCantidad_PrecioUnitario;
-		this.activo = activa;
+		if(!aplicaDosPorUno && !aplicaDtoPorCantidad ) {
+			throw new SinPromosException("El producto debe tener al menos un tipo de promocion");
+		}else {
+			if(producto==null) {
+				throw new productoInexistenteException("Debes seleccionar un producto valido");
+			}else {
+				Id = id;
+				this.producto = producto;
+				this.diasDePromo = diasDePromo;
+				this.aplicaDosPorUno = aplicaDosPorUno;
+				this.aplicaDtoPorCantidad = aplicaDtoPorCantidad;
+				this.dtoPorCantidad_CantMinima = dtoPorCantidad_CantMinima;
+				this.dtoPorCantidad_PrecioUnitario = dtoPorCantidad_PrecioUnitario;
+				this.activo = activa;
+			}
+		}
+		
 	}
 
 	public int getId() {

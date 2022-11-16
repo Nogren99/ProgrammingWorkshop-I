@@ -19,11 +19,13 @@ import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
 import excepciones.PasswordInvalidaException;
 import excepciones.ProductoAsociadoAComandaException;
+import excepciones.SinPromosException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
 import excepciones.mesaRepetidaException;
 import excepciones.precioVentaInvalidoException;
 import excepciones.precioVentaMenorAlCostoException;
+import excepciones.productoInexistenteException;
 import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
@@ -610,23 +612,22 @@ public class Controlador implements ActionListener {
     }else if (comando.equalsIgnoreCase("NuevaPromo")) {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
     	ArrayList<Promocion> promociones= sistema.getPromociones();
-    	if(ventProm.getList_1().getSelectedValue()!=null ) {
-    		boolean dosPorUno =ventProm.getRdbtnNewRadioButton().isSelected();
-    		boolean descuentoCantidad=ventProm.getRdbtnNewRadioButton_2().isSelected();
-    		if(dosPorUno || descuentoCantidad) {
-    			String diaspromo=(String)ventProm.getSpinner_3().getValue(); 
-    			System.out.println(diaspromo);
-    			Producto temporal=(Producto) ventProm.getList_1().getSelectedValue(); 
-    			System.out.println(temporal);
-    			boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
-    			ProductoOferta prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_1().getValue(),(double)ventProm.getSpinner_2().getValue(), activa);
-    			promociones.add(prod);
-    			System.out.println(promociones);
-    			JOptionPane.showMessageDialog(null,"Oferta agregada satisfactoriamente");
-    		}else
-    			JOptionPane.showMessageDialog(null,"Debes seleccionar al menos un tipo de promocion");
-    	}else
-    		JOptionPane.showMessageDialog(null,"Debes seleccionar un producto");
+		boolean dosPorUno =ventProm.getRdbtnNewRadioButton().isSelected();
+		boolean descuentoCantidad=ventProm.getRdbtnNewRadioButton_2().isSelected();
+		String diaspromo=(String)ventProm.getSpinner_3().getValue(); 
+		Producto temporal=(Producto) ventProm.getList_1().getSelectedValue(); 
+		boolean activa =ventProm.getRdbtnNewRadioButton_4().isSelected();
+		ProductoOferta prod;
+			
+		try {
+			prod = new ProductoOferta((int)ventProm.getSpinner().getValue(), temporal, diaspromo, dosPorUno, descuentoCantidad,(int) ventProm.getSpinner_1().getValue(),(double)ventProm.getSpinner_2().getValue(), activa);
+			promociones.add(prod);
+		} catch (SinPromosException e1) {
+			JOptionPane.showMessageDialog(null,e1.getMessage());
+		} catch (productoInexistenteException e1) {
+			JOptionPane.showMessageDialog(null,e1.getMessage());
+		}
+
     }else if (comando.equalsIgnoreCase("PromoTemp")) {
     	VentanaPromocion ventProm = (VentanaPromocion) this.vista;
     	ArrayList<Promocion> promociones= sistema.getPromociones();
