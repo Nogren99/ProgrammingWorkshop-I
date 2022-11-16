@@ -2,32 +2,25 @@ package modelo;
 
 import java.io.Serializable;
 
-
 /**
  * @author Nico
  * <br>
- * Clase padre que representa a un producto en promoción. Posteriormente se determinará mediante sus clases hijas qué tipo de promoción se aplicará.
+ * Clase padre que representa a un producto en promociï¿½n. Posteriormente se determinarï¿½ mediante sus clases hijas quï¿½ tipo de promociï¿½n se aplicarï¿½.
  * <br>
  *
  */
+
 public abstract class Promocion implements Serializable {
 	protected Producto producto;
 	protected boolean activo;
-
 
 	public Producto getProducto() {
 		return producto;
 	}
 	
-	
-
-
 	public boolean isActivo() {
 		return activo;
 	}
-
-
-
 
 	/**
 	 * Calcula el precio dependiendo del tipo de oferta
@@ -35,5 +28,7 @@ public abstract class Promocion implements Serializable {
 	 * @param promo
 	 * @return
 	 */
+	
 	public abstract double calculaPrecio(int cant,String promo);
+	
 }

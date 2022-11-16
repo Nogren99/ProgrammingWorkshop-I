@@ -28,7 +28,6 @@ public class TestProductoOferta {
 		}catch(ProductoInexistenteException e2) {
 			Assert.fail("No deberia mostrar productoInexistenteException");
 		}
-
 	}
 
 	@After
@@ -70,14 +69,11 @@ public class TestProductoOferta {
 		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
 		}
-			
-
 	}
 	
 	@Test
 	public void testConstructorFallidoProductoNulo() {
 		ProductoOferta productoO=null;
-		
 		try {
 			productoO= new ProductoOferta(1,null, "Lunes", true, true, 2, 50, true);
 		} catch (SinPromosException e) {

@@ -9,9 +9,10 @@ import excepciones.CantComensalesException;
 /**
  * @author Nico
  * <br>
- * Clase que representa una mesa de la cervecería. Se vincula con un mozo y contiene una comanda.
+ * Clase que representa una mesa de la cervecerï¿½a. Se vincula con un mozo y contiene una comanda.
  *
  */
+
 public class Mesa implements Serializable{
 	private int numero;
     private int comensales;
@@ -29,6 +30,7 @@ public class Mesa implements Serializable{
 	 * @param estado
 	 * @throws CantComensalesException
 	 */
+    
 	public Mesa(int numero, int comensales, String estado) throws CantComensalesException{
 		super();
 		if( (comensales>=2 && numero>1) || numero<=1 ) {
@@ -47,6 +49,7 @@ public class Mesa implements Serializable{
 	 * Devuelve el consumo de la mesa
 	 * @return consumoTotal
 	 */
+	
 	public double getConsumoTotal() {
 		return consumoTotal;
 	}
@@ -54,6 +57,7 @@ public class Mesa implements Serializable{
 	/**
 	 * @return cantUso
 	 */
+	
 	public int getCantUso() {
 		return cantUso;
 	}
@@ -70,6 +74,7 @@ public class Mesa implements Serializable{
 	 * Devuelve el n\u00famero de mesa
 	 * @return numero
 	 */
+	
 	public int getNumero() {
 		return numero;
 	}
@@ -82,6 +87,7 @@ public class Mesa implements Serializable{
 	 * Devuelve la cantidad de comenzales de la mesa
 	 * @return comenzales
 	 */
+	
 	public int getComensales() {
 		return comensales;
 	}
@@ -94,6 +100,7 @@ public class Mesa implements Serializable{
 	 * Devuelve el mozo de la mesa
 	 * @return mozo
 	 */
+	
 	public Mozo getMozo() {
 		return mozo;
 	}
@@ -106,6 +113,7 @@ public class Mesa implements Serializable{
 	 * Devuelve el estado de la mesa
 	 * @return estado
 	 */
+	
 	public String getEstado() {
 		return estado;
 	}
@@ -118,6 +126,7 @@ public class Mesa implements Serializable{
 	 * Devuelve la comanda de la mesa
 	 * @return comanda
 	 */
+	
 	public Comanda getComanda() {
 		return comanda;
 	}

@@ -8,14 +8,13 @@ import excepciones.CostoInvalidoException;
 import excepciones.PrecioVentaInvalidoException;
 import excepciones.PrecioVentaMenorAlCostoException;
 
-
-
 /**
  * @author Nico
  * <br>
  * Clase que representa un producto de la cervecer�a. Contiene un id, precio de costo y venta, su nombre y su stock actual.
  *
  */
+
 public class Producto implements Serializable{
 	private int Id;
     private String nombre;
@@ -27,37 +26,25 @@ public class Producto implements Serializable{
         super();
     }
 
-    
-    
     public int getId() {
 		return Id;
 	}
-
-
 
 	public double getCosto() {
 		return costo;
 	}
 
-
-
 	public double getVenta() {
 		return venta;
 	}
-
-
 
 	public void setId(int id) {
 		Id = id;
 	}
 
-
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
 
 	public void setCosto(double costo) throws CostoInvalidoException {
 		if(costo>0)
@@ -66,8 +53,6 @@ public class Producto implements Serializable{
 			throw new CostoInvalidoException("Costo INVALIDO , debe ser mayor a 0");
 	}
 
-
-
 	public void setVenta(double venta) throws PrecioVentaInvalidoException {
 		if(venta>0)
 			this.venta = venta;
@@ -75,13 +60,9 @@ public class Producto implements Serializable{
 			throw new PrecioVentaInvalidoException("Precio de venta INVALIDO, debe ser mayor a 0");
 	}
 
-
-
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
-
 
 	/**
      * F 4.1.1
@@ -95,8 +76,6 @@ public class Producto implements Serializable{
      * 
      */
      
-	
-	
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws PrecioVentaMenorAlCostoException , PrecioVentaInvalidoException, CostoInvalidoException{
 		super(); 
 		if(venta>costo && venta>0 && costo>0) {
@@ -115,29 +94,20 @@ public class Producto implements Serializable{
 					if (venta<costo)
 						throw new PrecioVentaMenorAlCostoException("Precio de venta menor al costo");
 		}
-		
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	
-
 	public int getStock() {
 		return stock;
 	}
-
-
 
 	@Override
 	public String toString() {
 		return  nombre + "     ["+"Id=" + Id +  ", costo=" + costo + ", venta=" + venta + ", stock="
 				+ stock + "]";
 	}
-	
-	
-    
 
-    
 }

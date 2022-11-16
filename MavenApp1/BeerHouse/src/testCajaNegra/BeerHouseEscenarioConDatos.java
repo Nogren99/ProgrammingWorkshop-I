@@ -27,8 +27,7 @@ import modelo.Producto;
 import modelo.Pedido;
 import negocio.BeerHouse;
 
-public class BeerHouseEscenarioConDatos
-{
+public class BeerHouseEscenarioConDatos{
     BeerHouse beerHouse = new BeerHouse();
 
     public BeerHouse getBeerHouse() {
@@ -39,8 +38,7 @@ public class BeerHouseEscenarioConDatos
     }
 
 	@Before
-    public void setUp()
-    {
+    public void setUp(){
         try {
             beerHouse.creaMesa(new Mesa (2,4,"libre"));
         } catch (CantComensalesException e) {
@@ -53,8 +51,6 @@ public class BeerHouseEscenarioConDatos
             Assert.fail("No deberia tirar ninguna excepcion, los constructores ya han sido testeados");
             e.printStackTrace();
         }
-        
-        
         beerHouse.agregaOperario(new Operario ("Marco","Q12345678","Marcos Lopez",true));
         try {
             beerHouse.agregaProducto(new Producto(12,"Pochoclo",10,20,5));
@@ -89,14 +85,11 @@ public class BeerHouseEscenarioConDatos
     }
 
 	@After
-    public void tearDown()
-    {
+    public void tearDown(){
         beerHouse.getMesa().clear();
         beerHouse.getOperario().clear();
         beerHouse.getProducto().clear();
         beerHouse.getMozos().clear();
     }
-    
-    
 
 }

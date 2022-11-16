@@ -2,15 +2,14 @@ package modelo;
 
 import java.io.Serializable;
 
-
-
 /**
  * @author Nico
  * <br>
- * Clase que representa un usuario del sistema de la cervecería. Contiene nombre de usuario y contraseña. 
+ * Clase que representa un usuario del sistema de la cervecerï¿½a. Contiene nombre de usuario y contraseï¿½a. 
  * <br>
  *
  */
+
 public abstract class Usuario implements Serializable{
     private String username;
     private String password;

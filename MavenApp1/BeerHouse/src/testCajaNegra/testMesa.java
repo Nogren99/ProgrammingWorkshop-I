@@ -14,6 +14,7 @@ import org.junit.Test;
 import excepciones.MesaImposibleException;
 import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
+import excepciones.SinPromoAsociadaException;
 import excepciones.ComandaInexistenteException;
 
 import static org.junit.Assert.*;
@@ -87,6 +88,8 @@ public class testMesa {
 			e.printStackTrace();
 		}catch(MesaNulaException e1) {
 			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia tirar un error por mesa nula");
+		}catch(SinPromoAsociadaException e1) {
+			Assert.fail("Se deberia tirar comandaInexistenteExeption, no deberia tirar un error por promo no asociada");
 		}
 	}
 	

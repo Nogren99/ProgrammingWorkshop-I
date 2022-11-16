@@ -1,21 +1,19 @@
 package modelo;
 
-
-
 /**
  * @author Nico
  * <br>
- * Clase que representa una promoción temporal.
+ * Clase que representa una promociï¿½n temporal.
  * <br>
  *
  */
+
 public class TemporalOferta extends Promocion {
 	private String nombre;
 	private String formaPago;
     private int porcentajeDescuento;
     private String diasDePromo;
     private boolean esAcumulable;
-    
 
 	public TemporalOferta(Producto producto,String nombre, String formaPago,String diasDePromo, int porcentajeDescuento,boolean esAcumulable,  boolean activo
 			) {
@@ -96,6 +94,7 @@ public class TemporalOferta extends Promocion {
 	 *<b>Pre: </b>cant es un entero positivo<br>
 	 *Promo es una cadena no vacia con el dia de promocion<br>
 	 */
+	
 	@Override
 	public double calculaPrecio(int cant,String promo) {
 		if(activo && promo == this.diasDePromo) {

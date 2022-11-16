@@ -17,7 +17,6 @@ import modelo.Mozo;
 import negocio.BeerHouse;
 
 public class TestCierreMesa {
-
 	private Mesa mesa;
 	private BeerHouse sistema = BeerHouse.getInstancia();
 	
@@ -94,8 +93,6 @@ public class TestCierreMesa {
 			Assert.fail("No deberia mostrar SinPromoAsociadaException");
 		}
 	}
-
-	
 	
 }
 

@@ -18,7 +18,6 @@ import excepciones.MesaNulaException;
 import excepciones.MesaOcupadaException;
 import excepciones.MuchosProductosEnPromoException;
 import excepciones.NoHayMesasHabilitadasException;
-import excepciones.NoMesasHabilitadasException;
 import excepciones.NoMozosActivosException;
 import excepciones.PasswordInvalidaException;
 import excepciones.ProductoAsociadoAComandaException;
@@ -601,7 +600,7 @@ public class BeerHouse implements Serializable{
     	}else if (mesa==null)
     		throw new MesaNulaException("No seleccionaste ninguna mesa");
     	else
-    		if(this.mesa.c)
+    		if(mesa==null)//CORREGIR ESTO, ESTA MAL
     			throw new ComandaInexistenteException("Esta mesa no tiene una comanda asignada");
     		else
     			throw new SinPromoAsociadaException("Esta mesa no cumple con ninguna promocion");
@@ -620,12 +619,9 @@ public class BeerHouse implements Serializable{
 			try {
 				r = new Recibo(new GregorianCalendar(), mesa, mesa.getComanda().getOrden(), null, this.precioComanda(mesa), null);
 				r.setFormaDePago(formaPago);
-				
 			} catch (ComandaInexistenteException e) {
-				//nunca entrar� aqu� por precondici�n
 			}
 			return r;
-
 	}
 	
 	public void escribirPersistencia() throws IOException{ // catchear excepcion en el main

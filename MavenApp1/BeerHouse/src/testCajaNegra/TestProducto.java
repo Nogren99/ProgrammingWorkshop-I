@@ -59,13 +59,11 @@ public class TestProducto {
 		double costo = this.productoCorrecto.getCosto();
 		double venta = this.productoCorrecto.getVenta();
 		double stock = this.productoCorrecto.getStock();
-		
 		Assert.assertEquals("El numero de ID no se cargo correctamente",1,id);
 		Assert.assertEquals("El nombre no se cargo correctamente","Pochoclo",nombre);
 		Assert.assertEquals("El costo no se cargo correctamente",50,costo);
 		Assert.assertEquals("El precio de venta no se cargo correctamente",300,venta);
 		Assert.assertEquals("El stock de venta no se cargo correctamente",1000,stock);
-
 	}
 	
 	@Test
@@ -84,8 +82,7 @@ public class TestProducto {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
 		} catch (CostoInvalidoException e) {
 			System.out.println("todo ok");
-		}
-		
+		}	
 	}
 	
 	@Test
@@ -104,8 +101,7 @@ public class TestProducto {
 			System.out.println("todo ok");
 		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
-		}
-		
+		}	
 	}
 	
 	@Test
@@ -124,8 +120,7 @@ public class TestProducto {
 			Assert.fail("No deberia mostrar precioVentaInvalidoException");
 		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia mostrar costoInvalidoException");
-		}
-		
+		}	
 	}
 	
 	@Test
@@ -134,8 +129,7 @@ public class TestProducto {
 			productoCorrecto.setCosto(1);
 		} catch (CostoInvalidoException e) {
 			Assert.fail("No deberia tirar costoInvalidoException");
-		}
-		
+		}	
 	}
 	
 	@Test
@@ -145,8 +139,7 @@ public class TestProducto {
 			Assert.fail("No deberia poder setear");
 		} catch (CostoInvalidoException e) {
 			System.out.println("todo ok");
-		}
-		
+		}	
 	}
 	
 	@Test
@@ -156,7 +149,6 @@ public class TestProducto {
 		} catch (PrecioVentaInvalidoException e) {
 			Assert.fail("No deberia tirar costoInvalidoException");
 		}
-		
 	}
 	
 	@Test
@@ -167,7 +159,6 @@ public class TestProducto {
 		} catch (PrecioVentaInvalidoException e) {
 			System.out.println("todo ok");
 		}
-		
 	}
 	
 }

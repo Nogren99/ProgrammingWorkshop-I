@@ -19,7 +19,6 @@ import modelo.Mozo;
 import negocio.BeerHouse;
 
 public class TestBeerHouse {
-	
 	private BeerHouse beerHouse;
 	private BeerHouseEscenarioConDatos BHDatos = new BeerHouseEscenarioConDatos();
 
@@ -74,10 +73,7 @@ public class TestBeerHouse {
 		}
 	}
 	
-
-	
 	//precioComanda
-	
 	
 	@Test
 	public void precioComanda() {
@@ -97,12 +93,9 @@ public class TestBeerHouse {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
-	
+
 	//altaMozo
-	
-	
+
 	@Test
     public void altaMozo() {
     	try {
@@ -137,11 +130,9 @@ public class TestBeerHouse {
     		Assert.fail("Deberia haber creado correctamente ");
     	}
     }
-	
-	
+
 	//eliminaProducto
-	
-	
+
 	@Test
 	public void eliminaProductoInvalido() {
 		try {
@@ -161,7 +152,6 @@ public class TestBeerHouse {
 		}
 	}
 
-	
 	//agregaMesa
 	
 	@Test
@@ -197,6 +187,6 @@ public class TestBeerHouse {
 		} catch (CantComensalesException e) {
 			System.out.println("Todo ok");
 		}
-		
 	}
+	
 }

@@ -26,6 +26,7 @@ import excepciones.MesaRepetidaException;
 import excepciones.PrecioVentaInvalidoException;
 import excepciones.PrecioVentaMenorAlCostoException;
 import excepciones.ProductoInexistenteException;
+import excepciones.SinPromoAsociadaException;
 import modelo.Comanda;
 import modelo.Mesa;
 import modelo.Mozo;
@@ -658,12 +659,10 @@ public class Controlador implements ActionListener {
 			JOptionPane.showMessageDialog(null, ((Recibo) sistema.generaRecibo((Mesa) ventClose.getList().getSelectedValue(), opcionesPago[i-1])).toString());		
 			JOptionPane.showMessageDialog(null, "Mesa cerrada!");
 			ventClose.repaint();
-		} catch (MesaNulaException | ComandaInexistenteException e1) {
+		} catch (MesaNulaException | ComandaInexistenteException | SinPromoAsociadaException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
-    	
-    	
-    	
+
     	}
     }
 }

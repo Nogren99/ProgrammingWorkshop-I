@@ -35,7 +35,6 @@ public class testMozo {
 		int hijos = this.mozo.getHijos();
 		byte estado = this.mozo.getEstado();
 		double volumenDeVenta = this.mozo.getVolumenDeVenta();
-		
 		Assert.assertEquals("El nombre y apellido no se cargo correctamente","Mirta",NyA);
 		Assert.assertEquals("El domicilio no se cargo correctamente","Marconi 2345",date);
 		Assert.assertEquals("La cantidad de hijos no se cargo correctamente",2,hijos);

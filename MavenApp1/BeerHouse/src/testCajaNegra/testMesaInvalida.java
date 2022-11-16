@@ -28,10 +28,6 @@ public class testMesaInvalida {
 		}
 	}
 		
-    //private Mozo mozo;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //private Comanda comanda;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //private double consumoTotal;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
 	@After
 	public void tearDown() throws Exception {
 	}

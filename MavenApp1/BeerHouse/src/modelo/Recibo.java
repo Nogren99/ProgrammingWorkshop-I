@@ -3,13 +3,13 @@ package modelo;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-
 /**
  * @author Nico
  * <br>
- * Clase que representa un recibo de la cervecería. Se generará durante el cierre de mesas. Contiene una colección de pedidos, una colección de promociones aplicadas, un precio total, la mesa en la que fue efectuado, la fecha del día y la forma de pago.
+ * Clase que representa un recibo de la cervecerï¿½a. Se generarï¿½ durante el cierre de mesas. Contiene una colecciï¿½n de pedidos, una colecciï¿½n de promociones aplicadas, un precio total, la mesa en la que fue efectuado, la fecha del dï¿½a y la forma de pago.
  * <br>
  */
+
 public class Recibo {
     private GregorianCalendar fecha;
     private Mesa mesa;
@@ -23,8 +23,9 @@ public class Recibo {
     }
 
 	/**
-	 * ¿Cual recibo?
+	 * ï¿½Cual recibo?
 	 */
+    
 	public Recibo(GregorianCalendar fecha, Mesa mesa, ArrayList<Pedido> pedidos, ArrayList<Promocion> promociones,
 			double total, String formaDePago){
 		super();

@@ -15,7 +15,6 @@ import modelo.Mozo;
 import negocio.BeerHouse;
 
 public class TestBeerHouseSinDatos {
-	
 	private BeerHouse beerHouse;
 	private BeerHouseEscenarioSinDatos BHSinDatos = new BeerHouseEscenarioSinDatos();
 
@@ -29,10 +28,7 @@ public class TestBeerHouseSinDatos {
 	public void tearDown() throws Exception {
 		BHSinDatos.tearDown();
 	}
-
 	
-	
-
 	@Test
 	public void asignaMMINCORRECTO() {
 		try {
@@ -41,9 +37,7 @@ public class TestBeerHouseSinDatos {
 			Assert.fail("No deberia lanzar MesaOcupadaException");
 		}
 	}
-	
 
-	
 	public void precioComanda() {
 		try {
 			beerHouse.precioComanda(beerHouse.getMesa().get(1));
@@ -60,7 +54,6 @@ public class TestBeerHouseSinDatos {
 			System.out.println(e.getMessage());
 		}
 	}
-	
 	
 	@Test
     public void altaMozo() {
