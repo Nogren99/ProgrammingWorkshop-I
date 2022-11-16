@@ -45,9 +45,20 @@ public class TestAgregaMesaComandaConDatos {
 	        try {
 				beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 14); //mesa 14: mesa inexistente
 				System.out.println("bien");
-			} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException
-					| NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-				Assert.fail();
+			} catch (MuchosProductosEnPromoException e) {
+				Assert.fail("No deberia lanzar MuchosProductosEnPromoException");
+			} catch (MesaOcupadaException e) {
+				Assert.fail("No deberia lanzar MesaOcupadaException");
+			} catch (MesaImposibleException e) {
+				Assert.fail("No deberia lanzar MesaImposibleException");
+			} catch (NoHayMesasHabilitadasException e) {
+				Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+			} catch (PrecioVentaMenorAlCostoException e) {
+				Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+			} catch (PrecioVentaInvalidoException e) {
+				Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+			} catch (CostoInvalidoException e) {
+				Assert.fail("No deberia lanzar CostoInvalidoException");
 			}
 	 }
 	
@@ -56,10 +67,20 @@ public class TestAgregaMesaComandaConDatos {
 	        try {
 				beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 2); //mesa 2: libre sin mozo
 				Assert.fail();
-	        } catch (MuchosProductosEnPromoException | MesaOcupadaException | NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-				Assert.fail();
+	        } catch (MuchosProductosEnPromoException e) {
+				Assert.fail("No deberia lanzar MuchosProductosEnPromoException");
+			} catch (MesaOcupadaException e) {
+				Assert.fail("No deberia lanzar MesaOcupadaException");
 			} catch (MesaImposibleException e) {
 				System.out.println("bien");
+			} catch (NoHayMesasHabilitadasException e) {
+				Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+			} catch (PrecioVentaMenorAlCostoException e) {
+				Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+			} catch (PrecioVentaInvalidoException e) {
+				Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+			} catch (CostoInvalidoException e) {
+				Assert.fail("No deberia lanzar CostoInvalidoException");
 			}
 	 }
 	
@@ -68,11 +89,21 @@ public class TestAgregaMesaComandaConDatos {
         try {
 			beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 3);     //mesa 3: ocupada
 			Assert.fail();
-        } catch (MuchosProductosEnPromoException| MesaImposibleException | NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-			Assert.fail();
-		} catch ( MesaOcupadaException e) {
+        } catch (MuchosProductosEnPromoException e) {
+			Assert.fail("No deberia lanzar MuchosProductosEnPromoException");
+		} catch (MesaOcupadaException e) {
 			System.out.println("bien");
-		} 
+		} catch (MesaImposibleException e) {
+			Assert.fail("No deberia lanzar MesaImposibleException");
+		} catch (NoHayMesasHabilitadasException e) {
+			Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+		} catch (PrecioVentaMenorAlCostoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+		} catch (PrecioVentaInvalidoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+		} catch (CostoInvalidoException e) {
+			Assert.fail("No deberia lanzar CostoInvalidoException");
+		}
     }
 	
 	@Test
@@ -80,11 +111,21 @@ public class TestAgregaMesaComandaConDatos {
         try {	
         	beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 5);     //mesa 5: libre, con mozo, con dos productos en promo
         	Assert.fail();
-        } catch (MesaOcupadaException | MesaImposibleException | NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-			Assert.fail();
-		} catch ( MuchosProductosEnPromoException e) {
+        } catch (MuchosProductosEnPromoException e) {
 			System.out.println("bien");
-		} 
+		} catch (MesaOcupadaException e) {
+			Assert.fail("No deberia lanzar MesaOcupadaException");
+		} catch (MesaImposibleException e) {
+			Assert.fail("No deberia lanzar MesaImposibleException");
+		} catch (NoHayMesasHabilitadasException e) {
+			Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+		} catch (PrecioVentaMenorAlCostoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+		} catch (PrecioVentaInvalidoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+		} catch (CostoInvalidoException e) {
+			Assert.fail("No deberia lanzar CostoInvalidoException");
+		}
     }
 	
 	@Test
@@ -92,9 +133,21 @@ public class TestAgregaMesaComandaConDatos {
         try {
 			beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 6);     //mesa 6: libre, con mozo, con comanda nula
 			System.out.println("bien");
-		} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException | NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-			Assert.fail();
-		} 
+		} catch (MuchosProductosEnPromoException e) {
+			Assert.fail("No deberia lanzar MuchosProductosEnPromoException");
+		} catch (MesaOcupadaException e) {
+			Assert.fail("No deberia lanzar MesaOcupadaException");
+		} catch (MesaImposibleException e) {
+			Assert.fail("No deberia lanzar MesaImposibleException");
+		} catch (NoHayMesasHabilitadasException e) {
+			Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+		} catch (PrecioVentaMenorAlCostoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+		} catch (PrecioVentaInvalidoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+		} catch (CostoInvalidoException e) {
+			Assert.fail("No deberia lanzar CostoInvalidoException");
+		}
     }
 	
 	@Test
@@ -102,9 +155,21 @@ public class TestAgregaMesaComandaConDatos {
         try {
 			beerHouse.agregaMesaComanda(new Pedido(new Producto(1,"Manzana",30,100,50),3), 7);     //mesa 7: libre, con mozo, con comanda no nula
 			System.out.println("bien");
-		} catch (MuchosProductosEnPromoException | MesaOcupadaException | MesaImposibleException | NoHayMesasHabilitadasException | PrecioVentaMenorAlCostoException | PrecioVentaInvalidoException | CostoInvalidoException e) {
-			Assert.fail();
-		} 
+		} catch (MuchosProductosEnPromoException e) {
+			Assert.fail("No deberia lanzar MuchosProductosEnPromoException");
+		} catch (MesaOcupadaException e) {
+			Assert.fail("No deberia lanzar MesaOcupadaException");
+		} catch (MesaImposibleException e) {
+			Assert.fail("No deberia lanzar MesaImposibleException");
+		} catch (NoHayMesasHabilitadasException e) {
+			Assert.fail("No deberia lanzar NoHayMesasHabilitadasException");
+		} catch (PrecioVentaMenorAlCostoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaMenorAlCostoException");
+		} catch (PrecioVentaInvalidoException e) {
+			Assert.fail("No deberia lanzar PrecioVentaInvalidoException");
+		} catch (CostoInvalidoException e) {
+			Assert.fail("No deberia lanzar CostoInvalidoException");
+		}
     }
 
 }

@@ -76,6 +76,7 @@ public class Producto implements Serializable{
      * 
      */
      
+	
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws PrecioVentaMenorAlCostoException , PrecioVentaInvalidoException, CostoInvalidoException{
 		super(); 
 		if(venta>costo && venta>0 && costo>0) {
