@@ -7,11 +7,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepciones.CantComensalesException;
 import excepciones.EstadoInvalidoException;
 import excepciones.HijosInvalidosException;
 import excepciones.MesaOcupadaException;
 import excepciones.ProductoAsociadoAComandaException;
 import excepciones.comandaInexistenteExeption;
+import excepciones.mesaRepetidaException;
+import modelo.Mesa;
 import modelo.Mozo;
 import negocio.BeerHouse;
 
@@ -158,4 +161,42 @@ public class TestBeerHouse {
 		}
 	}
 
+	
+	//agregaMesa
+	
+	@Test
+	public void agregaMesa() {
+		try {
+			Mesa mesa = beerHouse.agregaMesa(99,33);
+		} catch (mesaRepetidaException e) {
+			Assert.fail("No deberia lanzar mesaRepetidaException ");
+		} catch (CantComensalesException e) {
+			Assert.fail("No deberia lanzar CantComensalesException ");
+		}
+		
+	}
+	
+	public void agregaMesaIdRepetido() {
+		try {
+			Mesa mesa = beerHouse.agregaMesa(2,33);
+			Assert.fail("No deberia poder crear mesa ");
+		} catch (mesaRepetidaException e) {
+			System.out.println("Todo ok");
+		} catch (CantComensalesException e) {
+			Assert.fail("No deberia lanzar CantComensalesException ");
+		}
+		
+	}
+	
+	public void agregaMesaComensalesInvalidos() {
+		try {
+			Mesa mesa = beerHouse.agregaMesa(99,33);
+			Assert.fail("No deberia poder crear mesa ");
+		} catch (mesaRepetidaException e) {
+			Assert.fail("No deberia lanzar mesaRepetidaException ");
+		} catch (CantComensalesException e) {
+			System.out.println("Todo ok");
+		}
+		
+	}
 }

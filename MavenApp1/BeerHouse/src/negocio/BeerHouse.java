@@ -26,6 +26,7 @@ import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.comandaInexistenteExeption;
 import excepciones.costoInvalidoException;
+import excepciones.mesaRepetidaException;
 import excepciones.precioVentaInvalidoException;
 import modelo.Admin;
 import modelo.Comanda;
@@ -205,8 +206,8 @@ public class BeerHouse implements Serializable{
     public void inicializaMesas() { //despues ver como manejamos esto
     	for (int i=2; i<20;i++) {
     		try {
-				this.agregaMesa(new Mesa(i,i,"libre"));
-			} catch (CantComensalesException e) {
+				this.creaMesa(new Mesa(i,i+1,"libre"));
+			} catch (CantComensalesException  e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -229,8 +230,34 @@ public class BeerHouse implements Serializable{
     	this.mesa.remove(mesa);
     }
     
-    public void agregaMesa(Mesa mesa) {
+    
+
+    public void creaMesa(Mesa mesa) {
     	this.mesa.add(mesa);
+    }
+    
+    public Mesa agregaMesa(int numero,int sillas) throws mesaRepetidaException, CantComensalesException {
+    	Mesa mesaNueva=null;
+        Iterator<Mesa> Iterador = mesa.iterator();
+        boolean existe=false;
+        while(Iterador.hasNext() && !existe) { 
+            Mesa m = Iterador.next();
+            if(m.getNumero()==numero) {
+            	existe=true;
+            }
+        }
+        if(existe)
+        	throw new mesaRepetidaException("Esa mesa ya existe!!");
+        else{
+        	try {
+				mesaNueva = new Mesa(numero,sillas,"Libre");
+				this.mesa.add(mesaNueva);
+			} catch (CantComensalesException e) {
+				throw new CantComensalesException(e.getMessage());
+			}
+        }
+        
+        return mesaNueva;
     }
     
     /**
