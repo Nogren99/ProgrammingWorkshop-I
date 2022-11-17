@@ -200,7 +200,7 @@ public class VistaLogin extends JFrame implements IVista {
         FlowLayout flowLayout = (FlowLayout) this.panel_8.getLayout();
         this.panel_1.add(this.panel_8);
 
-        this.lblNewLabel = new JLabel("Sistema Cervecer\u00EDa 'Peppa'");
+        this.lblNewLabel = new JLabel("Sistema Cervecer\u00EDa 'Pepa'");
         this.lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 14));
         this.panel_8.add(this.lblNewLabel);
 

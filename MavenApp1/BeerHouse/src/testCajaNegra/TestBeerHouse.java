@@ -48,7 +48,7 @@ public class TestBeerHouse {
 	public void asignaMMMozoInvalido() {
 		try {
 			beerHouse.asignaMM( beerHouse.getMesa().get(0).getNumero(),null);
-			Assert.fail("No deberia poder reaalizarse MesaOcupadaException");
+			Assert.fail("No deberia poder realizarse");
 		} catch (MesaOcupadaException e) {
 			System.out.println(e.getMessage());
 		}

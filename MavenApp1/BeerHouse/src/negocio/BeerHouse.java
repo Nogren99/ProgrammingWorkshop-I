@@ -107,7 +107,6 @@ public class BeerHouse implements Serializable{
     }
     /**
      * numero es un entero
-     * Mozo distinto de null
      * @param numero
      * @param mozo
      * @throws MesaOcupadaException
