@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"excepciones"},{"l":"main"},{"l":"modelo"},{"l":"negocio"},{"l":"persistencia"},{"l":"presentacion"},{"l":"test"},{"l":"vista"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"excepciones"},{"l":"main"},{"l":"modelo"},{"l":"negocio"},{"l":"persistencia"},{"l":"presentacion"},{"l":"testCajaBlanca"},{"l":"testCajaNegra"},{"l":"testGUI"},{"l":"testPersistencia"},{"l":"vista"}];updateSearchResults();

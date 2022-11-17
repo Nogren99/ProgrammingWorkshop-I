@@ -4,5 +4,8 @@ modelo
 negocio
 persistencia
 presentacion
-test
+testCajaBlanca
+testCajaNegra
+testGUI
+testPersistencia
 vista
