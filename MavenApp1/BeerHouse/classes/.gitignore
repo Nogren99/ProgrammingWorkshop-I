@@ -1,10 +1,10 @@
-/testPersistencia/
 /excepciones/
-/negocio/
-/presentacion/
-/testCajaNegra/
-/testGUI/
-/testCajaBlanca/
+/main/
 /modelo/
 /persistencia/
 /vista/
+/negocio/
+/persistencia/
+/presentacion/
+/testCajaBlanca/
+/testGUI/

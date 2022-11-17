@@ -40,6 +40,7 @@ public class TestVentana
         TestUtils.clickComponent(leerPersistencia, robot);
         ((IVista) ventana).cerrar();
     }
+	
 	@Test
 	public void testLogin()
     {
