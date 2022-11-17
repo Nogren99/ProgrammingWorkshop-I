@@ -51,13 +51,13 @@ public class VentanaPersistir extends JFrame implements IVista {
 		FlowLayout flowLayout = (FlowLayout) this.panel.getLayout();
 		this.contentPane.add(this.panel);
 		
-		this.btnPersistir = new JButton("Persistir");
+		this.btnPersistir = new JButton("Entrar SIN Datos");
 		this.panel.add(this.btnPersistir);
 		
 		this.panel_1 = new JPanel();
 		this.contentPane.add(this.panel_1);
 		
-		this.btnLeerPersistencia = new JButton("LeerPersistencia");
+		this.btnLeerPersistencia = new JButton("Leer Persistencia");
 		this.panel_1.add(this.btnLeerPersistencia);
 		
 		this.btnPersistir.setName("btnPersistir");

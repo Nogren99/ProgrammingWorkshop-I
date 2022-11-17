@@ -20,18 +20,23 @@ public class ControladorPersistencia implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
-		 if(comando.equalsIgnoreCase("Persistir")) {
-			try {
+		 if(comando.equalsIgnoreCase("Entrar SIN Datos")) {
+			 //System.out.println("Se ha deshabilitado este boton para evitar PISAR Y BORRAR todos los datos :) puede habilitaro nuevamente en la clase presentacion.ControladorPersistencia"); 
+			 this.vista.cerrar();
+			 /*
+			 try {
 				sistema.escribirPersistencia();
+				
 				//this.vista.cerrar();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		} else if (comando.equalsIgnoreCase("LeerPersistencia")) {
+			*/
+		} else if (comando.equalsIgnoreCase("Leer Persistencia")) {
 			try {
 				sistema.leerPersistencia();
-				//this.vista.cerrar();
+				this.vista.cerrar();
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
