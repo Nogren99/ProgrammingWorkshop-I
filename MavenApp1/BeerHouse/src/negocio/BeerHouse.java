@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import org.junit.Assert;
+
 import excepciones.CantComensalesException;
 import excepciones.EstadoInvalidoException;
 import excepciones.HijosInvalidosException;
@@ -44,6 +46,12 @@ import persistencia.IPersistencia;
 import persistencia.PersistenciaBIN;
 import vista.VentanaABM;
 
+/**
+ * @author Nico
+ * Invariante de clase: Los atributos de tipo ArrayList mozos, mesa, operario, producto y promociones siempre serán distintos de null
+ */
+
+
 public class BeerHouse implements Serializable{
 
     private static BeerHouse instancia;
@@ -54,7 +62,9 @@ public class BeerHouse implements Serializable{
     private ArrayList<Promocion> promociones = new ArrayList<Promocion>();
     private double sueldo;
     
-    public BeerHouse() {}
+    public BeerHouse() {
+    	this.verificaInvariante();
+    }
 
     public static BeerHouse getInstancia() {
         if (instancia == null)
@@ -71,6 +81,8 @@ public class BeerHouse implements Serializable{
     }
     
     /**
+     * Método que da de alta un mozo. Recibe nombre, hijos y estado. Verifica que estado sea 1, 2 o 3 y los hijos sean mayor o igual a 0.
+     * Lanza EstadoInvalidoException si el estado no es 1, 2 o 3. Lanza HijosInvalidosException si la cantidad de hijos es negativa.
      * <b>Pre: </b>numero es un entero.<br>
      * mozo distinto de null.<br>
      * efectuado la ronda de contrataciones.<br>
@@ -92,8 +104,20 @@ public class BeerHouse implements Serializable{
     			throw new EstadoInvalidoException("El estado debe ser 1, 2 o 3");	
     	} else 
     		throw new HijosInvalidosException("No se puede tener hijos negativos");
+    	this.verificaInvariante();
     	return mozo;
     }
+    
+/**
+ * <b> Pre: </b> Username, pass, name distintos de null.  <br>
+ * Método que da de alta a un operario. Verifica que la password sea válida. Lanza PasswordInvalidaException en caso contrario.
+ * @param username
+ * @param pass
+ * @param name
+ * @param activo
+ * @return
+ * @throws PasswordInvalidaException
+ */
     
     public Operario altaOpe (String username, String pass, String name, boolean activo) throws PasswordInvalidaException {
     	Operario ope = null;
@@ -102,17 +126,25 @@ public class BeerHouse implements Serializable{
     		this.operario.add(ope);
     	} else
     		throw new PasswordInvalidaException("Contraseï¿½a invalida.");
-	
+    	this.verificaInvariante();
     	return ope;
     }
     /**
+<<<<<<< Updated upstream
      * numero es un entero
+=======
+     * Método que asigna un mozo a una mesa. Recibe un numero y un mozo, lanza MesaOcupadaException si el número ingresado por parámetro representa una mesa con estado ocupado.
+     * <b> Pre: </b> numero es un entero
+     * Mozo distinto de null
+>>>>>>> Stashed changes
      * @param numero
      * @param mozo
      * @throws MesaOcupadaException
      */
     public void asignaMM(int numero,Mozo mozo) throws MesaOcupadaException {
     	boolean ok=true;
+    	Assert.assertTrue(numero>0);
+    	Assert.assertNotNull(mozo);
     	Iterator<Mesa> IteradorMesa = mesa.iterator();
     	while(IteradorMesa.hasNext() && ok ) { 
     		Mesa messa = IteradorMesa.next();
@@ -125,6 +157,7 @@ public class BeerHouse implements Serializable{
     	if (ok) {
     		throw new MesaOcupadaException("Ese numero no corresponde a una mesa");
     	}
+    	this.verificaInvariante();
     }
     
     public void modificaIDProducto(Producto producto, int ID) {
@@ -160,6 +193,9 @@ public class BeerHouse implements Serializable{
     }
     
     /**
+     * Método que elimina un producto de la colección en caso de que sea posible. 
+     * Verifica que no esté asociado a ninguna comanda.
+     * Lanza ProductoAsociadoAComandaException si éste está asociado a la comanda de alguna mesa.
      * <b>Pre: </b> producto distinto de null <br>
      * @param producto
      * @throws ProductoAsociadoAComandaException
@@ -167,6 +203,7 @@ public class BeerHouse implements Serializable{
     public void eliminaProducto(Producto producto)  throws ProductoAsociadoAComandaException{
     	boolean ok=true;
     	Iterator<Mesa> Iterador = mesa.iterator();
+    	Assert.assertNotNull(producto);
     	//si en el arraylist mesa,hay una mesa que contiene una comanda, en la cual su arraylist contiene un pedido que tenga un producto igual al selccionado
 		//se elimina
     	while(Iterador.hasNext() && ok) { //me fijo en cada mesa
@@ -229,12 +266,29 @@ public class BeerHouse implements Serializable{
     	this.mesa.remove(mesa);
     }
     
-    
+    /**
+     * 
+     * @param mesa
+     */
 
     public void creaMesa(Mesa mesa) {
     	this.mesa.add(mesa);
     }
     
+    
+    
+    /**
+     * Método que agrega una mesa al sistema dado un número de mesa y cantidad de sillas. <br>
+     * Verifica que el número de mesa no exista en el sistema y que la cantidad de comensales sea válida. <br>
+     * Lanza MesaRepetidaException si la mesa ya existía. <br>
+     * Lanza CantComensalesException si la cantidad de comensales es inválida. <br>
+     * 
+     * @param numero
+     * @param sillas
+     * @return
+     * @throws MesaRepetidaException
+     * @throws CantComensalesException
+     */
     public Mesa agregaMesa(int numero,int sillas) throws MesaRepetidaException, CantComensalesException {
     	Mesa mesaNueva=null;
         Iterator<Mesa> Iterador = mesa.iterator();
@@ -255,11 +309,13 @@ public class BeerHouse implements Serializable{
 				throw new CantComensalesException(e.getMessage());
 			}
         }
-        
+        this.verificaInvariante();
         return mesaNueva;
     }
     
     /**
+     * Método que realiza el loguin de un usuario al sistema. 
+     * Lanza una Exception en caso de que el usuario se encuentre inactivo, no exista o bien no haya operarios registrados en el sistema.
      *<b>Pre: </b>username no es vacio ni null<br>
      * password no es vacio ni null<br>
      * efectuado la ronda de contrataciones.<br>
@@ -273,6 +329,10 @@ public class BeerHouse implements Serializable{
      */
     public Usuario login(String username, String password) throws Exception{
     	//System.out.println("username: "+ username + " password: "+ password);
+    	Assert.assertNotNull(password);
+    	Assert.assertNotNull(username);
+    	Assert.assertNotEquals("Password no puede ser vacia", "", password);
+    	Assert.assertNotEquals("Username no puede ser vacio", "", username);
         if (operario.isEmpty() && username.equals("ADMIN") && password.equals("ADMIN1234")) {
             String nuevaPassword = JOptionPane.showInputDialog(null, "Ingrese nueva password");
             String nombreAdmin = JOptionPane.showInputDialog(null,"\u00bfQuien sos?");
@@ -301,12 +361,23 @@ public class BeerHouse implements Serializable{
         }
     }
 
+    /**
+     * Método que setea como activo a un operario dado su nombre.
+     * @param nombreAdmin
+     */
+    
     private void estaActivo(String nombreAdmin) {
-		// Buscar en el array de operarios , el nombre del admin para marcarlo como activo
     	if(operario.contains(nombreAdmin)) {
     		operario.get(operario.indexOf(nombreAdmin)).setActivo(true);
     	}
 	}
+    
+    /**
+     * Método que verifica si hay mesas habilitadas
+     * <b> Retorna false si hay mesas habilitadas. Lanza NoHayMesasHabilitadasException si la colección de mesas está vacía
+     * @return
+     * @throws NoHayMesasHabilitadasException
+     */
     
     public boolean mesasVacias() throws NoHayMesasHabilitadasException{
     	if(this.mesa.isEmpty())
@@ -315,6 +386,13 @@ public class BeerHouse implements Serializable{
     		return false;
     }
     
+    
+    /**
+     * Método que verifica si hay mozos en el sistema
+     * <b> Post: </b> Retorna false si hay mozos en el sistema. Lanza NoMozosActivosException si no hay mozos en el sistema.
+     * @return
+     * @throws NoMozosActivosException
+     */
     public boolean mososVacios() throws NoMozosActivosException{
     	if(this.mozos.isEmpty())
     		throw new NoMozosActivosException("No hay mosos activos");
@@ -396,6 +474,12 @@ public class BeerHouse implements Serializable{
 	public static void setInstancia(BeerHouse instancia) {
 		BeerHouse.instancia = instancia;
 	}
+	
+	/**
+	 * Método que asocia una mesa a una comanda. Verifica que exista en la colección del sistema.
+	 * @param mesa
+	 * @param comanda
+	 */
 
 	public void asociarComanda(Mesa mesa, Comanda comanda) {
         int i = 0;
@@ -405,23 +489,41 @@ public class BeerHouse implements Serializable{
             this.mesa.get(i).setComanda(comanda);
             this.mesa.get(i).setEstado("Ocupada");
         }
+        this.verificaInvariante();
     }
     
+	/**
+	 * Método que retorna el volumen de venta mayor entre todos los mozos
+	 * @return
+	 */
+	
 	public double mayorVolumenDeVenta() {
 		double max = 0.0;
 		for (Mozo mozo : mozos)
 			if (mozo.getVolumenDeVenta()>max)
 				max=mozo.getVolumenDeVenta();
+		this.verificaInvariante();
 		return max;
     }
 	
+	/**
+	 * Método que retorna el volumen de venta menor entre todos los mozos
+	 * @return
+	 */
 	public double menorVolumenDeVenta() {
 		double min = 999999.0;
 		for (Mozo mozo : mozos)
 			if (mozo.getVolumenDeVenta()<min)
 				min=mozo.getVolumenDeVenta();
+		this.verificaInvariante();
 		return min;
     }
+	
+	/**
+	 * Método que retorna el día actual de la semana
+	 * <b> Post: </b> Retorna el día actual de la semana como String
+	 * @return
+	 */
 	
 	private String dayConverter() {
 		LocalDate today = LocalDate.now();
@@ -450,6 +552,7 @@ public class BeerHouse implements Serializable{
 	 * @return max
 	 */
 	public Mozo mozoMayorVolumen() { //verificar si no hay mosos?
+		Assert.assertNotNull(mozos);
 		Iterator<Mozo> iterador = this.mozos.iterator();
 		Mozo max = null;
 		double ventaMax=-1;
@@ -460,6 +563,7 @@ public class BeerHouse implements Serializable{
 				max=aux;
 			}
 		}
+		this.verificaInvariante();
 		return max;
 	}
 	/**
@@ -478,6 +582,7 @@ public class BeerHouse implements Serializable{
 				min=aux;
 			}
 		}
+		this.verificaInvariante();
 		return min;
 	}
 	
@@ -506,6 +611,7 @@ public class BeerHouse implements Serializable{
 					total+=p.getCantidad()*p.getProducto().getVenta();
 				}
 			}
+			this.verificaInvariante();
 			return total;
 		}else
 			throw new ComandaInexistenteException("Mesa sin comanda asignada");
@@ -638,6 +744,7 @@ public class BeerHouse implements Serializable{
         System.out.println("Datos grabados exitosamente");
         persistencia.cerrarOutput();
         System.out.println("Archivo cerrado");
+        this.verificaInvariante();
     }
 	
 	public void leerPersistencia() throws ClassNotFoundException, IOException, Exception{
@@ -653,6 +760,15 @@ public class BeerHouse implements Serializable{
         this.mozos=beerDTO.getMozos();
         this.operario=beerDTO.getOperario();
         this.producto=beerDTO.getProducto();
+        this.verificaInvariante();
     }
+	
+	private void verificaInvariante() {
+		Assert.assertNotNull(mesa);
+		Assert.assertNotNull(mozos);
+		Assert.assertNotNull(operario);
+		Assert.assertNotNull(producto);	
+		Assert.assertNotNull(promociones);
+	}
 	
 }

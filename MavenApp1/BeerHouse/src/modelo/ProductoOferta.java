@@ -1,6 +1,9 @@
 package modelo;
 
 import excepciones.SinPromosException;
+
+import org.junit.Assert;
+
 import excepciones.ProductoInexistenteException;
 
 /**
@@ -118,7 +121,7 @@ public class ProductoOferta extends Promocion {
 	@Override
 	public double calculaPrecio(int cant,String promo) {
 		double aux=0;
-		
+		Assert.assertTrue(cant>0);
 		if(promo==this.diasDePromo && activo) {
 			if(this.aplicaDosPorUno && cant%2==0) 
 				aux=(this.producto.getVenta()*cant)/2;

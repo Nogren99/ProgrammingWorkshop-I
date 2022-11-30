@@ -2,6 +2,8 @@ package modelo;
 
 import java.io.Serializable;
 
+import org.junit.Assert;
+
 import excepciones.UsuarioInactivoException;
 import excepciones.UsuarioInexistenteException;
 import excepciones.CostoInvalidoException;
@@ -66,6 +68,7 @@ public class Producto implements Serializable{
 
 	/**
      * F 4.1.1
+     * <b>Pre: </b> Nombre != null<br>
      * <b>Post: </b> el precio de venta es menor al costo y ambos son mayores o iguales a 0<br>
      * @param id
      * @param nombre
@@ -79,6 +82,7 @@ public class Producto implements Serializable{
 	
 	public Producto(int id, String nombre, double costo, double venta, int stock) throws PrecioVentaMenorAlCostoException , PrecioVentaInvalidoException, CostoInvalidoException{
 		super(); 
+		Assert.assertNotNull(nombre);
 		if(venta>costo && venta>0 && costo>0) {
 			Id = id;
 			this.nombre = nombre;

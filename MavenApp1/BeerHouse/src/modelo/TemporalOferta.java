@@ -1,5 +1,7 @@
 package modelo;
 
+import org.junit.Assert;
+
 /**
  * @author Nico
  * <br>
@@ -97,6 +99,7 @@ public class TemporalOferta extends Promocion {
 	
 	@Override
 	public double calculaPrecio(int cant,String promo) {
+		Assert.assertTrue(cant>0);
 		if(activo && promo == this.diasDePromo) {
 			return cant * (  this.producto.getVenta() * this.porcentajeDescuento / 100  );
 		}else
