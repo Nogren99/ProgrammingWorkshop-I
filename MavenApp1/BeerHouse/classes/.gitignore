@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /excepciones/
 /main/
 /modelo/
@@ -9,3 +10,8 @@
 /testCajaBlanca/
 /testGUI/
 /testCajaNegra/
+=======
+/testCajaNegra/
+/negocio/
+/modelo/
+>>>>>>> Stashed changes
